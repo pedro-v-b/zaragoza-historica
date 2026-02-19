@@ -1,0 +1,65 @@
+# Node
+node_modules/
+dist/
+build/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+ENV/
+.venv
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Environment
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Uploads (en desarrollo guardar en git solo .gitkeep)
+uploads/*.jpg
+uploads/*.jpeg
+uploads/*.png
+uploads/*.gif
+uploads/thumbs/*.jpg
+uploads/thumbs/*.jpeg
+uploads/thumbs/*.png
+uploads/thumbs/*.gif
+backend_python/uploads/*.jpg
+backend_python/uploads/*.jpeg
+backend_python/uploads/*.png
+backend_python/uploads/*.gif
+backend_python/uploads/thumbs/*.jpg
+backend_python/uploads/thumbs/*.jpeg
+backend_python/uploads/thumbs/*.png
+backend_python/uploads/thumbs/*.gif
+
+# Docker
+docker-compose.override.yml
+postgres_data/
+
+# Build
+*.tsbuildinfo

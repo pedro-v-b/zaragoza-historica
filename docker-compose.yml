@@ -1,0 +1,52 @@
+services:
+  postgres:
+    image: postgis/postgis:15-3.4
+    container_name: zaragoza_historica_db
+    environment:
+      POSTGRES_USER: zaragoza_user
+      POSTGRES_PASSWORD: zaragoza_pass
+      POSTGRES_DB: zaragoza_historica
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./backend_python/database:/docker-entrypoint-initdb.d
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U zaragoza_user -d zaragoza_historica"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - zaragoza_network
+
+  backend:
+    build:
+      context: ./backend_python
+      dockerfile: Dockerfile
+    container_name: zaragoza_historica_backend
+    environment:
+      PORT: 3000
+      HOST: 0.0.0.0
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_NAME: zaragoza_historica
+      DB_USER: zaragoza_user
+      DB_PASSWORD: zaragoza_pass
+      CORS_ORIGINS: http://localhost:5173,http://localhost:3000
+    ports:
+      - "3000:3000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    volumes:
+      - ./uploads:/app/uploads
+    networks:
+      - zaragoza_network
+    restart: unless-stopped
+
+networks:
+  zaragoza_network:
+    driver: bridge
+
+volumes:
+  postgres_data:
