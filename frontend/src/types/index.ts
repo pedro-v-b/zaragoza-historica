@@ -73,3 +73,39 @@ export interface BBox {
   maxLng: number;
   maxLat: number;
 }
+
+// Auth types
+export interface LoginRequest {
+  username: string;
+  password: string;
+}
+
+export interface UserResponse {
+  id: number;
+  username: string;
+  role: string;
+  is_active: boolean;
+}
+
+export interface LoginResponse {
+  access_token: string;
+  token_type: string;
+  user: UserResponse;
+}
+
+// Admin form types
+export interface PhotoFormData {
+  title: string;
+  description?: string;
+  year?: number;
+  year_from?: number;
+  year_to?: number;
+  era?: string;
+  zone?: string;
+  lat: number;
+  lng: number;
+  source?: string;
+  author?: string;
+  rights?: string;
+  tags?: string[];
+}

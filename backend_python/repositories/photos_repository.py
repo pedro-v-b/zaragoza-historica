@@ -165,24 +165,140 @@ class PhotosRepository:
     def get_year_range(self) -> Dict[str, int]:
         """Obtiene el rango de años disponible"""
         query = """
-            SELECT 
+            SELECT
                 MIN(COALESCE(year, year_from)) as min_year,
                 MAX(COALESCE(year, year_to)) as max_year
             FROM photos
         """
-        
+
         conn = Database.get_connection()
         try:
             cursor = conn.cursor()
             cursor.execute(query)
             result = cursor.fetchone()
             cursor.close()
-            
+
             return {
                 'min': result['min_year'] or 1800,
                 'max': result['max_year'] or 2024
             }
-            
+
+        finally:
+            Database.return_connection(conn)
+
+    def create(self, data: dict) -> dict:
+        """Crea una nueva foto"""
+        query = """
+            INSERT INTO photos (
+                title, description, year, year_from, year_to, era, zone,
+                lat, lng, image_url, thumb_url, source, author, rights, tags
+            ) VALUES (
+                %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s
+            )
+            RETURNING id, title, description, year, year_from, year_to, era, zone,
+                lat, lng, image_url, thumb_url, source, author, rights, tags,
+                created_at, updated_at
+        """
+
+        conn = Database.get_connection()
+        try:
+            cursor = conn.cursor()
+            cursor.execute(query, (
+                data['title'],
+                data.get('description'),
+                data.get('year'),
+                data.get('year_from'),
+                data.get('year_to'),
+                data.get('era'),
+                data.get('zone'),
+                data['lat'],
+                data['lng'],
+                data['image_url'],
+                data['thumb_url'],
+                data.get('source'),
+                data.get('author'),
+                data.get('rights'),
+                data.get('tags'),
+            ))
+            photo = cursor.fetchone()
+            conn.commit()
+            cursor.close()
+
+            return dict(photo)
+
+        finally:
+            Database.return_connection(conn)
+
+    def update(self, photo_id: int, data: dict) -> Optional[dict]:
+        """Actualiza una foto existente"""
+        # Construir query dinámico solo con campos proporcionados
+        fields = []
+        values = []
+
+        field_mapping = {
+            'title': 'title',
+            'description': 'description',
+            'year': 'year',
+            'year_from': 'year_from',
+            'year_to': 'year_to',
+            'era': 'era',
+            'zone': 'zone',
+            'lat': 'lat',
+            'lng': 'lng',
+            'image_url': 'image_url',
+            'thumb_url': 'thumb_url',
+            'source': 'source',
+            'author': 'author',
+            'rights': 'rights',
+            'tags': 'tags',
+        }
+
+        for key, column in field_mapping.items():
+            if key in data:
+                fields.append(f"{column} = %s")
+                values.append(data[key])
+
+        if not fields:
+            return self.find_by_id(photo_id)
+
+        values.append(photo_id)
+
+        query = f"""
+            UPDATE photos
+            SET {', '.join(fields)}
+            WHERE id = %s
+            RETURNING id, title, description, year, year_from, year_to, era, zone,
+                lat, lng, image_url, thumb_url, source, author, rights, tags,
+                created_at, updated_at
+        """
+
+        conn = Database.get_connection()
+        try:
+            cursor = conn.cursor()
+            cursor.execute(query, values)
+            photo = cursor.fetchone()
+            conn.commit()
+            cursor.close()
+
+            return dict(photo) if photo else None
+
+        finally:
+            Database.return_connection(conn)
+
+    def delete(self, photo_id: int) -> bool:
+        """Elimina una foto"""
+        query = "DELETE FROM photos WHERE id = %s RETURNING id"
+
+        conn = Database.get_connection()
+        try:
+            cursor = conn.cursor()
+            cursor.execute(query, (photo_id,))
+            result = cursor.fetchone()
+            conn.commit()
+            cursor.close()
+
+            return result is not None
+
         finally:
             Database.return_connection(conn)
 

@@ -1,14 +1,22 @@
 import { useState, useEffect, useCallback } from 'react';
+import { Routes, Route } from 'react-router-dom';
 import { Layout, Header } from './components/Layout';
 import { Filters } from './components/Filters';
 import { MapView } from './components/Map';
 import { PhotoList } from './components/PhotoList';
+import {
+  AdminLogin,
+  AdminDashboard,
+  AdminLayout,
+  ProtectedRoute,
+} from './components/Admin';
 import { Photo } from './types';
 import { getPhotos } from './services/api';
 import { useDebounce } from './hooks/useDebounce';
 import './index.css';
 
-function App() {
+// Componente principal del mapa (vista pública)
+function MapApp() {
   // Estado de fotos y filtros
   const [photos, setPhotos] = useState<Photo[]>([]);
   const [total, setTotal] = useState(0);
@@ -136,6 +144,29 @@ function App() {
         />
       </div>
     </Layout>
+  );
+}
+
+// App con rutas
+function App() {
+  return (
+    <Routes>
+      {/* Ruta pública - Mapa */}
+      <Route path="/" element={<MapApp />} />
+
+      {/* Rutas de administración */}
+      <Route path="/admin/login" element={<AdminLogin />} />
+      <Route
+        path="/admin"
+        element={
+          <ProtectedRoute>
+            <AdminLayout>
+              <AdminDashboard />
+            </AdminLayout>
+          </ProtectedRoute>
+        }
+      />
+    </Routes>
   );
 }
 

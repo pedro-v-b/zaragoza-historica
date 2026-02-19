@@ -1,6 +1,7 @@
 """
 Servicio de lógica de negocio para autenticación
 """
+import uuid
 from datetime import datetime, timedelta, timezone
 from typing import Optional
 from jose import JWTError, jwt
@@ -45,7 +46,8 @@ class AuthService:
             "user_id": user_data["id"],
             "role": user_data.get("role", "user"),
             "exp": expire,
-            "iat": datetime.now(timezone.utc)
+            "iat": datetime.now(timezone.utc),
+            "jti": str(uuid.uuid4())  # Unique token ID para evitar colisiones
         }
 
         encoded_jwt = jwt.encode(

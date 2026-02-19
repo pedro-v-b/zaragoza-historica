@@ -43,12 +43,28 @@ class PhotosService:
         eras = photos_repository.get_distinct_eras()
         zones = photos_repository.get_distinct_zones()
         year_range = photos_repository.get_year_range()
-        
+
         return FilterMetadata(
             eras=eras,
             zones=zones,
             yearRange=year_range
         )
+
+    def create_photo(self, data: dict) -> Photo:
+        """Crea una nueva foto"""
+        photo_data = photos_repository.create(data)
+        return Photo(**photo_data)
+
+    def update_photo(self, photo_id: int, data: dict) -> Photo:
+        """Actualiza una foto existente"""
+        photo_data = photos_repository.update(photo_id, data)
+        if not photo_data:
+            return None
+        return Photo(**photo_data)
+
+    def delete_photo(self, photo_id: int) -> bool:
+        """Elimina una foto"""
+        return photos_repository.delete(photo_id)
 
 
 # Singleton
