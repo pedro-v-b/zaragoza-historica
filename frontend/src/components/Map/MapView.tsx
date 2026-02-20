@@ -19,7 +19,6 @@ interface HistoricalLayer {
 const WMS_PNOA = 'https://www.ign.es/wms/pnoa-historico';
 const WMS_MINUTAS = 'https://www.ign.es/wms/minutas-cartograficas';
 const WMS_MTN = 'https://www.ign.es/wms/primera-edicion-mtn';
-const WMS_IDEZAR = 'https://idezar-sig.zaragoza.es/servicios/geoserver/wms';
 
 const HISTORICAL_LAYERS: HistoricalLayer[] = [
   // Mapa base moderno
@@ -47,17 +46,6 @@ const HISTORICAL_LAYERS: HistoricalLayer[] = [
   { id: 'mtn25', name: 'MTN25 1ª Edición', year: '1935-1960', wmsLayer: 'MTN25', wmsUrl: WMS_MTN, attribution: 'IGN - Primera Edición MTN' },
   { id: 'catastrones', name: 'Catastrones', year: '1870-1950', wmsLayer: 'catastrones', wmsUrl: WMS_MTN, attribution: 'IGN - Catastrones históricos' },
   { id: 'minutas', name: 'Minutas Cartográficas', year: '1870-1920', wmsLayer: 'Minutas', wmsUrl: WMS_MINUTAS, attribution: 'IGN - Minutas Cartográficas' },
-
-  // Planos históricos de Zaragoza - IDEZar (1712-1889)
-  { id: 'h1889', name: 'Plano de la Ciudad', year: '1889', wmsLayer: 'h1889', wmsUrl: WMS_IDEZAR, attribution: 'Ayuntamiento de Zaragoza' },
-  { id: 'h1880', name: 'Plano de Casañal', year: '1880', wmsLayer: 'h1880', wmsUrl: WMS_IDEZAR, attribution: 'Ayuntamiento de Zaragoza' },
-  { id: 'h1872', name: 'Plano de la Ciudad', year: '1872', wmsLayer: 'h1872', wmsUrl: WMS_IDEZAR, attribution: 'Ayuntamiento de Zaragoza' },
-  { id: 'h1863', name: 'Plano de la Ciudad', year: '1863', wmsLayer: 'h1863', wmsUrl: WMS_IDEZAR, attribution: 'Ayuntamiento de Zaragoza' },
-  { id: 'h1861', name: 'Plano de la Ciudad', year: '1861', wmsLayer: 'h1861', wmsUrl: WMS_IDEZAR, attribution: 'Ayuntamiento de Zaragoza' },
-  { id: 'h1852', name: 'Plano de la Ciudad', year: '1852', wmsLayer: 'h1852', wmsUrl: WMS_IDEZAR, attribution: 'Ayuntamiento de Zaragoza' },
-  { id: 'h1809', name: 'Plano de los Sitios', year: '1809', wmsLayer: 'h1809', wmsUrl: WMS_IDEZAR, attribution: 'Ayuntamiento de Zaragoza' },
-  { id: 'h1769', name: 'Plano de Pontaque', year: '1769', wmsLayer: 'h1769', wmsUrl: WMS_IDEZAR, attribution: 'Ayuntamiento de Zaragoza' },
-  { id: 'h1712', name: 'Plano de Tiburcio', year: '1712', wmsLayer: 'h1712', wmsUrl: WMS_IDEZAR, attribution: 'Ayuntamiento de Zaragoza' },
 ];
 
 // Fix para iconos de Leaflet
