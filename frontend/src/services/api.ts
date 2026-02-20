@@ -72,14 +72,29 @@ export async function getMapLayers(): Promise<MapLayer[]> {
 /**
  * Helper para obtener headers de autenticación
  */
-function getAuthHeaders(): HeadersInit {
+function getAuthHeaders(includeContentType: boolean = true): HeadersInit {
   const token = getToken();
   if (!token) {
     throw new Error('No autenticado');
   }
-  return {
+  const headers: HeadersInit = {
     'Authorization': `Bearer ${token}`,
   };
+  if (includeContentType) {
+    headers['Content-Type'] = 'application/json';
+  }
+  return headers;
+}
+
+/**
+ * Helper para obtener solo el token (para FormData)
+ */
+function getAuthToken(): string {
+  const token = getToken();
+  if (!token) {
+    throw new Error('No autenticado');
+  }
+  return token;
 }
 
 /**
@@ -110,7 +125,9 @@ export async function createPhoto(data: PhotoFormData, imageFile: File): Promise
 
   const response = await fetch(`${API_BASE_URL}/photos`, {
     method: 'POST',
-    headers: getAuthHeaders(),
+    headers: {
+      'Authorization': `Bearer ${getAuthToken()}`,
+    },
     body: formData,
   });
 
@@ -152,7 +169,9 @@ export async function updatePhoto(id: number, data: PhotoFormData, imageFile?: F
 
   const response = await fetch(`${API_BASE_URL}/photos/${id}`, {
     method: 'PUT',
-    headers: getAuthHeaders(),
+    headers: {
+      'Authorization': `Bearer ${getAuthToken()}`,
+    },
     body: formData,
   });
 

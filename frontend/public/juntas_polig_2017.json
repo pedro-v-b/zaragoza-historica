@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html lang="es">
+<head>
+<title>Ayuntamiento de Zaragoza</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"/>
+<meta name="date" content="20051214"/>
+<meta name="organization" content="Ayuntamiento de Zaragoza"/>
+<meta name="author" content="Ayuntamiento de Zaragoza. Servicio de Modernización y Desarrollo Organizativo. webmuncipal@ayto-zaragoza.es"/>
+<base href="http://www.zaragoza.es"/>
+<link rel="stylesheet" type="text/css" href="/cont/plantillas/css/portal/ayto.css" media="screen"></link>
+<link rel="stylesheet" type="text/css" href="/cont/plantillas/css/handheld.css" media="handheld"></link>
+<link rel="stylesheet" type="text/css" href="/cont/plantillas/css/print.css" media="print"></link>
+</head><body>
+
+<div class="visib">
+<div class="cab"><div id="flash"><img src="/cont/paginas/img/cabec/ayto.gif" alt=""/></div>
+<div id="grupo_portal">
+<ul>
+
+<li id="el_ayto"><a href="/ciudad/ayto/" accesskey="3">El Ayuntamiento</a></li>
+<li id="la_ciudad"><a href="/ciudad/" accesskey="4">La Ciudad</a></li>
+<li id="la_gente"><a href="/ciudad/sectores/" accesskey="5"> Para la Gente</a></li>
+<li id="turismo"><a href="http://turismo.zaragoza.es" accesskey="6">Turismo</a></li>
+</ul>
+</div>
+<div id="portal">
+<div id="navegacion"><a href="http://www.zaragoza.es" accesskey="1">zaragoza.es</a></div>
+<p class="inv"><a href="#menu" accesskey="2">Ir al Menú de Navegación</a></p>
+</div>
+
+</div>
+<div class="contenido">
+
+<h1>Página de Error</h1>
+<h2>Error 404. La página solicitada no se encuentra disponible</h2>
+<p>Texto explicativo del error</p>
+<p>Puede comunicárnoslo utilizando el <a href="https://www.zaragoza.es/aytocasa/enlinea/sugerencias.htm"><strong>Servicio de Quejas y Sugerencias</strong></a></p>
+
+</div>
+<div class="sep"> </div>
+<div id="pie"><a href="mailto:webmunicipal@zaragoza.es">webmunicipal@zaragoza.es</a> / <a href="/ciudad/servicios/mapaweb.htm" accesskey="7">Mapa Web</a> / <a href="http://www.w3c.es/ESMiembros">Miembro W3C</a> / <a href="http://validator.w3.org/check/referer"><acronym title="Extensible Hypertext Markup Language">XHTML</acronym> 1.0</a> / <a href="http://jigsaw.w3.org/css-validator/check/referer"><acronym title="Cascading Style Sheet">CSS</acronym> 2.0</a> / <a href="/ciudad/servicios/accesibilidad.htm" accesskey="0"><acronym title="Web Accessibility Initiative">Accessibilidad</acronym></a>
+
+</div></div>
+
+</body>
+</html>

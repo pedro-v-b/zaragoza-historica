@@ -13,11 +13,36 @@ interface PhotoListProps {
   onPageChange: (page: number) => void;
 }
 
+// Skeleton Loading Component
+const SkeletonCard: React.FC = () => (
+  <div className="skeleton-card">
+    <div className="skeleton-thumb" />
+    <div className="skeleton-content">
+      <div className="skeleton-line medium" />
+      <div className="skeleton-line tiny" />
+      <div className="skeleton-line short" />
+    </div>
+  </div>
+);
+
+const SkeletonLoading: React.FC = () => (
+  <div className="photo-list">
+    <div className="photo-list-header">
+      <h2>Resultados</h2>
+      <div className="results-info">Cargando fotos...</div>
+    </div>
+    <div className="skeleton-container">
+      {[...Array(6)].map((_, i) => (
+        <SkeletonCard key={i} />
+      ))}
+    </div>
+  </div>
+);
+
 export const PhotoList: React.FC<PhotoListProps> = ({
   photos,
   total,
   page,
-  pageSize,
   totalPages,
   loading,
   selectedPhotoId,
@@ -33,13 +58,7 @@ export const PhotoList: React.FC<PhotoListProps> = ({
   };
 
   if (loading) {
-    return (
-      <div className="photo-list">
-        <div className="loading">
-          <p>Cargando fotos...</p>
-        </div>
-      </div>
-    );
+    return <SkeletonLoading />;
   }
 
   if (photos.length === 0) {
@@ -62,11 +81,12 @@ export const PhotoList: React.FC<PhotoListProps> = ({
       </div>
 
       <div className="photo-items">
-        {photos.map((photo) => (
+        {photos.map((photo, index) => (
           <div
             key={photo.id}
             className={`photo-card ${selectedPhotoId === photo.id ? 'active' : ''}`}
             onClick={() => onPhotoClick(photo)}
+            style={{ animationDelay: `${index * 0.05}s` }}
           >
             <div className="photo-card-thumbnail">
               <img
@@ -92,13 +112,13 @@ export const PhotoList: React.FC<PhotoListProps> = ({
       {totalPages > 1 && (
         <div className="pagination">
           <button onClick={() => onPageChange(page - 1)} disabled={page === 1}>
-            ← Anterior
+            Anterior
           </button>
           <span className="pagination-info">
-            Página {page} de {totalPages}
+            Pagina {page} de {totalPages}
           </span>
           <button onClick={() => onPageChange(page + 1)} disabled={page === totalPages}>
-            Siguiente →
+            Siguiente
           </button>
         </div>
       )}

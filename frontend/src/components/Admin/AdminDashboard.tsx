@@ -4,6 +4,99 @@ import { getPhotos, createPhoto, updatePhoto, deletePhoto } from '../../services
 import { PhotoTable } from './PhotoTable';
 import { PhotoForm } from './PhotoForm';
 
+// Todos los barrios y zonas de Zaragoza
+const BARRIOS_ZARAGOZA = [
+  // Distrito Centro
+  'Casco Historico',
+  'Centro',
+  'San Pablo',
+  'La Magdalena',
+  'San Miguel',
+  'Tenerías',
+  // Distrito Casco Historico
+  'San Felipe',
+  'El Gancho',
+  // Distrito Universidad
+  'Universidad',
+  'San Jose',
+  'La Paz',
+  'San Vicente de Paul',
+  // Distrito Delicias
+  'Delicias',
+  'Ciudad Jardin',
+  'Monsalud',
+  // Distrito San Jose
+  'Torrero',
+  'La Paz',
+  'Venecia',
+  // Distrito Las Fuentes
+  'Las Fuentes',
+  // Distrito Almozara
+  'La Almozara',
+  'Las Armas',
+  // Distrito Oliver-Valdefierro
+  'Oliver',
+  'Valdefierro',
+  // Distrito Torrero-La Paz
+  'Torrero',
+  'La Paz',
+  'Venecia',
+  'San Antonio de Padua',
+  // Distrito Actur-Rey Fernando
+  'Actur',
+  'Rey Fernando',
+  'Parque Goya',
+  // Distrito El Rabal
+  'El Rabal',
+  'Arrabal',
+  'Cogullada',
+  'Picarral',
+  'Jesus',
+  // Distrito Casablanca
+  'Casablanca',
+  'Valdespartera',
+  'Montecanal',
+  'Rosales del Canal',
+  'Arcosur',
+  // Distrito Santa Isabel
+  'Santa Isabel',
+  'Movera',
+  // Distrito Miralbueno
+  'Miralbueno',
+  // Barrios rurales norte
+  'Juslibol',
+  'San Juan de Mozarrifar',
+  'Montanana',
+  'Penanflor',
+  'San Gregorio',
+  'Villamayor de Gallego',
+  // Barrios rurales oeste
+  'Alfocea',
+  'Garrapinillos',
+  'La Joyosa',
+  'Marlofa',
+  'Monzalbarba',
+  'Villarrapa',
+  // Barrios rurales sur
+  'Casetas',
+  'Venta del Olivar',
+  'Torre Medina',
+  // Zonas emblematicas
+  'Plaza del Pilar',
+  'La Seo',
+  'La Aljaferia',
+  'Expo',
+  'Puerto Venecia',
+  'Gran Via',
+  'Paseo Independencia',
+  'Plaza de Aragon',
+  'Plaza de Espana',
+  'Puente de Piedra',
+  'Ribera del Ebro',
+  'Parque Grande',
+  'Parque del Agua',
+].sort();
+
 export const AdminDashboard: React.FC = () => {
   const [photos, setPhotos] = useState<Photo[]>([]);
   const [loading, setLoading] = useState(true);
@@ -13,11 +106,18 @@ export const AdminDashboard: React.FC = () => {
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [total, setTotal] = useState(0);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [searchZone, setSearchZone] = useState('');
 
   const loadPhotos = useCallback(async () => {
     setLoading(true);
     try {
-      const response = await getPhotos({ page, pageSize: 20 });
+      const response = await getPhotos({
+        page,
+        pageSize: 20,
+        q: searchQuery || undefined,
+        zone: searchZone || undefined,
+      });
       setPhotos(response.items);
       setTotalPages(response.totalPages);
       setTotal(response.total);
@@ -26,7 +126,7 @@ export const AdminDashboard: React.FC = () => {
     } finally {
       setLoading(false);
     }
-  }, [page]);
+  }, [page, searchQuery, searchZone]);
 
   useEffect(() => {
     loadPhotos();
@@ -75,6 +175,18 @@ export const AdminDashboard: React.FC = () => {
     setEditingPhoto(null);
   };
 
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    setPage(1);
+    loadPhotos();
+  };
+
+  const handleClearSearch = () => {
+    setSearchQuery('');
+    setSearchZone('');
+    setPage(1);
+  };
+
   return (
     <div className="admin-dashboard">
       <div className="admin-toolbar">
@@ -88,6 +200,43 @@ export const AdminDashboard: React.FC = () => {
           </button>
         </div>
       </div>
+
+      {/* Barra de busqueda */}
+      <form className="admin-search-bar" onSubmit={handleSearch}>
+        <div className="search-field">
+          <label htmlFor="search-title">Buscar por titulo</label>
+          <input
+            id="search-title"
+            type="text"
+            placeholder="Escribe para buscar..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
+        </div>
+        <div className="search-field">
+          <label htmlFor="search-zone">Filtrar por barrio</label>
+          <select
+            id="search-zone"
+            value={searchZone}
+            onChange={(e) => setSearchZone(e.target.value)}
+          >
+            <option value="">Todos los barrios</option>
+            {BARRIOS_ZARAGOZA.map((barrio) => (
+              <option key={barrio} value={barrio}>{barrio}</option>
+            ))}
+          </select>
+        </div>
+        <div className="search-actions">
+          <button type="submit" className="btn btn-primary">
+            Buscar
+          </button>
+          {(searchQuery || searchZone) && (
+            <button type="button" className="btn btn-secondary" onClick={handleClearSearch}>
+              Limpiar
+            </button>
+          )}
+        </div>
+      </form>
 
       <PhotoTable
         photos={photos}

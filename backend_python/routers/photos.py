@@ -14,7 +14,16 @@ from dependencies.auth import get_current_user
 router = APIRouter(prefix="/photos", tags=["photos"])
 
 # Directorio de uploads
-UPLOADS_DIR = os.path.join(os.path.dirname(__file__), "..", "..", "uploads")
+# En Docker: se configura via UPLOADS_DIR=/app/uploads
+# En local: se calcula ruta al directorio uploads en la raíz del proyecto
+def get_uploads_dir():
+    env_path = os.environ.get('UPLOADS_DIR')
+    if env_path:
+        return os.path.abspath(env_path)
+    # Ruta relativa: backend_python/routers/../.. = raíz del proyecto
+    return os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "uploads"))
+
+UPLOADS_DIR = get_uploads_dir()
 THUMBS_DIR = os.path.join(UPLOADS_DIR, "thumbs")
 
 

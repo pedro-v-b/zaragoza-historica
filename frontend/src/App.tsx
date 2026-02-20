@@ -3,7 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 import { Layout, Header } from './components/Layout';
 import { Filters } from './components/Filters';
 import { MapView } from './components/Map';
-import { PhotoList } from './components/PhotoList';
+import { PhotoList, PhotoDetail } from './components/PhotoList';
 import {
   AdminLogin,
   AdminDashboard,
@@ -28,7 +28,6 @@ function MapApp() {
   // Estado de filtros
   const [yearFrom, setYearFrom] = useState<number | undefined>();
   const [yearTo, setYearTo] = useState<number | undefined>();
-  const [era, setEra] = useState<string | undefined>();
   const [zone, setZone] = useState<string | undefined>();
   const [searchQuery, setSearchQuery] = useState<string | undefined>();
   const [bbox, setBbox] = useState<string | undefined>();
@@ -37,6 +36,10 @@ function MapApp() {
   // Estado UI
   const [selectedPhotoId, setSelectedPhotoId] = useState<number | null>(null);
   const [centerOnPhoto, setCenterOnPhoto] = useState<Photo | null>(null);
+  const [hoveredZone, setHoveredZone] = useState<string | null>(null);
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+  const [showPhotoDetail, setShowPhotoDetail] = useState(false);
+  const [detailPhoto, setDetailPhoto] = useState<Photo | null>(null);
 
   // Debounce del bbox para evitar demasiadas peticiones al mover el mapa
   const debouncedBbox = useDebounce(bbox, 800);
@@ -44,7 +47,7 @@ function MapApp() {
   // Cargar fotos cuando cambian los filtros
   useEffect(() => {
     loadPhotos();
-  }, [yearFrom, yearTo, era, zone, searchQuery, page, debouncedBbox, onlyInViewport]);
+  }, [yearFrom, yearTo, zone, searchQuery, page, debouncedBbox, onlyInViewport]);
 
   const loadPhotos = async () => {
     setLoading(true);
@@ -56,7 +59,6 @@ function MapApp() {
 
       if (yearFrom) filters.yearFrom = yearFrom;
       if (yearTo) filters.yearTo = yearTo;
-      if (era) filters.era = era;
       if (zone) filters.zone = zone;
       if (searchQuery) filters.q = searchQuery;
       if (onlyInViewport && debouncedBbox) filters.bbox = debouncedBbox;
@@ -80,14 +82,12 @@ function MapApp() {
     (filters: {
       yearFrom?: number;
       yearTo?: number;
-      era?: string;
       zone?: string;
       q?: string;
       onlyInViewport: boolean;
     }) => {
       setYearFrom(filters.yearFrom);
       setYearTo(filters.yearTo);
-      setEra(filters.era);
       setZone(filters.zone);
       setSearchQuery(filters.q);
       setOnlyInViewport(filters.onlyInViewport);
@@ -95,6 +95,12 @@ function MapApp() {
     },
     []
   );
+
+  // Handler para selección de zona desde el mapa o filtros
+  const handleZoneSelect = useCallback((zoneName: string | null) => {
+    setZone(zoneName || undefined);
+    setPage(1);
+  }, []);
 
   // Handler para movimiento del mapa
   const handleMapMove = useCallback((newBbox: string) => {
@@ -105,6 +111,25 @@ function MapApp() {
   const handlePhotoClick = useCallback((photo: Photo) => {
     setSelectedPhotoId(photo.id);
     setCenterOnPhoto(photo);
+    setDetailPhoto(photo);
+    setShowPhotoDetail(true);
+  }, []);
+
+  // Handler para cerrar detalle
+  const handleCloseDetail = useCallback(() => {
+    setShowPhotoDetail(false);
+    setDetailPhoto(null);
+    setSelectedPhotoId(null);
+  }, []);
+
+  // Handler para volver a la lista
+  const handleBackToList = useCallback(() => {
+    setShowPhotoDetail(false);
+  }, []);
+
+  // Toggle sidebar
+  const toggleSidebar = useCallback(() => {
+    setSidebarCollapsed((prev) => !prev);
   }, []);
 
   // Handler para cambio de página
@@ -114,34 +139,74 @@ function MapApp() {
 
   return (
     <Layout>
-      {/* Sidebar izquierda: Filtros */}
-      <div className="sidebar-left">
-        <Header />
-        <Filters onFilterChange={handleFilterChange} />
+      {/* Sidebar izquierda: Filtros (Colapsable) */}
+      <div className={`sidebar-left ${sidebarCollapsed ? 'collapsed' : ''}`}>
+        <div className="sidebar-header">
+          <Header />
+          <button
+            className="sidebar-close-btn"
+            onClick={toggleSidebar}
+            title="Ocultar filtros"
+          >
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M15 5L5 15M5 5L15 15" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+            </svg>
+          </button>
+        </div>
+        <Filters
+          onFilterChange={handleFilterChange}
+          selectedZone={zone}
+          onZoneHover={setHoveredZone}
+          onZoneSelect={handleZoneSelect}
+        />
       </div>
 
       {/* Mapa central */}
-      <MapView
-        photos={photos}
-        selectedPhotoId={selectedPhotoId}
-        onMapMove={handleMapMove}
-        onPhotoClick={handlePhotoClick}
-        centerOnPhoto={centerOnPhoto}
-      />
-
-      {/* Sidebar derecha: Lista de resultados */}
-      <div className="sidebar-right">
-        <PhotoList
+      <div className="map-wrapper">
+        {sidebarCollapsed && (
+          <button
+            className="sidebar-open-btn"
+            onClick={toggleSidebar}
+            title="Mostrar filtros"
+          >
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M3 5H17M3 10H17M3 15H17" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+            </svg>
+          </button>
+        )}
+        <MapView
           photos={photos}
-          total={total}
-          page={page}
-          pageSize={pageSize}
-          totalPages={totalPages}
-          loading={loading}
           selectedPhotoId={selectedPhotoId}
+          onMapMove={handleMapMove}
           onPhotoClick={handlePhotoClick}
-          onPageChange={handlePageChange}
+          centerOnPhoto={centerOnPhoto}
+          selectedZone={zone}
+          hoveredZone={hoveredZone}
+          onZoneSelect={handleZoneSelect}
         />
+      </div>
+
+      {/* Sidebar derecha: Lista de resultados o Detalle */}
+      <div className="sidebar-right">
+        {showPhotoDetail && detailPhoto ? (
+          <PhotoDetail
+            photo={detailPhoto}
+            onClose={handleCloseDetail}
+            onBackToList={handleBackToList}
+          />
+        ) : (
+          <PhotoList
+            photos={photos}
+            total={total}
+            page={page}
+            pageSize={pageSize}
+            totalPages={totalPages}
+            loading={loading}
+            selectedPhotoId={selectedPhotoId}
+            onPhotoClick={handlePhotoClick}
+            onPageChange={handlePageChange}
+          />
+        )}
       </div>
     </Layout>
   );

@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Photo, PhotoFormData } from '../../types';
+import { LocationPicker } from './LocationPicker';
 
 interface PhotoFormProps {
   photo?: Photo | null;
@@ -40,19 +41,91 @@ const ERAS = [
 ];
 
 const ZONES = [
+  // Distrito Centro
   'Casco Historico',
   'Centro',
-  'Delicias',
+  'San Pablo',
+  'La Magdalena',
+  'San Miguel',
+  'Tenerias',
+  'San Felipe',
+  'El Gancho',
+  // Distrito Universidad
   'Universidad',
-  'Romareda',
-  'Parque Grande',
   'San Jose',
+  'La Paz',
+  'San Vicente de Paul',
+  // Distrito Delicias
+  'Delicias',
+  'Ciudad Jardin',
+  'Monsalud',
+  // Distrito Torrero-La Paz
+  'Torrero',
+  'Venecia',
+  'San Antonio de Padua',
+  // Distrito Las Fuentes
   'Las Fuentes',
+  // Distrito Almozara
   'La Almozara',
-  'El Rabal',
+  'Las Armas',
+  // Distrito Oliver-Valdefierro
+  'Oliver',
+  'Valdefierro',
+  // Distrito Actur-Rey Fernando
   'Actur',
+  'Rey Fernando',
+  'Parque Goya',
+  // Distrito El Rabal
+  'El Rabal',
   'Arrabal',
-];
+  'Cogullada',
+  'Picarral',
+  'Jesus',
+  // Distrito Casablanca
+  'Casablanca',
+  'Valdespartera',
+  'Montecanal',
+  'Rosales del Canal',
+  'Arcosur',
+  'Romareda',
+  // Distrito Santa Isabel
+  'Santa Isabel',
+  'Movera',
+  // Distrito Miralbueno
+  'Miralbueno',
+  // Barrios rurales norte
+  'Juslibol',
+  'San Juan de Mozarrifar',
+  'Montanana',
+  'Penanflor',
+  'San Gregorio',
+  'Villamayor de Gallego',
+  // Barrios rurales oeste
+  'Alfocea',
+  'Garrapinillos',
+  'La Joyosa',
+  'Marlofa',
+  'Monzalbarba',
+  'Villarrapa',
+  // Barrios rurales sur
+  'Casetas',
+  'Venta del Olivar',
+  'Torre Medina',
+  // Zonas emblematicas
+  'Plaza del Pilar',
+  'La Seo',
+  'La Aljaferia',
+  'Expo',
+  'Puerto Venecia',
+  'Gran Via',
+  'Paseo Independencia',
+  'Plaza de Aragon',
+  'Plaza de Espana',
+  'Puente de Piedra',
+  'Ribera del Ebro',
+  'Parque Grande',
+  'Parque del Agua',
+].sort();
 
 export const PhotoForm: React.FC<PhotoFormProps> = ({
   photo,
@@ -108,6 +181,14 @@ export const PhotoForm: React.FC<PhotoFormProps> = ({
         name === 'year' || name === 'year_from' || name === 'year_to' || name === 'lat' || name === 'lng'
           ? value ? parseFloat(value) : undefined
           : value,
+    }));
+  };
+
+  const handleLocationChange = (lat: number, lng: number) => {
+    setFormData((prev) => ({
+      ...prev,
+      lat,
+      lng,
     }));
   };
 
@@ -275,7 +356,15 @@ export const PhotoForm: React.FC<PhotoFormProps> = ({
             </div>
           </div>
 
-          <div className="form-row two-cols">
+          {/* Selector de ubicacion en mapa */}
+          <LocationPicker
+            lat={formData.lat}
+            lng={formData.lng}
+            onLocationChange={handleLocationChange}
+          />
+
+          {/* Campos ocultos de lat/lng para el formulario */}
+          <div className="form-row two-cols" style={{ display: 'none' }}>
             <div className="form-group">
               <label htmlFor="lat">Latitud *</label>
               <input

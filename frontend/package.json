@@ -10,19 +10,21 @@
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0"
   },
   "dependencies": {
+    "leaflet": "^1.9.4",
+    "leaflet.markercluster": "^1.5.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-router-dom": "^6.21.0",
-    "leaflet": "^1.9.4",
-    "leaflet.markercluster": "^1.5.3"
+    "react-router-dom": "^6.21.0"
   },
   "devDependencies": {
+    "@types/leaflet": "^1.9.8",
+    "@types/leaflet.markercluster": "^1.5.4",
     "@types/react": "^18.2.45",
     "@types/react-dom": "^18.2.18",
     "@types/react-router-dom": "^5.3.3",
-    "@types/leaflet": "^1.9.8",
-    "@types/leaflet.markercluster": "^1.5.4",
     "@vitejs/plugin-react": "^4.2.1",
+    "proj4": "^2.20.2",
+    "shapefile": "^0.6.6",
     "typescript": "^5.3.3",
     "vite": "^5.0.8"
   }

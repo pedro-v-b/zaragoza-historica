@@ -33,6 +33,7 @@ services:
       DB_USER: zaragoza_user
       DB_PASSWORD: zaragoza_pass
       CORS_ORIGINS: http://localhost:5173,http://localhost:3000
+      UPLOADS_DIR: /app/uploads
     ports:
       - "3000:3000"
     depends_on:

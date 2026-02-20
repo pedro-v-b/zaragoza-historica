@@ -62,7 +62,16 @@ app.add_middleware(
 )
 
 # Servir archivos estáticos (uploads)
-uploads_path = os.path.join(os.path.dirname(__file__), "..", "uploads")
+# En Docker: se configura via UPLOADS_DIR=/app/uploads
+# En local: se calcula ruta al directorio uploads en la raíz del proyecto
+def get_uploads_path():
+    env_path = os.environ.get('UPLOADS_DIR')
+    if env_path:
+        return os.path.abspath(env_path)
+    # Ruta relativa: backend_python/.. = raíz del proyecto
+    return os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "uploads"))
+
+uploads_path = get_uploads_path()
 if os.path.exists(os.path.abspath(uploads_path)):
     app.mount("/uploads", StaticFiles(directory=os.path.abspath(uploads_path)), name="uploads")
 else:
