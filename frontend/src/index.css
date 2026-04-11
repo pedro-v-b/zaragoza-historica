@@ -1792,6 +1792,9 @@ body {
   line-height: 1.7;
   color: var(--text-secondary);
   margin-bottom: 24px;
+  text-align: justify;
+  text-justify: inter-word;
+  hyphens: auto;
 }
 
 .photo-detail-tags {
@@ -2102,6 +2105,9 @@ body {
   font-size: 15px;
   line-height: 1.7;
   color: var(--text-secondary);
+  text-align: justify;
+  text-justify: inter-word;
+  hyphens: auto;
 }
 
 .fullscreen-tags {
