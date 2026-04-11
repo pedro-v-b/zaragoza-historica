@@ -1,13 +1,25 @@
 """
 Repository para operaciones sobre fotos históricas con PostGIS
 """
+import os
 from typing import List, Tuple, Dict, Optional
 from config.database import Database
-
 
 class PhotosRepository:
     """Repository para acceso a datos de fotos"""
     
+    def _format_photo_urls(self, photo: dict) -> dict:
+        """Prefija las URLs de las imágenes con el base URL de almacenamiento si existe"""
+        base_url = os.getenv("STORAGE_PUBLIC_URL", "").rstrip('/')
+        if not base_url:
+            return photo
+            
+        # Solo prefijar si la URL es relativa (empieza por /uploads/)
+        for key in ['image_url', 'thumb_url']:
+            if photo.get(key) and photo[key].startswith('/uploads/'):
+                photo[key] = f"{base_url}{photo[key]}"
+        return photo
+
     def find_all(self, filters: dict) -> Tuple[List[dict], int]:
         """
         Obtiene fotos con filtros combinados y paginación
@@ -28,7 +40,6 @@ class PhotosRepository:
         
         where_clauses = []
         query_params = []
-        param_index = 1
         
         # Filtro por bounding box (PostGIS)
         if bbox:
@@ -86,10 +97,6 @@ class PhotosRepository:
             cursor.execute(count_query, query_params)
             total = cursor.fetchone()['count']
 
-            # Orden: determinista aleatorio basado en md5(id || seed) o por defecto.
-            # Usamos md5 en lugar de setseed+random() porque setseed es estado de
-            # sesion y no funciona fiable con un pool de conexiones, mientras que
-            # md5(id||seed) es estable entre paginas y distinto para cada seed.
             offset = (page - 1) * page_size
             if random_order:
                 seed_str = str(seed) if seed is not None else "0"
@@ -119,10 +126,11 @@ class PhotosRepository:
 
             cursor.execute(data_query, exec_params)
             photos = cursor.fetchall()
-
             cursor.close()
 
-            return [dict(photo) for photo in photos], total
+            # Formatear URLs para cada foto
+            formatted_photos = [self._format_photo_urls(dict(photo)) for photo in photos]
+            return formatted_photos, total
             
         finally:
             Database.return_connection(conn)
@@ -145,7 +153,9 @@ class PhotosRepository:
             photo = cursor.fetchone()
             cursor.close()
             
-            return dict(photo) if photo else None
+            if photo:
+                return self._format_photo_urls(dict(photo))
+            return None
             
         finally:
             Database.return_connection(conn)
