@@ -1,0 +1,340 @@
+================================================================================
+                    CONTEXTO COMPLETO DEL PROYECTO
+                       "ZARAGOZA HISTÓRICA"
+                         TFG DAM v2
+================================================================================
+
+Ruta del proyecto: C:\Users\pvial\Desktop\TFG DAM v2
+
+================================================================================
+1. DESCRIPCIÓN GENERAL
+================================================================================
+
+Aplicación web full-stack para visualizar fotografías históricas de Zaragoza
+geolocalizadas en un mapa interactivo. Permite explorar la historia visual
+de la ciudad mediante filtros combinables y sincronización en tiempo real
+entre mapa y lista de resultados.
+
+Tipo: Single Page Application (SPA) con funcionalidades geoespaciales
+Estado: MVP 100% funcional
+
+================================================================================
+2. TECNOLOGÍAS UTILIZADAS
+================================================================================
+
+FRONTEND:
+- React 18
+- TypeScript 5.3+ (strict mode)
+- Vite 5 (build tool)
+- Leaflet 1.9.4 (mapas)
+- leaflet.markercluster 1.5.3 (clustering)
+- React Router v6
+- CSS puro
+
+BACKEND:
+- Python 3.11+
+- FastAPI >= 0.115.0
+- Uvicorn (servidor ASGI)
+- Pydantic v2 (validación)
+- psycopg2-binary (driver PostgreSQL)
+- python-jose + bcrypt (JWT auth)
+- pytest (testing)
+
+BASE DE DATOS:
+- PostgreSQL 15
+- PostGIS 3.4 (extensión geoespacial)
+
+DEVOPS:
+- Docker + Docker Compose
+- Imagen: postgis/postgis:15-3.4
+
+================================================================================
+3. ARQUITECTURA DEL PROYECTO
+================================================================================
+
+Arquitectura de 4 capas (Backend):
+
+    Petición HTTP
+         ↓
+    [Routers]        → Endpoints FastAPI, validación de parámetros
+         ↓
+    [Services]       → Lógica de negocio, transformación de datos
+         ↓
+    [Repositories]   → Queries SQL/PostGIS directas
+         ↓
+    [Database]       → Pool de conexiones PostgreSQL
+
+================================================================================
+4. ESTRUCTURA DE DIRECTORIOS
+================================================================================
+
+TFG DAM v2/
+├── backend_python/              # BACKEND ACTIVO (Python + FastAPI)
+│   ├── main.py                 # Entry point FastAPI
+│   ├── requirements.txt        # Dependencias Python
+│   ├── Dockerfile
+│   ├── .env                    # Variables de entorno
+│   ├── config/
+│   │   ├── database.py         # Pool de conexiones PostgreSQL
+│   │   └── auth.py             # Configuración JWT
+│   ├── models/
+│   │   └── schemas.py          # Modelos Pydantic
+│   ├── routers/
+│   │   ├── photos.py           # Endpoints de fotos
+│   │   ├── layers.py           # Endpoints de capas
+│   │   └── auth.py             # Endpoints de autenticación
+│   ├── services/
+│   │   ├── photos_service.py   # Lógica de fotos
+│   │   ├── layers_service.py   # Lógica de capas
+│   │   └── auth_service.py     # Lógica de auth
+│   ├── repositories/
+│   │   ├── photos_repository.py
+│   │   ├── layers_repository.py
+│   │   └── auth_repository.py
+│   ├── dependencies/
+│   │   └── auth.py             # Middleware JWT
+│   └── database/
+│       ├── schema.sql          # Tablas + índices + triggers
+│       ├── seeds.sql           # 8 fotos de ejemplo
+│       └── seeds_extra.sql     # 10 fotos adicionales
+│
+├── frontend/                    # FRONTEND (React + TypeScript)
+│   ├── index.html
+│   ├── package.json
+│   ├── vite.config.ts
+│   ├── tsconfig.json
+│   └── src/
+│       ├── main.tsx            # Entry point
+│       ├── App.tsx             # Componente raíz
+│       ├── index.css           # Estilos globales
+│       ├── components/
+│       │   ├── Layout/
+│       │   │   ├── Layout.tsx
+│       │   │   └── Header.tsx
+│       │   ├── Map/
+│       │   │   └── MapView.tsx     # Mapa Leaflet + clustering
+│       │   ├── Filters/
+│       │   │   └── Filters.tsx     # Panel de filtros
+│       │   ├── PhotoList/
+│       │   │   ├── PhotoList.tsx   # Lista + paginación
+│       │   │   └── PhotoDetail.tsx # Vista detalle
+│       │   └── Admin/
+│       │       ├── AdminDashboard.tsx
+│       │       ├── AdminLogin.tsx
+│       │       ├── PhotoForm.tsx
+│       │       ├── PhotoTable.tsx
+│       │       ├── LocationPicker.tsx
+│       │       └── ProtectedRoute.tsx
+│       ├── services/
+│       │   └── api.ts          # Cliente HTTP (fetch)
+│       ├── types/
+│       │   └── index.ts        # Interfaces TypeScript
+│       └── hooks/
+│           └── useDebounce.ts  # Custom hook
+│
+├── backend/                     # DEPRECATED (TypeScript antiguo)
+├── scraper/                     # Módulo de scraping (Flickr)
+├── uploads/                     # Imágenes subidas
+├── temp_images/                 # Imágenes temporales
+│
+├── docker-compose.yml           # Orquestación de contenedores
+├── start.ps1                    # Script inicio (Windows)
+├── stop.ps1                     # Script parada (Windows)
+│
+├── README.md                    # Documentación principal
+├── QUICKSTART.md                # Guía de inicio rápido
+├── MIGRACION_PYTHON.md          # Migración TS → Python
+├── CONTEXTO_PROYECTO.md         # Contexto detallado
+├── API_EXAMPLES.md              # Ejemplos de API
+├── INSTALL_POSTGRES.md          # Instalación BD
+└── GUIA_AÑADIR_FOTOS.md         # Cómo añadir fotos
+
+================================================================================
+5. BASE DE DATOS
+================================================================================
+
+TABLA: photos (fotografías históricas)
+--------------------------------------
+- id (SERIAL PRIMARY KEY)
+- title (VARCHAR 255)
+- description (TEXT)
+- year (INTEGER) - Año exacto
+- year_from, year_to (INTEGER) - Rango de años
+- era (VARCHAR 50) - "Años 30", "Años 50", etc.
+- zone (VARCHAR 100) - Barrio/zona
+- lat, lng (DECIMAL 10,8) - Coordenadas
+- geometry (GEOMETRY Point, SRID 4326) - PostGIS point
+- image_url, thumb_url (VARCHAR 500)
+- source, author, rights (VARCHAR)
+- tags (TEXT[]) - Array de tags
+- created_at, updated_at (TIMESTAMP)
+
+TABLA: map_layers (capas del mapa)
+----------------------------------
+- id (SERIAL PRIMARY KEY)
+- name (VARCHAR 100)
+- year (INTEGER)
+- type (VARCHAR 20) - 'plan', 'ortho', 'current'
+- tile_url_template (VARCHAR 500)
+- attribution (TEXT)
+- min_zoom, max_zoom (INTEGER)
+- is_active (BOOLEAN)
+- display_order (INTEGER)
+
+ÍNDICES:
+- GIST espacial en geometry (queries PostGIS)
+- B-tree en year, era, zone, created_at
+
+TRIGGERS:
+- sync_geometry: Auto-convierte lat/lng → geometry POINT
+- update_updated_at: Auto-actualiza updated_at
+
+================================================================================
+6. ENDPOINTS DE LA API
+================================================================================
+
+FOTOGRAFÍAS:
+- GET  /api/photos              → Lista con filtros (bbox, year, era, zone, q)
+- GET  /api/photos/{id}         → Foto específica
+- GET  /api/photos/metadata/filters → Metadatos (épocas, zonas, años)
+- GET  /api/map                 → Datos ligeros para mapa
+- POST /api/photos              → Crear foto (admin)
+- PUT  /api/photos/{id}         → Actualizar foto (admin)
+- DELETE /api/photos/{id}       → Eliminar foto (admin)
+
+CAPAS:
+- GET  /api/layers              → Lista capas activas
+- GET  /api/layers/{id}         → Capa específica
+
+AUTENTICACIÓN:
+- POST /api/auth/login          → Login con credenciales
+- POST /api/auth/register       → Registro de admin
+
+SISTEMA:
+- GET  /api/health              → Health check
+- GET  /docs                    → Swagger UI
+- GET  /redoc                   → ReDoc
+
+================================================================================
+7. FUNCIONALIDADES PRINCIPALES
+================================================================================
+
+1. MAPA INTERACTIVO
+   - Leaflet centrado en Zaragoza (Plaza del Pilar: 41.6488, -0.8891)
+   - Clustering de marcadores
+   - Zoom: 3-19
+   - Popups con miniatura + botón "Ver detalle"
+
+2. FILTROS COMBINABLES
+   - Rango de años (desde/hasta)
+   - Época histórica (select dinámico)
+   - Zona/barrio (select dinámico)
+   - Búsqueda por texto
+   - Bounding box (área visible del mapa)
+   - Checkbox: "Solo fotos en pantalla visible"
+
+3. SINCRONIZACIÓN BIDIRECCIONAL
+   - Al mover mapa → lista se actualiza (debounce 800ms)
+   - Al clic en foto de lista → mapa se centra
+   - Al clic en marcador → foto se resalta en lista
+
+4. PAGINACIÓN
+   - 20 fotos por página (configurable)
+   - Navegación anterior/siguiente
+
+5. SELECTOR DE CAPAS HISTÓRICAS
+   - Radio buttons para cambiar capa base
+   - Capas: Actual, Plano 1935, Ortofoto 1960
+
+6. PANEL ADMINISTRATIVO
+   - Login con JWT
+   - CRUD completo de fotos
+   - Selector de ubicación interactivo
+   - Subida de imágenes
+
+================================================================================
+8. CONFIGURACIÓN
+================================================================================
+
+DOCKER-COMPOSE.YML:
+- postgres: postgis/postgis:15-3.4, puerto 5432
+- backend: Python, puerto 3000
+- Credenciales: zaragoza_user / zaragoza_pass
+- Database: zaragoza_historica
+
+BACKEND .ENV:
+- DB_HOST=localhost (o "postgres" en Docker)
+- DB_PORT=5432
+- DB_NAME=zaragoza_historica
+- DB_USER=zaragoza_user
+- DB_PASSWORD=zaragoza_pass
+- PORT=3000
+- CORS_ORIGINS=http://localhost:5173,http://localhost:3000
+- JWT_SECRET=tu-clave-secreta
+
+VITE PROXY:
+- /api → http://localhost:3000
+- /uploads → http://localhost:3000
+
+================================================================================
+9. CÓMO EJECUTAR
+================================================================================
+
+OPCIÓN 1: Script automático (Windows)
+--------------------------------------
+.\start.ps1
+
+OPCIÓN 2: Docker Compose + Manual
+----------------------------------
+# Iniciar BD + Backend
+docker-compose up -d
+
+# Frontend (nueva terminal)
+cd frontend
+npm run dev
+
+OPCIÓN 3: Desarrollo local Python
+-----------------------------------
+# 1. BD en Docker
+docker-compose up -d postgres
+
+# 2. Backend local
+cd backend_python
+python -m venv venv
+.\venv\Scripts\Activate.ps1
+pip install -r requirements.txt
+python main.py
+
+# 3. Frontend
+cd frontend
+npm run dev
+
+URLS:
+- Frontend: http://localhost:5173
+- Backend API: http://localhost:3000
+- Swagger: http://localhost:3000/docs
+- Health: http://localhost:3000/api/health
+
+================================================================================
+10. ESTADÍSTICAS DEL CÓDIGO
+================================================================================
+
+Backend Python: ~900 líneas, 12 archivos principales
+Frontend React: ~1,500 líneas TypeScript, 18+ archivos
+Base de Datos: 2 tablas, 7 índices, 2 triggers
+Fotos de ejemplo: 8 + 10 opcionales
+
+================================================================================
+11. NOTAS IMPORTANTES
+================================================================================
+
+- El proyecto fue migrado de TypeScript/Express a Python/FastAPI (Feb 2026)
+- Compatibilidad 100% mantenida con frontend existente
+- Documentación exhaustiva en archivos .md
+- Git configurado con commits recientes
+- Panel admin incluido con autenticación JWT
+- Scraper de Flickr disponible en /scraper
+
+================================================================================
+                         FIN DEL DOCUMENTO
+================================================================================

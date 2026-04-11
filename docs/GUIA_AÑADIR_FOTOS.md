@@ -14,7 +14,7 @@
 ### Paso 1: Ejecutar el script
 ```powershell
 cd "C:\Users\pvial\Desktop\TFG DAM"
-python add_photo.py
+python scripts/legacy/add_photo.py
 ```
 
 ### Paso 2: Responder las preguntas
@@ -234,7 +234,7 @@ resize_image('original.jpg', 'backend/uploads/thumbs/foto.jpg', 300)
 
 ```powershell
 # 1. Ejecutar script
-python add_photo.py
+python scripts/legacy/add_photo.py
 
 # 2. Copiar imágenes
 copy "C:\mis_fotos\foto.jpg" "backend\uploads\foto.jpg"

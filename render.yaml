@@ -1,0 +1,39 @@
+services:
+  # 🐍 Backend: FastAPI en contenedor Docker
+  - type: web
+    name: zaragoza-historica-backend
+    runtime: docker
+    repo: https://github.com/tu-usuario/tu-repo # Cambiar por tu repo real o dejar que Render lo detecte
+    dockerContext: ./backend_python
+    dockerfilePath: ./backend_python/Dockerfile
+    plan: free
+    healthCheckPath: /api/health
+    envVars:
+      - key: DB_HOST
+        value: db.ktnavneugmimhdvpnnga.supabase.co
+      - key: DB_PORT
+        value: "5432"
+      - key: DB_NAME
+        value: postgres
+      - key: DB_USER
+        value: postgres
+      - key: DB_PASSWORD
+        sync: false # Deberás introducir la contraseña V4BG8aKwXi3qrNn en el panel de Render
+      - key: CORS_ORIGINS
+        value: "*" # Se recomienda restringir a la URL del frontend una vez desplegado
+      - key: PORT
+        value: "3000"
+
+  # ⚛️ Frontend: React (Sitio Estático)
+  - type: static
+    name: zaragoza-historica-frontend
+    env: node
+    buildCommand: cd frontend && npm install && npm run build
+    staticPublishPath: ./frontend/dist
+    plan: free
+    envVars:
+      - key: VITE_API_URL
+        fromService:
+          type: web
+          name: zaragoza-historica-backend
+          property: host

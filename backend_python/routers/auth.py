@@ -1,18 +1,20 @@
 """
 Router para endpoints de autenticación
 """
-from fastapi import APIRouter, HTTPException, status, Depends
+from fastapi import APIRouter, HTTPException, status, Depends, Request
 from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
 from models.schemas import LoginRequest, LoginResponse, UserResponse, MessageResponse
 from services.auth_service import auth_service
 from dependencies.auth import get_current_user, security
 from models.schemas import TokenData
+from config.rate_limit import limiter
 
 router = APIRouter(prefix="/auth", tags=["auth"])
 
 
 @router.post("/login", response_model=LoginResponse)
-async def login(login_data: LoginRequest):
+@limiter.limit("5/minute")
+async def login(request: Request, login_data: LoginRequest):
     """
     Autentica un usuario y devuelve un token JWT
 

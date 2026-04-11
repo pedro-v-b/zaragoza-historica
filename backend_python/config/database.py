@@ -3,11 +3,14 @@ Configuración de conexión a PostgreSQL + PostGIS
 """
 import os
 import sys
+import logging
 from typing import Optional
 import psycopg2
 from psycopg2 import pool
 from psycopg2.extras import RealDictCursor
 from dotenv import load_dotenv
+
+logger = logging.getLogger(__name__)
 
 # Configurar codificación en Windows antes de todo
 if sys.platform == 'win32':
@@ -73,11 +76,9 @@ class Database:
                 )
                 
                 cls._initialized = True
-                print("[OK] Pool de conexiones PostgreSQL creado")
+                logger.info("Pool de conexiones PostgreSQL creado")
             except Exception as e:
-                print(f"[ERROR] Error creando pool de conexiones: {e}")
-                import traceback
-                traceback.print_exc()
+                logger.exception("Error creando pool de conexiones: %s", e)
                 raise
     
     @classmethod
@@ -98,7 +99,7 @@ class Database:
         """Cierra todas las conexiones del pool"""
         if cls._connection_pool is not None:
             cls._connection_pool.closeall()
-            print("[OK] Pool de conexiones cerrado")
+            logger.info("Pool de conexiones cerrado")
     
     @classmethod
     async def test_connection(cls) -> bool:
@@ -109,13 +110,13 @@ class Database:
                 cursor = conn.cursor()
                 cursor.execute("SELECT NOW(), PostGIS_Version() as postgis_version")
                 result = cursor.fetchone()
-                print(f"[OK] Conectado a PostgreSQL: {result['now']}, PostGIS: {result['postgis_version']}")
+                logger.info("Conectado a PostgreSQL: %s, PostGIS: %s", result['now'], result['postgis_version'])
                 cursor.close()
                 return True
             finally:
                 cls.return_connection(conn)
         except Exception as e:
-            print(f"[ERROR] Error conectando a la base de datos: {e}")
+            logger.error("Error conectando a la base de datos: %s", e)
             return False
 
 # NO inicializar automáticamente - se hará de forma diferida

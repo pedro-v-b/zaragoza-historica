@@ -10,7 +10,7 @@ Aplicación web para visualizar fotografías históricas geolocalizadas de Zarag
 
 **Estado**: ✅ **MVP 100% FUNCIONAL** (Backend Python + Frontend + Base de datos)
 
-**Inicio rápido**: Lee `QUICKSTART.md` o ejecuta `docker-compose up -d`
+**Inicio rápido**: Lee `docs/QUICKSTART.md` o ejecuta `docker-compose up -d`
 
 **Características principales**:
 - 🗺️ Mapa interactivo con Leaflet + clustering de marcadores
@@ -25,12 +25,14 @@ Aplicación web para visualizar fotografías históricas geolocalizadas de Zarag
 
 **Tech stack**: React + TypeScript + Vite + Leaflet | **Python + FastAPI** + PostgreSQL + PostGIS
 
-**Archivos clave**:
-- `QUICKSTART.md` - Guía de inicio en 5 minutos
-- `MIGRACION_PYTHON.md` - **Documentación de la migración a Python**
-- `API_EXAMPLES.md` - Ejemplos de uso de la API
-- `INSTALL_POSTGRES.md` - 3 opciones de instalación de BD
-- `RESUMEN.md` - Visión global del proyecto completo
+**Archivos clave** (todos en `docs/`):
+- `docs/QUICKSTART.md` - Guía de inicio en 5 minutos
+- `docs/MIGRACION_PYTHON.md` - **Documentación de la migración a Python**
+- `docs/API_EXAMPLES.md` - Ejemplos de uso de la API
+- `docs/INSTALL_POSTGRES.md` - 3 opciones de instalación de BD
+- `docs/RESUMEN.md` - Visión global del proyecto completo
+- `docs/GUIA_AÑADIR_FOTOS.md` - Guía para añadir fotos manualmente
+- `docs/CONTEXTO_PROYECTO.md` - Contexto y decisiones de diseño
 
 ---
 
@@ -100,7 +102,7 @@ docker-compose ps
 
 #### Opción B: PostgreSQL instalado en Windows
 Si Docker no funciona, instala PostgreSQL + PostGIS manualmente.
-Consulta el archivo `INSTALL_POSTGRES.md` para instrucciones detalladas.
+Consulta `docs/INSTALL_POSTGRES.md` para instrucciones detalladas.
 
 #### Opción C: Base de datos en la nube (prueba rápida)
 - **ElephantSQL** (gratis): https://www.elephantsql.com/

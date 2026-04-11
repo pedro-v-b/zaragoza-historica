@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FilterMetadata } from '../../types';
 import { getFilterMetadata } from '../../services/api';
 
@@ -12,6 +12,7 @@ interface FiltersProps {
     yearFrom?: number;
     yearTo?: number;
     zone?: string;
+    era?: string;
     q?: string;
     onlyInViewport: boolean;
   }) => void;
@@ -19,6 +20,17 @@ interface FiltersProps {
   onZoneHover?: (zone: string | null) => void;
   onZoneSelect?: (zone: string | null) => void;
 }
+
+// Presets de rangos de años
+const YEAR_PRESETS = [
+  { label: 'Todo', from: null, to: null },
+  { label: '2010–hoy', from: 2010, to: 2024 },
+  { label: '2000–2010', from: 2000, to: 2010 },
+  { label: '1975–2000', from: 1975, to: 2000 },
+  { label: '1950–1975', from: 1950, to: 1975 },
+  { label: '1900–1950', from: 1900, to: 1950 },
+  { label: 'Antes de 1900', from: null, to: 1900 },
+];
 
 export const Filters: React.FC<FiltersProps> = ({
   onFilterChange,
@@ -28,14 +40,15 @@ export const Filters: React.FC<FiltersProps> = ({
 }) => {
   const [metadata, setMetadata] = useState<FilterMetadata | null>(null);
   const [barrios, setBarrios] = useState<Barrio[]>([]);
-  const [yearRange, setYearRange] = useState<[number, number]>([1850, 2024]);
+  const [yearFrom, setYearFrom] = useState<string>('');
+  const [yearTo, setYearTo] = useState<string>('');
+  const [activePreset, setActivePreset] = useState<number>(0);
   const [zone, setZone] = useState<string>('');
+  const [selectedEra, setSelectedEra] = useState<string>('');
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [onlyInViewport, setOnlyInViewport] = useState<boolean>(false);
-
-  // Referencias para el slider
-  const sliderRef = useRef<HTMLDivElement>(null);
-  const [isDragging, setIsDragging] = useState<'min' | 'max' | null>(null);
+  const [barrioExpanded, setBarrioExpanded] = useState<boolean>(false);
+  const [tematicoExpanded, setTematicoExpanded] = useState<boolean>(false);
 
   useEffect(() => {
     loadMetadata();
@@ -49,10 +62,11 @@ export const Filters: React.FC<FiltersProps> = ({
     }
   }, [selectedZone]);
 
-  // Inicializar rango de años cuando se carga metadata
+  // Inicializar rango cuando se carga metadata
   useEffect(() => {
     if (metadata) {
-      setYearRange([metadata.yearRange.min, metadata.yearRange.max]);
+      setYearFrom(metadata.yearRange.min.toString());
+      setYearTo(metadata.yearRange.max.toString());
     }
   }, [metadata]);
 
@@ -73,7 +87,6 @@ export const Filters: React.FC<FiltersProps> = ({
         name: f.properties.name || f.properties.JUNTA,
         originalName: f.properties.name || f.properties.JUNTA,
       }));
-      // Ordenar alfabeticamente
       barriosList.sort((a, b) => a.name.localeCompare(b.name));
       setBarrios(barriosList);
     } catch (error) {
@@ -81,58 +94,59 @@ export const Filters: React.FC<FiltersProps> = ({
     }
   };
 
-  // Lógica del slider de rango
-  const getSliderValue = useCallback((clientX: number): number => {
-    if (!sliderRef.current || !metadata) return yearRange[0];
-    const rect = sliderRef.current.getBoundingClientRect();
-    const percent = Math.max(0, Math.min(1, (clientX - rect.left) / rect.width));
-    const value = Math.round(metadata.yearRange.min + percent * (metadata.yearRange.max - metadata.yearRange.min));
-    return value;
-  }, [metadata, yearRange]);
-
-  const handleSliderMouseDown = (handle: 'min' | 'max') => (e: React.MouseEvent) => {
-    e.preventDefault();
-    setIsDragging(handle);
+  // Seleccionar preset de rango
+  const handlePreset = (index: number) => {
+    if (!metadata) return;
+    const preset = YEAR_PRESETS[index];
+    const from = preset.from ?? metadata.yearRange.min;
+    const to = preset.to ?? metadata.yearRange.max;
+    setYearFrom(from.toString());
+    setYearTo(to.toString());
+    setActivePreset(index);
+    onFilterChange({
+      yearFrom: from,
+      yearTo: to,
+      zone: zone || undefined,
+      era: selectedEra || undefined,
+      q: searchQuery || undefined,
+      onlyInViewport,
+    });
   };
 
-  const handleSliderMouseMove = useCallback((e: MouseEvent) => {
-    if (!isDragging || !metadata) return;
-    const value = getSliderValue(e.clientX);
+  // Validar y clampar año al perder foco
+  const handleYearBlur = (field: 'from' | 'to') => {
+    if (!metadata) return;
+    const { min, max } = metadata.yearRange;
 
-    setYearRange(prev => {
-      if (isDragging === 'min') {
-        return [Math.min(value, prev[1] - 1), prev[1]];
-      } else {
-        return [prev[0], Math.max(value, prev[0] + 1)];
-      }
-    });
-  }, [isDragging, getSliderValue, metadata]);
-
-  const handleSliderMouseUp = useCallback(() => {
-    if (isDragging) {
-      setIsDragging(null);
-      // Aplicar filtros al soltar
-      handleApplyFilters();
+    if (field === 'from') {
+      let v = parseInt(yearFrom, 10);
+      if (isNaN(v)) v = min;
+      v = Math.max(min, Math.min(v, parseInt(yearTo, 10) || max));
+      setYearFrom(v.toString());
+    } else {
+      let v = parseInt(yearTo, 10);
+      if (isNaN(v)) v = max;
+      v = Math.min(max, Math.max(v, parseInt(yearFrom, 10) || min));
+      setYearTo(v.toString());
     }
-  }, [isDragging]);
+    setActivePreset(-1);
+  };
 
-  // Event listeners para drag
-  useEffect(() => {
-    if (isDragging) {
-      window.addEventListener('mousemove', handleSliderMouseMove);
-      window.addEventListener('mouseup', handleSliderMouseUp);
-      return () => {
-        window.removeEventListener('mousemove', handleSliderMouseMove);
-        window.removeEventListener('mouseup', handleSliderMouseUp);
-      };
-    }
-  }, [isDragging, handleSliderMouseMove, handleSliderMouseUp]);
+  // Porcentaje lineal para barra visual
+  const getBarPercent = (year: number): number => {
+    if (!metadata) return 0;
+    const { min, max } = metadata.yearRange;
+    return ((year - min) / (max - min)) * 100;
+  };
 
   const handleApplyFilters = () => {
+    const from = parseInt(yearFrom, 10);
+    const to = parseInt(yearTo, 10);
     onFilterChange({
-      yearFrom: yearRange[0],
-      yearTo: yearRange[1],
+      yearFrom: isNaN(from) ? undefined : from,
+      yearTo: isNaN(to) ? undefined : to,
       zone: zone || undefined,
+      era: selectedEra || undefined,
       q: searchQuery || undefined,
       onlyInViewport,
     });
@@ -142,10 +156,28 @@ export const Filters: React.FC<FiltersProps> = ({
     const newZone = zone === selectedBarrio ? '' : selectedBarrio;
     setZone(newZone);
     onZoneSelect?.(newZone || null);
+    const from = parseInt(yearFrom, 10);
+    const to = parseInt(yearTo, 10);
     onFilterChange({
-      yearFrom: yearRange[0],
-      yearTo: yearRange[1],
+      yearFrom: isNaN(from) ? undefined : from,
+      yearTo: isNaN(to) ? undefined : to,
       zone: newZone || undefined,
+      era: selectedEra || undefined,
+      q: searchQuery || undefined,
+      onlyInViewport,
+    });
+  };
+
+  const handleEraSelect = (eraName: string) => {
+    const newEra = selectedEra === eraName ? '' : eraName;
+    setSelectedEra(newEra);
+    const from = parseInt(yearFrom, 10);
+    const to = parseInt(yearTo, 10);
+    onFilterChange({
+      yearFrom: isNaN(from) ? undefined : from,
+      yearTo: isNaN(to) ? undefined : to,
+      zone: zone || undefined,
+      era: newEra || undefined,
       q: searchQuery || undefined,
       onlyInViewport,
     });
@@ -153,19 +185,16 @@ export const Filters: React.FC<FiltersProps> = ({
 
   const handleResetFilters = () => {
     if (metadata) {
-      setYearRange([metadata.yearRange.min, metadata.yearRange.max]);
+      setYearFrom(metadata.yearRange.min.toString());
+      setYearTo(metadata.yearRange.max.toString());
     }
+    setActivePreset(0);
     setZone('');
+    setSelectedEra('');
     setSearchQuery('');
     setOnlyInViewport(false);
     onZoneSelect?.(null);
     onFilterChange({ onlyInViewport: false });
-  };
-
-  // Calcular posición de los handles
-  const getHandlePosition = (value: number): number => {
-    if (!metadata) return 0;
-    return ((value - metadata.yearRange.min) / (metadata.yearRange.max - metadata.yearRange.min)) * 100;
   };
 
   return (
@@ -182,71 +211,155 @@ export const Filters: React.FC<FiltersProps> = ({
         />
       </div>
 
-      {/* Filtro por año - Slider de rango */}
+      {/* Filtro por año */}
       <div className="filter-section">
         <h3>Rango de años</h3>
         {metadata && (
           <>
-            <div className="year-range-display">
-              <span className="year-value">{yearRange[0]}</span>
-              <span className="year-separator">—</span>
-              <span className="year-value">{yearRange[1]}</span>
+            {/* Inputs numéricos */}
+            <div className="year-inputs">
+              <div className="year-input-group">
+                <label>Desde</label>
+                <input
+                  type="number"
+                  value={yearFrom}
+                  min={metadata.yearRange.min}
+                  max={metadata.yearRange.max}
+                  onChange={(e) => { setYearFrom(e.target.value); setActivePreset(-1); }}
+                  onBlur={() => handleYearBlur('from')}
+                  onKeyDown={(e) => e.key === 'Enter' && handleApplyFilters()}
+                />
+              </div>
+              <span className="year-input-separator">—</span>
+              <div className="year-input-group">
+                <label>Hasta</label>
+                <input
+                  type="number"
+                  value={yearTo}
+                  min={metadata.yearRange.min}
+                  max={metadata.yearRange.max}
+                  onChange={(e) => { setYearTo(e.target.value); setActivePreset(-1); }}
+                  onBlur={() => handleYearBlur('to')}
+                  onKeyDown={(e) => e.key === 'Enter' && handleApplyFilters()}
+                />
+              </div>
             </div>
-            <div className="year-slider" ref={sliderRef}>
-              <div className="slider-track" />
+
+            {/* Barra visual del rango seleccionado */}
+            <div className="year-visual-bar">
+              <div className="year-visual-track" />
               <div
-                className="slider-range"
+                className="year-visual-range"
                 style={{
-                  left: `${getHandlePosition(yearRange[0])}%`,
-                  width: `${getHandlePosition(yearRange[1]) - getHandlePosition(yearRange[0])}%`,
+                  left: `${getBarPercent(parseInt(yearFrom, 10) || metadata.yearRange.min)}%`,
+                  width: `${getBarPercent(parseInt(yearTo, 10) || metadata.yearRange.max) - getBarPercent(parseInt(yearFrom, 10) || metadata.yearRange.min)}%`,
                 }}
-              />
-              <div
-                className={`slider-handle slider-handle-min ${isDragging === 'min' ? 'active' : ''}`}
-                style={{ left: `${getHandlePosition(yearRange[0])}%` }}
-                onMouseDown={handleSliderMouseDown('min')}
-                title={yearRange[0].toString()}
-              />
-              <div
-                className={`slider-handle slider-handle-max ${isDragging === 'max' ? 'active' : ''}`}
-                style={{ left: `${getHandlePosition(yearRange[1])}%` }}
-                onMouseDown={handleSliderMouseDown('max')}
-                title={yearRange[1].toString()}
               />
             </div>
             <div className="year-range-labels">
               <span>{metadata.yearRange.min}</span>
               <span>{metadata.yearRange.max}</span>
             </div>
+
+            {/* Presets de rango rápido */}
+            <div className="year-presets">
+              {YEAR_PRESETS.map((preset, i) => (
+                <button
+                  key={preset.label}
+                  className={`year-preset-btn ${activePreset === i ? 'active' : ''}`}
+                  onClick={() => handlePreset(i)}
+                >
+                  {preset.label}
+                </button>
+              ))}
+            </div>
           </>
         )}
       </div>
 
-      {/* Filtro por zona/barrio */}
-      <div className="filter-section">
-        <h3>Barrio / Zona</h3>
-        <p className="filter-hint">Selecciona un barrio para ver solo sus fotos</p>
-        <div className="zone-list">
-          {zone && (
-            <button
-              className="zone-item zone-clear"
-              onClick={() => handleZoneSelect('')}
-            >
-              ✕ Limpiar selección
-            </button>
-          )}
-          {barrios.map((barrio) => (
-            <button
-              key={barrio.name}
-              className={`zone-item ${zone === barrio.name ? 'active' : ''}`}
-              onClick={() => handleZoneSelect(barrio.name)}
-              onMouseEnter={() => onZoneHover?.(barrio.name)}
-              onMouseLeave={() => onZoneHover?.(null)}
-            >
-              {barrio.name}
-            </button>
-          ))}
-        </div>
+      {/* Filtro temático por época histórica */}
+      <div className="filter-section filter-section-collapsible">
+        <button
+          className="filter-section-toggle"
+          onClick={() => setTematicoExpanded((v) => !v)}
+        >
+          <h3>Temático</h3>
+          <svg
+            className={`toggle-chevron ${tematicoExpanded ? 'expanded' : ''}`}
+            width="16" height="16" viewBox="0 0 16 16" fill="none"
+          >
+            <path d="M4 6L8 10L12 6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+        </button>
+        {tematicoExpanded && (
+          <div className="era-list">
+            {metadata?.eras && metadata.eras.length > 0 ? (
+              <>
+                {selectedEra && (
+                  <button
+                    className="era-item era-clear"
+                    onClick={() => handleEraSelect('')}
+                  >
+                    ✕ Limpiar selección
+                  </button>
+                )}
+                {metadata.eras.map((eraName) => (
+                  <button
+                    key={eraName}
+                    className={`era-item ${selectedEra === eraName ? 'active' : ''}`}
+                    onClick={() => handleEraSelect(eraName)}
+                  >
+                    {eraName}
+                  </button>
+                ))}
+              </>
+            ) : (
+              <p className="filter-hint">No hay épocas disponibles</p>
+            )}
+          </div>
+        )}
+      </div>
+
+      {/* Filtro por zona/barrio (colapsable) */}
+      <div className="filter-section filter-section-collapsible">
+        <button
+          className="filter-section-toggle"
+          onClick={() => setBarrioExpanded((v) => !v)}
+        >
+          <h3>Barrio / Zona</h3>
+          <svg
+            className={`toggle-chevron ${barrioExpanded ? 'expanded' : ''}`}
+            width="16" height="16" viewBox="0 0 16 16" fill="none"
+          >
+            <path d="M4 6L8 10L12 6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+        </button>
+        {barrioExpanded && (
+          <>
+            <p className="filter-hint">Selecciona un barrio para ver solo sus fotos</p>
+            <div className="zone-list">
+              {zone && (
+                <button
+                  className="zone-item zone-clear"
+                  onClick={() => handleZoneSelect('')}
+                >
+                  ✕ Limpiar selección
+                </button>
+              )}
+              {barrios.map((barrio) => (
+                <button
+                  key={barrio.name}
+                  className={`zone-item ${zone === barrio.name ? 'active' : ''}`}
+                  onClick={() => handleZoneSelect(barrio.name)}
+                  onMouseEnter={() => onZoneHover?.(barrio.name)}
+                  onMouseLeave={() => onZoneHover?.(null)}
+                >
+                  {barrio.name}
+                </button>
+              ))}
+            </div>
+          </>
+        )}
       </div>
 
       {/* Filtro solo en viewport */}

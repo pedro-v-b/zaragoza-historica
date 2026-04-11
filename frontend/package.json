@@ -7,7 +7,9 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0"
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "test": "vitest run",
+    "test:watch": "vitest"
   },
   "dependencies": {
     "leaflet": "^1.9.4",
@@ -17,15 +19,19 @@
     "react-router-dom": "^6.21.0"
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^6.4.0",
+    "@testing-library/react": "^14.2.0",
     "@types/leaflet": "^1.9.8",
     "@types/leaflet.markercluster": "^1.5.4",
     "@types/react": "^18.2.45",
     "@types/react-dom": "^18.2.18",
     "@types/react-router-dom": "^5.3.3",
     "@vitejs/plugin-react": "^4.2.1",
+    "jsdom": "^24.0.0",
     "proj4": "^2.20.2",
     "shapefile": "^0.6.6",
     "typescript": "^5.3.3",
-    "vite": "^5.0.8"
+    "vite": "^5.0.8",
+    "vitest": "^1.4.0"
   }
 }

@@ -29,6 +29,10 @@ class PhotosService:
             totalPages=total_pages
         )
     
+    def get_photos_raw(self, filters: dict):
+        """Obtiene fotos sin convertir a modelos Pydantic para mayor velocidad"""
+        return photos_repository.find_all(filters)
+    
     def get_photo_by_id(self, photo_id: int) -> Photo:
         """Obtiene una foto por ID"""
         photo_data = photos_repository.find_by_id(photo_id)

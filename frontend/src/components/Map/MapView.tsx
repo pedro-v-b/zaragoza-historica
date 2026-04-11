@@ -4,6 +4,10 @@ import 'leaflet.markercluster';
 import 'leaflet.markercluster/dist/MarkerCluster.css';
 import 'leaflet.markercluster/dist/MarkerCluster.Default.css';
 import { Photo } from '../../types';
+import BuildingsLayer from './BuildingsLayer';
+import BuildingsLegend from './BuildingsLegend';
+import WikipediaLayer from './WikipediaLayer';
+import MonumentsLayer from './MonumentsLayer';
 
 // Definición de capas históricas WMS
 interface HistoricalLayer {
@@ -15,33 +19,28 @@ interface HistoricalLayer {
   attribution: string;
 }
 
-// URLs de los servicios WMS
+// URLs de los servicios WMS del IGN
 const WMS_PNOA = 'https://www.ign.es/wms/pnoa-historico';
 const WMS_MINUTAS = 'https://www.ign.es/wms/minutas-cartograficas';
 const WMS_MTN = 'https://www.ign.es/wms/primera-edicion-mtn';
 
+// Capas con cobertura verificada para Zaragoza
 const HISTORICAL_LAYERS: HistoricalLayer[] = [
   // Mapa base moderno
   { id: 'modern', name: 'Mapa Actual', year: '2024', wmsLayer: '', wmsUrl: '', attribution: '' },
 
-  // Ortofotos PNOA (2004-2023)
-  { id: 'pnoa2023', name: 'PNOA Ortofoto', year: '2023', wmsLayer: 'PNOA2023', wmsUrl: WMS_PNOA, attribution: 'IGN-CNIG' },
-  { id: 'pnoa2020', name: 'PNOA Ortofoto', year: '2020', wmsLayer: 'PNOA2020', wmsUrl: WMS_PNOA, attribution: 'IGN-CNIG' },
-  { id: 'pnoa2017', name: 'PNOA Ortofoto', year: '2017', wmsLayer: 'PNOA2017', wmsUrl: WMS_PNOA, attribution: 'IGN-CNIG' },
+  // Ortofotos PNOA con cobertura en Zaragoza
   { id: 'pnoa2015', name: 'PNOA Ortofoto', year: '2015', wmsLayer: 'PNOA2015', wmsUrl: WMS_PNOA, attribution: 'IGN-CNIG' },
   { id: 'pnoa2012', name: 'PNOA Ortofoto', year: '2012', wmsLayer: 'PNOA2012', wmsUrl: WMS_PNOA, attribution: 'IGN-CNIG' },
   { id: 'pnoa2009', name: 'PNOA Ortofoto', year: '2009', wmsLayer: 'PNOA2009', wmsUrl: WMS_PNOA, attribution: 'IGN-CNIG' },
   { id: 'pnoa2006', name: 'PNOA Ortofoto', year: '2006', wmsLayer: 'PNOA2006', wmsUrl: WMS_PNOA, attribution: 'IGN-CNIG' },
-  { id: 'pnoa2004', name: 'PNOA Ortofoto', year: '2004', wmsLayer: 'PNOA2004', wmsUrl: WMS_PNOA, attribution: 'IGN-CNIG' },
 
-  // Vuelos históricos (1956-2003)
+  // Vuelos históricos con cobertura en Zaragoza
   { id: 'sigpac', name: 'SIGPAC', year: '1997-2003', wmsLayer: 'SIGPAC', wmsUrl: WMS_PNOA, attribution: 'IGN-CNIG' },
   { id: 'olistat', name: 'OLISTAT', year: '1997-98', wmsLayer: 'OLISTAT', wmsUrl: WMS_PNOA, attribution: 'IGN-CNIG' },
-  { id: 'nacional', name: 'Vuelo Nacional', year: '1981-86', wmsLayer: 'Nacional_1981-1986', wmsUrl: WMS_PNOA, attribution: 'IGN-CNIG' },
-  { id: 'interministerial', name: 'Interministerial', year: '1973-86', wmsLayer: 'Interministerial_1973-1986', wmsUrl: WMS_PNOA, attribution: 'IGN-CNIG' },
   { id: 'americano', name: 'Vuelo Americano B', year: '1956-57', wmsLayer: 'AMS_1956-1957', wmsUrl: WMS_PNOA, attribution: 'IGN-CNIG' },
 
-  // Cartografía histórica IGN (anterior a 1950)
+  // Cartografía histórica IGN
   { id: 'mtn50', name: 'MTN50 1ª Edición', year: '1915-1960', wmsLayer: 'MTN50', wmsUrl: WMS_MTN, attribution: 'IGN - Primera Edición MTN' },
   { id: 'mtn25', name: 'MTN25 1ª Edición', year: '1935-1960', wmsLayer: 'MTN25', wmsUrl: WMS_MTN, attribution: 'IGN - Primera Edición MTN' },
   { id: 'catastrones', name: 'Catastrones', year: '1870-1950', wmsLayer: 'catastrones', wmsUrl: WMS_MTN, attribution: 'IGN - Catastrones históricos' },
@@ -86,6 +85,8 @@ interface MapViewProps {
   selectedZone?: string;
   hoveredZone?: string | null;
   onZoneSelect?: (zone: string | null) => void;
+  yearFrom?: number;
+  yearTo?: number;
 }
 
 export const MapView: React.FC<MapViewProps> = ({
@@ -97,15 +98,22 @@ export const MapView: React.FC<MapViewProps> = ({
   selectedZone,
   hoveredZone,
   onZoneSelect,
+  yearFrom,
+  yearTo,
 }) => {
   const mapRef = useRef<L.Map | null>(null);
   const markersLayerRef = useRef<L.MarkerClusterGroup | null>(null);
+  const markersByIdRef = useRef<Map<number, L.Marker>>(new Map());
   const barriosLayerRef = useRef<L.GeoJSON | null>(null);
   const barriosDataRef = useRef<any>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const [currentLayerId, setCurrentLayerId] = useState<string>('modern');
-  const [showBarrios, setShowBarrios] = useState<boolean>(true);
+  const [showBarrios, setShowBarrios] = useState<boolean>(false);
+  const [showBuildings, setShowBuildings] = useState<boolean>(false);
+  const [showWikipedia, setShowWikipedia] = useState<boolean>(false);
+  const [showMonuments, setShowMonuments] = useState<boolean>(false);
   const [showLayerControl, setShowLayerControl] = useState<boolean>(false);
+  const [mapInstance, setMapInstance] = useState<L.Map | null>(null);
   const baseLayerRef = useRef<L.TileLayer | L.TileLayer.WMS | null>(null);
   const modernLayerRef = useRef<L.TileLayer | null>(null);
   const initializedRef = useRef<boolean>(false);
@@ -148,6 +156,7 @@ export const MapView: React.FC<MapViewProps> = ({
 
     // Guardar referencia del mapa primero
     mapRef.current = map;
+    setMapInstance(map);
 
     // Crear MarkerClusterGroup con configuracion personalizada
     const markersLayer = (L as any).markerClusterGroup({
@@ -155,8 +164,8 @@ export const MapView: React.FC<MapViewProps> = ({
       spiderfyOnMaxZoom: true,
       showCoverageOnHover: false,
       zoomToBoundsOnClick: true,
-      maxClusterRadius: 50,
-      disableClusteringAtZoom: 18,
+      maxClusterRadius: 60, 
+      disableClusteringAtZoom: 20, // Nunca desactivar clustering dentro del rango de zoom normal
       iconCreateFunction: (cluster: any) => {
         const count = cluster.getChildCount();
         let size = 'small';
@@ -182,7 +191,7 @@ export const MapView: React.FC<MapViewProps> = ({
     markersLayerRef.current = markersLayer;
 
     // Cargar y mostrar barrios de Zaragoza
-    loadBarrios(map);
+    loadBarrios();
 
     // Evento moveend con debounce manual
     let moveTimeout: ReturnType<typeof setTimeout>;
@@ -195,8 +204,16 @@ export const MapView: React.FC<MapViewProps> = ({
       }, 500);
     });
 
+    // Detectar cambios de tamaño del contenedor (ej: al colapsar sidebars)
+    const resizeObserver = new ResizeObserver(() => {
+      map.invalidateSize({ animate: false });
+    });
+    resizeObserver.observe(containerRef.current);
+
     return () => {
+      resizeObserver.disconnect();
       initializedRef.current = false;
+      setMapInstance(null);
       map.remove();
     };
   }, []);
@@ -241,7 +258,7 @@ export const MapView: React.FC<MapViewProps> = ({
   };
 
   // Cargar barrios de Zaragoza
-  const loadBarrios = async (map: L.Map) => {
+  const loadBarrios = async () => {
     try {
       const response = await fetch('/barrios-zaragoza-wgs84.geojson');
       const geojson = await response.json();
@@ -290,8 +307,8 @@ export const MapView: React.FC<MapViewProps> = ({
         },
       });
 
-      barriosLayer.addTo(map);
       barriosLayerRef.current = barriosLayer;
+      // Solo añadir al mapa si showBarrios está activo (por defecto no lo está)
     } catch (error) {
       console.error('Error loading barrios:', error);
     }
@@ -304,35 +321,29 @@ export const MapView: React.FC<MapViewProps> = ({
 
     const markersLayer = markersLayerRef.current;
     markersLayer.clearLayers();
+    markersByIdRef.current.clear();
+
+    const newMarkers: L.Marker[] = [];
 
     photos.forEach((photo) => {
+      // Validar coordenadas antes de crear marcador
+      if (isNaN(photo.lat) || isNaN(photo.lng)) {
+        return;
+      }
+
       // Usar icono seleccionado o normal
       const icon = photo.id === selectedPhotoId ? selectedIcon : defaultIcon;
       const marker = L.marker([photo.lat, photo.lng], { icon });
-
-      // Formatear el año
-      const yearText = photo.year
-        ? photo.year.toString()
-        : photo.year_from && photo.year_to
-        ? `${photo.year_from} - ${photo.year_to}`
-        : photo.year_from
-        ? `Desde ${photo.year_from}`
-        : photo.year_to
-        ? `Hasta ${photo.year_to}`
-        : 'Fecha desconocida';
+      markersByIdRef.current.set(photo.id, marker);
 
       // Popup mejorado con estilo mas limpio (360px ancho, 200px imagen)
       const popupContent = `
         <div class="popup-content">
-          <div class="popup-image-container">
-            <img src="${photo.image_url || photo.thumb_url}" alt="${photo.title}" onerror="this.src='https://via.placeholder.com/360x200/f5f0eb/a99e9e?text=Sin+imagen'" />
+          <div class="popup-image-container" onclick="window.handlePhotoClick(${photo.id})" style="cursor:pointer">
+            <img src="${photo.thumb_url}" alt="${photo.title}" onerror="this.src='https://via.placeholder.com/360x200/f5f0eb/a99e9e?text=Sin+imagen'" />
           </div>
           <div class="popup-body">
             <h3>${photo.title}</h3>
-            <div class="popup-meta">
-              <span class="popup-year">${yearText}</span>
-              ${photo.zone ? `<span class="popup-zone">${photo.zone}</span>` : ''}
-            </div>
             <button class="btn btn-primary popup-btn" onclick="window.handlePhotoClick(${photo.id})">
               Ver detalle
             </button>
@@ -346,13 +357,24 @@ export const MapView: React.FC<MapViewProps> = ({
         className: 'custom-popup',
       });
 
-      markersLayer.addLayer(marker);
+      newMarkers.push(marker);
     });
+    
+    markersLayer.addLayers(newMarkers);
   }, [photos, selectedPhotoId]);
 
-  // Centrar mapa en foto seleccionada
+  // Centrar mapa en foto seleccionada y abrir su popup (como si se hubiera
+  // hecho click directamente sobre el marcador). Si esta dentro de un cluster,
+  // MarkerClusterGroup.zoomToShowLayer() se encarga de expandirlo primero.
   useEffect(() => {
-    if (centerOnPhoto && mapRef.current) {
+    if (!centerOnPhoto || !mapRef.current) return;
+    const marker = markersByIdRef.current.get(centerOnPhoto.id);
+    const markersLayer = markersLayerRef.current;
+    if (marker && markersLayer) {
+      markersLayer.zoomToShowLayer(marker, () => {
+        marker.openPopup();
+      });
+    } else {
       mapRef.current.setView([centerOnPhoto.lat, centerOnPhoto.lng], 16, {
         animate: true,
       });
@@ -511,6 +533,36 @@ export const MapView: React.FC<MapViewProps> = ({
                 Límites de barrios
               </span>
             </label>
+            <label className={`layer-toggle ${showBuildings ? 'active' : ''}`}>
+              <input
+                type="checkbox"
+                checked={showBuildings}
+                onChange={(e) => setShowBuildings(e.target.checked)}
+              />
+              <span className="layer-name">
+                Edificios (Catastro)
+              </span>
+            </label>
+            <label className={`layer-toggle ${showWikipedia ? 'active' : ''}`}>
+              <input
+                type="checkbox"
+                checked={showWikipedia}
+                onChange={(e) => setShowWikipedia(e.target.checked)}
+              />
+              <span className="layer-name">
+                Wikipedia
+              </span>
+            </label>
+            <label className={`layer-toggle ${showMonuments ? 'active' : ''}`}>
+              <input
+                type="checkbox"
+                checked={showMonuments}
+                onChange={(e) => setShowMonuments(e.target.checked)}
+              />
+              <span className="layer-name">
+                Monumentos y patrimonio
+              </span>
+            </label>
           </div>
 
           {/* Capas históricas */}
@@ -533,6 +585,22 @@ export const MapView: React.FC<MapViewProps> = ({
           </div>
         </div>
       )}
+
+      <BuildingsLayer
+        map={mapInstance}
+        visible={showBuildings}
+        yearFrom={yearFrom}
+        yearTo={yearTo}
+      />
+      <BuildingsLegend visible={showBuildings} />
+      <WikipediaLayer
+        map={mapInstance}
+        visible={showWikipedia}
+      />
+      <MonumentsLayer
+        map={mapInstance}
+        visible={showMonuments}
+      />
     </div>
   );
 };

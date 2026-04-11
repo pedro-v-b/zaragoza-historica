@@ -7,7 +7,7 @@ from pydantic import BaseModel, Field
 
 
 class Photo(BaseModel):
-    """Modelo de foto histórica"""
+    """Modelo de foto histórica completo"""
     id: int
     title: str
     description: Optional[str] = None
@@ -31,6 +31,19 @@ class Photo(BaseModel):
         from_attributes = True
 
 
+class MapPhoto(BaseModel):
+    """Modelo ultraligero para el mapa"""
+    id: int
+    lat: float
+    lng: float
+    title: str
+    image_url: str
+    thumb_url: str
+
+    class Config:
+        from_attributes = True
+
+
 class PhotoFilters(BaseModel):
     """Filtros para búsqueda de fotos"""
     bbox: Optional[str] = Field(None, description="Bounding box: 'minLng,minLat,maxLng,maxLat'")
@@ -40,7 +53,7 @@ class PhotoFilters(BaseModel):
     zone: Optional[str] = None
     q: Optional[str] = Field(None, description="Búsqueda de texto")
     page: int = Field(1, ge=1)
-    pageSize: int = Field(20, ge=1, le=100, alias="pageSize")
+    pageSize: int = Field(20, ge=1, le=10000, alias="pageSize")
 
     class Config:
         populate_by_name = True
@@ -138,3 +151,16 @@ class MessageResponse(BaseModel):
     """Respuesta genérica con mensaje"""
     message: str
     success: bool = True
+
+
+class HistoricalContext(BaseModel):
+    """Contexto histórico anual de Zaragoza"""
+    year: int
+    alcalde: Optional[str] = None
+    eventos: Optional[List[str]] = None
+    noticias_sociedad_sucesos: Optional[List[str]] = None
+    urbanismo: Optional[List[str]] = None
+    movilidad_transporte: Optional[List[str]] = None
+
+    class Config:
+        from_attributes = True

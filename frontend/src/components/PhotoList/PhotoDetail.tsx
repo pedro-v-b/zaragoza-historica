@@ -110,6 +110,9 @@ export const PhotoDetail: React.FC<PhotoDetailProps> = ({
           <img
             src={photo.image_url}
             alt={photo.title}
+            onClick={openFullImage}
+            style={{ cursor: 'pointer' }}
+            title="Clic para ver imagen completa"
             onError={(e) => {
               (e.target as HTMLImageElement).src = 'https://via.placeholder.com/400x300/f5f7f9/94a3af?text=Sin+imagen';
             }}

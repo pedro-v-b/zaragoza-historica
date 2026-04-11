@@ -44,18 +44,22 @@ uploads/*.jpg
 uploads/*.jpeg
 uploads/*.png
 uploads/*.gif
+uploads/*.webp
 uploads/thumbs/*.jpg
 uploads/thumbs/*.jpeg
 uploads/thumbs/*.png
 uploads/thumbs/*.gif
+uploads/thumbs/*.webp
 backend_python/uploads/*.jpg
 backend_python/uploads/*.jpeg
 backend_python/uploads/*.png
 backend_python/uploads/*.gif
+backend_python/uploads/*.webp
 backend_python/uploads/thumbs/*.jpg
 backend_python/uploads/thumbs/*.jpeg
 backend_python/uploads/thumbs/*.png
 backend_python/uploads/thumbs/*.gif
+backend_python/uploads/thumbs/*.webp
 
 # Docker
 docker-compose.override.yml
@@ -63,3 +67,6 @@ postgres_data/
 
 # Build
 *.tsbuildinfo
+
+# Large Data Files
+backend_python/database/catastro/

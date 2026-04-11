@@ -1,0 +1,1010 @@
+[
+  {
+    "año": 1900,
+    "alcalde": "Período de la Restauración (Partido Liberal/Partido Conservador en alternancia)",
+    "eventos": ["Zaragoza cuenta con aproximadamente 99.118 habitantes según el censo", "España en proceso de recuperación tras el Desastre del 98"],
+    "noticias_sociedad_sucesos": ["Fuerte presencia de sociedades obreras vinculadas a la UGT", "Joaquín Costa lidera el movimiento regeneracionista desde Aragón"],
+    "urbanismo": ["El Paseo de la Independencia consolida su papel como eje urbano central", "Proyectos de alineación y mejora de calles en el casco histórico"],
+    "movilidad_transporte": ["Red de tranvías de tracción animal en proceso de electrificación", "Estación del ferrocarril del Norte como nodo principal de transporte"]
+  },
+  {
+    "año": 1901,
+    "alcalde": "Alcalde del Partido Conservador (Restauración)",
+    "eventos": ["Electrificación de la red de tranvías de Zaragoza completada", "Modernización de los servicios municipales"],
+    "noticias_sociedad_sucesos": ["Crecimiento demográfico sostenido en la capital aragonesa", "Primeros conflictos laborales en el sector textil"],
+    "urbanismo": ["Obras de pavimentación en el centro urbano", "Mejora del alumbrado público con instalaciones eléctricas"],
+    "movilidad_transporte": ["Inauguración del tranvía eléctrico sustituyendo la tracción animal", "Extensión de las líneas tranviarias a nuevos barrios"]
+  },
+  {
+    "año": 1902,
+    "alcalde": "Alcalde del Partido Liberal (Restauración)",
+    "eventos": ["Coronación de Alfonso XIII como rey de España", "Agitación social y primeras huelgas organizadas en Zaragoza"],
+    "noticias_sociedad_sucesos": ["Fundación de nuevas sociedades obreras y mutualistas", "Creciente influencia del anarquismo entre los trabajadores zaragozanos"],
+    "urbanismo": ["Continuación de obras de ensanche y urbanización en la periferia", "Construcción de nuevos edificios de viviendas en estilo ecléctico"],
+    "movilidad_transporte": ["Consolidación de la red de tranvía eléctrico", "Ampliación de líneas de ferrocarril hacia el interior de Aragón"]
+  },
+  {
+    "año": 1903,
+    "alcalde": "Alcalde del Partido Conservador (Restauración)",
+    "eventos": ["Período de estabilidad política bajo el sistema turnista", "Desarrollo de la prensa local como vehículo de debate ciudadano"],
+    "noticias_sociedad_sucesos": ["Fundación de nuevos centros culturales y recreativos", "Presencia creciente de la Iglesia en la vida social zaragozana"],
+    "urbanismo": ["Proyectos de mejora del Paseo de la Independencia", "Trabajos de canalización y saneamiento en barrios populares"],
+    "movilidad_transporte": ["Mejoras en el servicio de tranvía eléctrico con nuevos vagones", "Incremento del tráfico ferroviario con el resto de España"]
+  },
+  {
+    "año": 1904,
+    "alcalde": "Alcalde del Partido Liberal (Restauración)",
+    "eventos": ["Actividad cultural intensa en el Ateneo de Zaragoza", "Debate público sobre las condiciones sanitarias de la ciudad"],
+    "noticias_sociedad_sucesos": ["Epidemias estacionales afectan a los barrios obreros", "Primeros debates sobre la reforma de la enseñanza pública en Aragón"],
+    "urbanismo": ["Inicio de obras en el Mercado Central de Lanuza", "Mejoras en el alumbrado y la red de aguas potables"],
+    "movilidad_transporte": ["Extensión de la red tranviaria hacia los arrabales", "Mejoras en los accesos viarios al casco histórico"]
+  },
+  {
+    "año": 1905,
+    "alcalde": "Alcalde del Partido Conservador (Restauración)",
+    "eventos": ["Crisis de gobierno en Madrid con repercusiones locales", "Celebraciones del tercer centenario de El Quijote con actos en Zaragoza"],
+    "noticias_sociedad_sucesos": ["Actividad frenética en las fiestas del Pilar con masiva afluencia", "Denuncias periodísticas sobre caciquismo y corrupción electoral"],
+    "urbanismo": ["Proyectos de remodelación de plazas céntricas", "Construcción de nuevas escuelas públicas en barrios populares"],
+    "movilidad_transporte": ["Consolidación del tranvía eléctrico como transporte urbano principal", "Debate sobre la construcción de nuevas infraestructuras de comunicación"]
+  },
+  {
+    "año": 1906,
+    "alcalde": "Alcalde del Partido Liberal (Restauración)",
+    "eventos": ["Inicio de preparativos para la gran Exposición de 1908", "Movilización social por las condiciones laborales en las fábricas"],
+    "noticias_sociedad_sucesos": ["Inauguración de nuevos locales de asociaciones obreras", "La burguesía zaragozana impulsa proyectos de modernización urbana"],
+    "urbanismo": ["Primeros estudios urbanísticos para la zona de la futura Exposición Hispano-Francesa", "Proyectos de mejora del paseo de la ribera del Ebro"],
+    "movilidad_transporte": ["Ampliación de líneas tranviarias para servir a nuevas zonas de la ciudad", "Mejoras en el nudo ferroviario de Zaragoza"]
+  },
+  {
+    "año": 1907,
+    "alcalde": "Alcalde del Partido Liberal (Restauración)",
+    "eventos": ["Intensa actividad preparatoria para la Exposición Hispano-Francesa de 1908", "Debate político sobre el regeneracionismo de Joaquín Costa, natural de Aragón"],
+    "noticias_sociedad_sucesos": ["Movimiento obrero en auge con nuevas federaciones sindicales", "Gran expectación ciudadana ante la inminente Exposición de 1908"],
+    "urbanismo": ["Construcción acelerada de los pabellones de la Exposición en el Parque Primo de Rivera", "Grandes obras de infraestructura en la ribera del Ebro"],
+    "movilidad_transporte": ["Adaptación de rutas tranviarias para facilitar el acceso a la zona Expo", "Obras en calles y accesos del recinto expositivo"]
+  },
+  {
+    "año": 1908,
+    "alcalde": "Alcalde del Partido Liberal (Restauración)",
+    "eventos": ["Exposición Hispano-Francesa (mayo-diciembre): conmemoración del centenario de los Sitios de Zaragoza de 1808", "Gran afluencia de visitantes nacionales e internacionales a la muestra"],
+    "noticias_sociedad_sucesos": ["El éxito de la Exposición impulsa la imagen de Zaragoza en España y Francia", "Intensa actividad cultural, congresual y comercial durante los meses de la Expo"],
+    "urbanismo": ["Construcción del Parque de Primo de Rivera (actual Parque Grande José Antonio Labordeta) como legado de la Exposición", "Nuevo pabellón de la Lonja y mejoras en el espacio público de la ribera"],
+    "movilidad_transporte": ["Nuevas líneas de tranvía para dar servicio al recinto expositivo", "Ampliación de la red viaria de acceso al parque y zona norte"]
+  },
+  {
+    "año": 1909,
+    "alcalde": "Alcalde del Partido Conservador (Restauración)",
+    "eventos": ["Semana Trágica de Barcelona con tensión social en Zaragoza", "Agitación obrera y antimilitarista por la guerra de Marruecos"],
+    "noticias_sociedad_sucesos": ["Manifestaciones de protesta en Zaragoza contra el envío de tropas a Marruecos", "Represión gubernamental de los movimientos de protesta"],
+    "urbanismo": ["Continuación de obras de consolidación del Parque inaugurado el año anterior", "Proyectos de nuevas escuelas en barrios populares"],
+    "movilidad_transporte": ["Mantenimiento y mejoras en la red de tranvías", "Debate sobre la prolongación de líneas ferroviarias en Aragón"]
+  },
+  {
+    "año": 1910,
+    "alcalde": "Alcalde del Partido Liberal (Restauración)",
+    "eventos": ["Gobierno de Canalejas en España con reformas sociales moderadas", "Actividad sindical intensa en Zaragoza con huelgas sectoriales"],
+    "noticias_sociedad_sucesos": ["Inauguración de nuevos locales de la UGT y CNT en Zaragoza", "Fallecimiento de Joaquín Costa; gran luto en Aragón"],
+    "urbanismo": ["Nuevos proyectos residenciales en el ensanche sur de la ciudad", "Obras de saneamiento en barrios con deficientes condiciones higiénicas"],
+    "movilidad_transporte": ["Ampliación y mejora de las líneas de tranvía eléctrico", "Nuevas conexiones ferroviarias con localidades aragonesas"]
+  },
+  {
+    "año": 1911,
+    "alcalde": "Alcalde del Partido Conservador (Restauración)",
+    "eventos": ["Huelga general en Zaragoza con importante impacto en la vida de la ciudad", "Crisis social derivada del conflicto de Marruecos"],
+    "noticias_sociedad_sucesos": ["Detenciones de dirigentes sindicales tras la huelga general", "Debate sobre la reforma de la instrucción pública"],
+    "urbanismo": ["Construcción de nuevos edificios de vivienda obrera en los arrabales", "Mejoras en la red de alcantarillado y agua potable"],
+    "movilidad_transporte": ["Nuevas rutas de tranvía para conectar barrios periféricos", "Inversiones en infraestructura ferroviaria regional"]
+  },
+  {
+    "año": 1912,
+    "alcalde": "Alcalde del Partido Liberal (Restauración)",
+    "eventos": ["Asesinato de Canalejas en Madrid; convulsión política nacional", "Agitación social y política en toda España con repercusión en Zaragoza"],
+    "noticias_sociedad_sucesos": ["Huelgas en el sector de la construcción zaragozana", "Crecimiento de la afiliación sindical en la industria local"],
+    "urbanismo": ["Proyectos de nuevas vías en el ensanche norte de la ciudad", "Debate sobre el futuro urbanístico del barrio de Delicias"],
+    "movilidad_transporte": ["Mejoras técnicas en los tranvías eléctricos", "Ampliación de servicios de ferrocarril de cercanías"]
+  },
+  {
+    "año": 1913,
+    "alcalde": "Alcalde del Partido Conservador (Restauración)",
+    "eventos": ["Período de cierta estabilidad política bajo gobierno conservador", "Desarrollo de las asociaciones patronales en Zaragoza"],
+    "noticias_sociedad_sucesos": ["Conflictos laborales en la industria metalúrgica zaragozana", "Apertura de nuevos comercios y establecimientos en el centro"],
+    "urbanismo": ["Obras de ensanche en la zona del Coso y alrededores", "Nuevas construcciones en el barrio de San José"],
+    "movilidad_transporte": ["Renovación del material rodante del tranvía", "Estudios para nuevas líneas de comunicación interurbana"]
+  },
+  {
+    "año": 1914,
+    "alcalde": "Alcalde del Partido Liberal (Restauración)",
+    "eventos": ["Inicio de la Primera Guerra Mundial en Europa; España se declara neutral", "La neutralidad española beneficia económicamente a la industria zaragozana"],
+    "noticias_sociedad_sucesos": ["Auge de las exportaciones aragonesas a los países beligerantes", "Debate público sobre la postura de España ante la guerra europea"],
+    "urbanismo": ["Inversión en infraestructuras públicas gracias al auge económico", "Nuevos proyectos de vivienda en la periferia urbana"],
+    "movilidad_transporte": ["Incremento del tráfico ferroviario por el boom exportador", "Mejoras en el acceso a la estación de El Portillo"]
+  },
+  {
+    "año": 1915,
+    "alcalde": "Alcalde del Partido Conservador (Restauración)",
+    "eventos": ["Continuación de la neutralidad española en la Gran Guerra con beneficios económicos", "Inflación y encarecimiento de subsistencias generan malestar social"],
+    "noticias_sociedad_sucesos": ["Protestas por el encarecimiento del pan y otros alimentos básicos", "Crecimiento de la industria de suministros en Zaragoza"],
+    "urbanismo": ["Nuevas edificaciones en el Paseo de la Independencia y adyacentes", "Proyectos de mejora del abastecimiento de agua potable"],
+    "movilidad_transporte": ["Mantenimiento de la red tranviaria ante el incremento de usuarios", "Mayor frecuencia de trenes por el aumento del tráfico comercial"]
+  },
+  {
+    "año": 1916,
+    "alcalde": "Alcalde del Partido Liberal (Restauración)",
+    "eventos": ["Crisis de subsistencias en España por la Primera Guerra Mundial", "Huelgas y protestas obreras en Zaragoza por el alza de precios"],
+    "noticias_sociedad_sucesos": ["Manifestaciones de mujeres en mercados por el encarecimiento del pan", "Tensión entre sindicatos y patronal en el sector textil"],
+    "urbanismo": ["Ralentización de obras por la crisis económica", "Proyectos de vivienda social para obreros de escasos recursos"],
+    "movilidad_transporte": ["Problemas de suministro eléctrico afectan al servicio de tranvías", "Debates sobre la modernización de la red ferroviaria aragonesa"]
+  },
+  {
+    "año": 1917,
+    "alcalde": "Alcalde del Partido Conservador (Restauración)",
+    "eventos": ["Huelga general de agosto de 1917; Zaragoza paralizada varios días", "Triple crisis: militar, parlamentaria y social sacude al régimen de la Restauración"],
+    "noticias_sociedad_sucesos": ["Detenciones masivas de sindicalistas en Zaragoza tras la huelga general", "La burguesía zaragozana apoya la represión de los movimientos obreros"],
+    "urbanismo": ["Paralización de muchas obras públicas durante los conflictos sociales", "Debate sobre el estado deficiente de las viviendas obreras"],
+    "movilidad_transporte": ["El servicio de tranvía se interrumpe durante la huelga general", "Daños en infraestructuras de transporte durante los disturbios"]
+  },
+  {
+    "año": 1918,
+    "alcalde": "Alcalde del Partido Liberal (Restauración)",
+    "eventos": ["Epidemia de gripe española causa estragos en la población zaragozana", "Fin de la Primera Guerra Mundial; expectativas de recuperación económica"],
+    "noticias_sociedad_sucesos": ["Centenares de fallecidos en Zaragoza por la pandemia de gripe", "Colapso temporal de los servicios sanitarios municipales"],
+    "urbanismo": ["Proyectos de mejora de cementerios y servicios funerarios ante la epidemia", "Obras de saneamiento urbano como medida sanitaria"],
+    "movilidad_transporte": ["Restricciones al transporte público durante los picos de la epidemia", "Reducción temporal de servicios de tranvía"]
+  },
+  {
+    "año": 1919,
+    "alcalde": "Alcalde del Partido Conservador (Restauración)",
+    "eventos": ["Agitación social intensa; la CNT organiza importantes huelgas en Zaragoza", "Pistolerismo patronal y respuesta sindical generan un clima de violencia social"],
+    "noticias_sociedad_sucesos": ["Atentados y represalias entre patronal y anarcosindicalistas", "Gran huelga en el sector de la construcción zaragozana"],
+    "urbanismo": ["Parálisis de obras por los conflictos laborales continuados", "Debate sobre las condiciones insalubres de viviendas en barrios obreros"],
+    "movilidad_transporte": ["Huelgas de tranviarios que interrumpen el servicio urbano", "Tensión laboral en el sector ferroviario"]
+  },
+  {
+    "año": 1920,
+    "alcalde": "Alcalde del Partido Liberal (Restauración)",
+    "eventos": ["Continuación del período de agitación social conocido como trienio bolchevique", "Represión policial de los movimientos anarquistas en Zaragoza"],
+    "noticias_sociedad_sucesos": ["Asesinatos de dirigentes sindicales y patronales en el clima de violencia social", "Crecimiento de la afiliación a la CNT en Aragón"],
+    "urbanismo": ["Inicio de proyectos de nuevas barriadas obreras en la periferia sur", "Obras de mejora del mercado de abastos"],
+    "movilidad_transporte": ["Restauración del servicio normal de tranvías tras los conflictos de 1919", "Estudios para extensión de líneas tranviarias al extrarradio"]
+  },
+  {
+    "año": 1921,
+    "alcalde": "Alcalde del Partido Conservador (Restauración)",
+    "eventos": ["Desastre de Annual en Marruecos; crisis política y militar nacional", "Debate en Zaragoza sobre el envío de tropas aragonesas a Marruecos"],
+    "noticias_sociedad_sucesos": ["Duelo por las bajas militares aragonesas en Annual", "Creciente antimilitarismo entre las clases populares zaragozanas"],
+    "urbanismo": ["Obras de mejora en el barrio de la Magdalena", "Continuación del ensanche urbano hacia el sur y este"],
+    "movilidad_transporte": ["Mantenimiento de la red de tranvías con mejoras técnicas menores", "Proyectos de nuevas carreteras de acceso a la ciudad"]
+  },
+  {
+    "año": 1922,
+    "alcalde": "Alcalde del Partido Liberal (Restauración)",
+    "eventos": ["Crisis política profunda del régimen de la Restauración", "Debates sobre la reforma constitucional y el sistema político"],
+    "noticias_sociedad_sucesos": ["Actividad creciente de partidos regionalistas aragoneses", "Conflictos laborales en la industria harinera de la región"],
+    "urbanismo": ["Proyectos de reforma interior en el casco histórico", "Nuevas edificaciones en el entorno del Paseo de la Independencia"],
+    "movilidad_transporte": ["Ampliación de la red de tranvías a barrios de reciente creación", "Debate sobre la necesidad de nuevos puentes sobre el Ebro"]
+  },
+  {
+    "año": 1923,
+    "alcalde": "Alcalde designado (Dictadura de Primo de Rivera desde septiembre)",
+    "eventos": ["Golpe de Estado de Primo de Rivera (13 de septiembre): inicio de la Dictadura", "Disolución de los ayuntamientos democráticos; Zaragoza recibe un alcalde designado"],
+    "noticias_sociedad_sucesos": ["Supresión de la libertad de prensa y asociación sindical", "Relativa tranquilidad social inicial bajo la Dictadura"],
+    "urbanismo": ["La Dictadura impulsa obras públicas de representación en las ciudades", "Proyectos de grandes avenidas y espacios públicos en Zaragoza"],
+    "movilidad_transporte": ["Inversión estatal en infraestructuras de carretera y ferrocarril", "Mejoras en la red tranviaria con apoyo de la Dictadura"]
+  },
+  {
+    "año": 1924,
+    "alcalde": "Alcalde designado por la Dictadura de Primo de Rivera",
+    "eventos": ["Consolidación de la Dictadura de Primo de Rivera; supresión de partidos políticos", "Zaragoza vive un período de estabilidad forzada y cierto orden público"],
+    "noticias_sociedad_sucesos": ["La CNT entra en la clandestinidad; la UGT colabora con la Dictadura", "Obras públicas como escaparate del régimen de Primo de Rivera"],
+    "urbanismo": ["Grandes proyectos de infraestructura urbana impulsados desde Madrid", "Inicio de los estudios para la Gran Vía de Zaragoza"],
+    "movilidad_transporte": ["Mejoras en la red de carreteras estatales que pasan por Zaragoza", "Inversión en la modernización del nodo ferroviario zaragozano"]
+  },
+  {
+    "año": 1925,
+    "alcalde": "Alcalde designado por la Dictadura de Primo de Rivera",
+    "eventos": ["España logra éxitos militares en Marruecos (desembarco de Alhucemas)", "Período de cierto auge económico bajo la Dictadura"],
+    "noticias_sociedad_sucesos": ["Prosperidad económica relativa beneficia a las clases medias zaragozanas", "Represión de cualquier disidencia política o sindical"],
+    "urbanismo": ["Avances en la planificación del ensanche occidental de Zaragoza", "Inicio de obras en nuevas arterias de comunicación intraurbana"],
+    "movilidad_transporte": ["Construcción de nuevas carreteras radiales que pasan por Zaragoza", "Mejoras en el servicio ferroviario Madrid-Barcelona vía Zaragoza"]
+  },
+  {
+    "año": 1926,
+    "alcalde": "Alcalde designado por la Dictadura de Primo de Rivera",
+    "eventos": ["Conspiración de La Sanjuanada contra Primo de Rivera fracasa", "Zaragoza es sede del Capitán General de la V Región Militar"],
+    "noticias_sociedad_sucesos": ["Actividad comercial y ferial en crecimiento en Zaragoza", "La prensa local sometida a la censura dictatorial"],
+    "urbanismo": ["Aprobación del proyecto de la Gran Vía de Zaragoza", "Obras de reforma en la Plaza de España y entornos"],
+    "movilidad_transporte": ["Inauguración de nuevas líneas de autobús interurbano en Aragón", "Continuación de mejoras en infraestructuras viarias"]
+  },
+  {
+    "año": 1927,
+    "alcalde": "Alcalde designado por la Dictadura de Primo de Rivera",
+    "eventos": ["Apertura de la Asamblea Nacional Consultiva, intento de institucionalizar la Dictadura", "Actividad industrial y comercial creciente en Zaragoza"],
+    "noticias_sociedad_sucesos": ["Inauguración de nuevas instalaciones fabriles en la periferia zaragozana", "Auge de la construcción de viviendas para clases medias"],
+    "urbanismo": ["Inicio de las obras de la Gran Vía de Zaragoza", "Trazado y construcción de nuevas calles en el ensanche"],
+    "movilidad_transporte": ["Ampliación de la red de tranvías hacia nuevas zonas del ensanche", "Mejoras en el acceso viario al barrio de Delicias"]
+  },
+  {
+    "año": 1928,
+    "alcalde": "Alcalde designado por la Dictadura de Primo de Rivera",
+    "eventos": ["Progresiva erosión del apoyo social a la Dictadura de Primo de Rivera", "Agitación universitaria con protestas estudiantiles"],
+    "noticias_sociedad_sucesos": ["Protestas de estudiantes de la Universidad de Zaragoza contra la Dictadura", "Debate intelectual sobre el futuro político de España"],
+    "urbanismo": ["Continuación de las obras de la Gran Vía", "Nuevas barriadas en construcción al sur y al oeste de la ciudad"],
+    "movilidad_transporte": ["Mejoras técnicas en los tranvías zaragozanos", "Proyectos de nuevas conexiones viarias entre barrios"]
+  },
+  {
+    "año": 1929,
+    "alcalde": "Alcalde designado por la Dictadura de Primo de Rivera",
+    "eventos": ["Crisis económica mundial; la Gran Depresión comienza a afectar a España", "Exposiciones Universales de Barcelona y Sevilla con participación aragonesa"],
+    "noticias_sociedad_sucesos": ["El crack de 1929 genera incertidumbre en los sectores comerciales zaragozanos", "Actividad cultural intensa en el Ateneo y casinos de la ciudad"],
+    "urbanismo": ["Continuación de la Gran Vía; nuevos bloques de viviendas en el ensanche", "Obras de mejora en el Parque Grande"],
+    "movilidad_transporte": ["Primeros autobuses de línea regulares en Zaragoza como complemento al tranvía", "Crecimiento del parque de automóviles privados en la ciudad"]
+  },
+  {
+    "año": 1930,
+    "alcalde": "Alcalde designado durante la Dictablanda de Berenguer",
+    "eventos": ["Caída de Primo de Rivera (enero); inicio de la Dictablanda del general Berenguer", "Agitación política republicana en Zaragoza; Pacto de San Sebastián"],
+    "noticias_sociedad_sucesos": ["Manifestaciones pro-republicanas en las calles de Zaragoza", "Fracasa la sublevación de Jaca (Galán y García Hernández, diciembre)"],
+    "urbanismo": ["Ralentización de obras públicas en la transición de régimen", "Continuación de la Gran Vía con ritmo más lento"],
+    "movilidad_transporte": ["Mantenimiento de la red tranviaria sin grandes novedades", "Debate sobre la futura red de comunicaciones de Aragón"]
+  },
+  {
+    "año": 1931,
+    "alcalde": "Alcalde republicano electo (14 de abril)",
+    "eventos": ["Proclamación de la Segunda República el 14 de abril; gran alegría popular en Zaragoza", "Primeras elecciones municipales democráticas en décadas; victoria republicano-socialista"],
+    "noticias_sociedad_sucesos": ["Celebraciones en las calles de Zaragoza por la proclamación de la República", "Quema de conventos en algunas ciudades; tensión religiosa en Zaragoza"],
+    "urbanismo": ["El nuevo ayuntamiento republicano proyecta reformas urbanas y sociales", "Planes de mejora de las condiciones de vida en los barrios obreros"],
+    "movilidad_transporte": ["El gobierno republicano anuncia inversiones en infraestructuras de transporte", "Continuación del servicio de tranvía con trabajadores con nuevos derechos laborales"]
+  },
+  {
+    "año": 1932,
+    "alcalde": "Alcalde republicano del Ayuntamiento de Zaragoza",
+    "eventos": ["Aprobación del Estatuto de Cataluña; debate sobre la autonomía de Aragón", "Sublevación del general Sanjurjo (Sanjurjada) fracasa en agosto"],
+    "noticias_sociedad_sucesos": ["Debate en Zaragoza sobre la cuestión religiosa y la enseñanza laica", "Huelgas de la CNT en varios sectores de la economía zaragozana"],
+    "urbanismo": ["Proyectos republicanos de escuelas públicas laicas en Zaragoza", "Continuación de la urbanización de nuevos barrios periféricos"],
+    "movilidad_transporte": ["Mejoras en el servicio de tranvía bajo gestión municipal republicana", "Primeras líneas regulares de autobús interurbano hacia la provincia"]
+  },
+  {
+    "año": 1933,
+    "alcalde": "Alcalde republicano (período de República radical-cedista)",
+    "eventos": ["Elecciones generales de noviembre: triunfo de la derecha; inicio del bienio negro", "La CNT llama a la abstención; la derecha toma el control del gobierno"],
+    "noticias_sociedad_sucesos": ["Tensión social en Zaragoza por el giro conservador del gobierno", "Grandes huelgas de la CNT en protesta por la política gubernamental"],
+    "urbanismo": ["Ralentización de los proyectos de vivienda social republicanos", "Debate sobre el plan urbanístico de la ciudad"],
+    "movilidad_transporte": ["El servicio de tranvía sufre interrupciones por huelgas sectoriales", "Mejoras en infraestructuras de carretera hacia la huerta aragonesa"]
+  },
+  {
+    "año": 1934,
+    "alcalde": "Alcalde radical (Partido Republicano Radical)",
+    "eventos": ["Revolución de Octubre de 1934: insurrección socialista en Asturias y Cataluña", "En Zaragoza, la huelga general de octubre fracasa ante la firmeza del gobierno"],
+    "noticias_sociedad_sucesos": ["Estado de alarma en Zaragoza durante la revolución de octubre", "Detención de dirigentes de izquierda tras los sucesos de octubre"],
+    "urbanismo": ["Paralización de obras en el contexto de conflicto político", "Debate sobre la extensión del ensanche en la orilla izquierda del Ebro"],
+    "movilidad_transporte": ["Interrupción del servicio de tranvía durante la huelga general de octubre", "Restauración del servicio tras el fracaso de la revolución"]
+  },
+  {
+    "año": 1935,
+    "alcalde": "Alcalde del Partido Republicano Radical",
+    "eventos": ["Escándalos del estraperlo sacuden al Partido Radical en el gobierno", "Crisis política que precipitará las elecciones de febrero de 1936"],
+    "noticias_sociedad_sucesos": ["Debate público en Zaragoza sobre la corrupción gubernamental", "Los partidos del Frente Popular se preparan para las elecciones"],
+    "urbanismo": ["Continuación de proyectos urbanísticos bajo una gestión política inestable", "Nuevas barriadas en la periferia sin planificación adecuada"],
+    "movilidad_transporte": ["Mantenimiento rutinario de la red de tranvías", "Proyectos de nuevas carreteras provinciales sin financiación suficiente"]
+  },
+  {
+    "año": 1936,
+    "alcalde": "Alcalde del Frente Popular (hasta julio); alcalde franquista designado (desde agosto)",
+    "eventos": ["Elecciones de febrero: victoria del Frente Popular en España", "Alzamiento militar del 18-19 de julio: Zaragoza queda en zona nacional desde el primer momento", "El general Miguel Cabanellas controla Zaragoza; la ciudad se convierte en plaza nacional"],
+    "noticias_sociedad_sucesos": ["Represión brutal de líderes republicanos, socialistas y anarquistas en Zaragoza", "Miles de personas asesinadas en la retaguardia nacional durante los primeros meses"],
+    "urbanismo": ["Paralización de toda obra civil no militar durante la guerra", "Los edificios republicanos son expropiados por el bando nacional"],
+    "movilidad_transporte": ["El ferrocarril y los transportes quedan militarizados", "Zaragoza se convierte en nodo logístico para el ejército nacional"]
+  },
+  {
+    "año": 1937,
+    "alcalde": "Alcalde franquista designado (Guerra Civil)",
+    "eventos": ["Zaragoza es base de operaciones del Ejército del Norte franquista", "Batallas del frente aragonés en las cercanías de Zaragoza"],
+    "noticias_sociedad_sucesos": ["Racionamiento de alimentos en la retaguardia nacional", "Intensa propaganda franquista en la ciudad; miedo y represión generalizados"],
+    "urbanismo": ["Obras de carácter militar y de defensa en la periferia de la ciudad", "Destrucción de símbolos republicanos y laicos en el espacio urbano"],
+    "movilidad_transporte": ["Red de transporte militarizada al servicio del ejército nacional", "Ferrocarril utilizado para transporte de tropas y material bélico"]
+  },
+  {
+    "año": 1938,
+    "alcalde": "Alcalde franquista designado (Guerra Civil)",
+    "eventos": ["El frente aragonés retrocede: los nacionales conquistan gran parte del este peninsular", "Zaragoza en la retaguardia profunda del bando franquista"],
+    "noticias_sociedad_sucesos": ["Miseria y racionamiento estricto en la población civil", "Fusilamiento y encarcelamiento de quienes ayudaron a la República"],
+    "urbanismo": ["Nula actividad constructiva civil durante la guerra", "Daños menores en infraestructuras urbanas por el conflicto bélico"],
+    "movilidad_transporte": ["Transporte ferroviario totalmente militarizado", "Escasez de combustible limita el transporte por carretera"]
+  },
+  {
+    "año": 1939,
+    "alcalde": "Alcalde franquista designado (primera posguerra)",
+    "eventos": ["1 de abril: fin de la Guerra Civil con victoria franquista", "Inicio de la posguerra: hambre, miseria y represión política masiva en Zaragoza"],
+    "noticias_sociedad_sucesos": ["Miles de zaragozanos en campos de concentración, cárceles o exiliados", "Inicio del proceso de depuración de funcionarios, maestros y militares afines a la República"],
+    "urbanismo": ["Proyectos de reconstrucción franquista basados en el estilo imperial-historicista", "Plan general de ordenación urbana franquista para Zaragoza"],
+    "movilidad_transporte": ["Desmilitarización gradual de las infraestructuras de transporte", "Escasez de material rodante para el servicio de tranvía"]
+  },
+  {
+    "año": 1940,
+    "alcalde": "Alcalde franquista designado (posguerra/autarquía)",
+    "eventos": ["España en el período de autarquía; hambre generalizada y cartillas de racionamiento", "El régimen de Franco consolida sus estructuras de control político y social"],
+    "noticias_sociedad_sucesos": ["Cartillas de racionamiento de alimentos en Zaragoza; escasez de productos básicos", "Estraperlo y mercado negro florecen ante la miseria de la autarquía"],
+    "urbanismo": ["Construcción de barrios de vivienda social franquista con tipología austera", "Plan urbanístico de la reconstrucción nacional en Zaragoza"],
+    "movilidad_transporte": ["Grave deterioro de la red de tranvías por falta de repuestos", "El transporte ferroviario opera con grandes dificultades por la escasez de carbón"]
+  },
+  {
+    "año": 1941,
+    "alcalde": "Alcalde franquista designado (posguerra/autarquía)",
+    "eventos": ["España envía la División Azul a luchar junto a Alemania en el frente ruso", "Hambre y miseria extrema en la posguerra española"],
+    "noticias_sociedad_sucesos": ["Reclutamiento de voluntarios aragoneses para la División Azul", "La mortalidad por hambre y enfermedades supera los niveles de la guerra"],
+    "urbanismo": ["Obras de carácter representativo del régimen: monumentos y edificios oficiales", "Barrios de chabolas en la periferia por la miseria de la posguerra"],
+    "movilidad_transporte": ["El tranvía opera con servicios muy reducidos por la escasez de electricidad", "Grave deterioro de la red de carreteras por falta de mantenimiento"]
+  },
+  {
+    "año": 1942,
+    "alcalde": "Alcalde franquista designado (posguerra/autarquía)",
+    "eventos": ["Continúa la miseria de la autarquía; España en la neutralidad de la Segunda Guerra Mundial", "El régimen franquista se consolida políticamente con el apoyo de la Iglesia y el Ejército"],
+    "noticias_sociedad_sucesos": ["El hambre y la tuberculosis hacen estragos entre la población más pobre", "La censura impide informar de la situación real del país"],
+    "urbanismo": ["Inicio de los primeros proyectos de vivienda social franquista (Obra Sindical del Hogar)", "Construcción de barracones y viviendas de emergencia para la población más necesitada"],
+    "movilidad_transporte": ["Continuación del deterioro del servicio de tranvías", "Escasez de neumáticos y combustible para el transporte por carretera"]
+  },
+  {
+    "año": 1943,
+    "alcalde": "Alcalde franquista designado (posguerra/autarquía)",
+    "eventos": ["España se retira gradualmente de la postura pro-Eje ante los reveses alemanes en la guerra", "El régimen franquista negocia su neutralidad con Estados Unidos y Gran Bretaña"],
+    "noticias_sociedad_sucesos": ["La población zaragozana sufre el cuarto año de racionamiento de alimentos", "Represión política continúa; miles de presos políticos en las cárceles"],
+    "urbanismo": ["Proyectos de nuevos barrios obreros en Delicias y Las Fuentes", "Construcción de la nueva sede de instituciones franquistas en el centro"],
+    "movilidad_transporte": ["Ligera mejora en el abastecimiento eléctrico permite mejorar el tranvía", "Tren como único medio de transporte interurbano fiable"]
+  },
+  {
+    "año": 1944,
+    "alcalde": "Alcalde franquista designado (posguerra/autarquía)",
+    "eventos": ["Incursiones de maquis republicanos por los Pirineos; guerrilla antifranquista en Aragón", "Fin de la Segunda Guerra Mundial en perspectiva; incertidumbre sobre el futuro de Franco"],
+    "noticias_sociedad_sucesos": ["Detenciones de colaboradores del maquis en la provincia de Zaragoza", "La derrota del Eje en Europa genera esperanzas de fin del franquismo entre la oposición"],
+    "urbanismo": ["Continuación de obras de vivienda social franquista", "Plan de ensanche y ordenación del barrio de las Delicias"],
+    "movilidad_transporte": ["Mejoras graduales en el servicio de tranvía", "Construcción de nuevas carreteras de acceso a la capital"]
+  },
+  {
+    "año": 1945,
+    "alcalde": "Alcalde franquista designado (posguerra/autarquía)",
+    "eventos": ["Fin de la Segunda Guerra Mundial; España queda aislada internacionalmente", "La ONU rechaza la admisión de España en 1946 por el carácter fascista del régimen"],
+    "noticias_sociedad_sucesos": ["Esperanzas frustradas de la oposición antifranquista ante el aislamiento de España", "Continúa la miseria de la autarquía con racionamiento y mercado negro"],
+    "urbanismo": ["Nuevas barriadas de vivienda social en la periferia sur de Zaragoza", "Plan del Fuero de los Españoles como marco jurídico del régimen"],
+    "movilidad_transporte": ["La red de tranvías opera con mayor regularidad que en los años de guerra", "Primeras mejoras en la red de carreteras provinciales"]
+  },
+  {
+    "año": 1946,
+    "alcalde": "Alcalde franquista designado (posguerra/autarquía)",
+    "eventos": ["España condenada al ostracismo internacional; cierre de la frontera con Francia", "Represión de los últimos focos de maquis en las sierras aragonesas"],
+    "noticias_sociedad_sucesos": ["Las dificultades económicas del aislamiento agravan la miseria cotidiana", "Estraperlo y corrupción endémicas en el Zaragoza de la posguerra"],
+    "urbanismo": ["Proyectos de vivienda social del Instituto Nacional de la Vivienda", "Ocupación de la periferia por barrios de autoconstrucción y chabolas"],
+    "movilidad_transporte": ["Ampliación de rutas de autobús interurbano con servicios estatales", "Mejoras en el material rodante del tranvía zaragozano"]
+  },
+  {
+    "año": 1947,
+    "alcalde": "Luis Gómez Laguna (alcalde franquista, inicio de mandato)",
+    "eventos": ["Nombramiento de Luis Gómez Laguna como alcalde de Zaragoza, cargo que ocupará durante casi dos décadas", "España en profundo aislamiento internacional; autarquía económica"],
+    "noticias_sociedad_sucesos": ["El racionamiento de alimentos comienza a levantarse gradualmente", "La Iglesia Católica ejerce un enorme control social y moral en Zaragoza"],
+    "urbanismo": ["Luis Gómez Laguna inicia un largo período de transformación urbana de Zaragoza", "Nuevos planes de ordenación para el crecimiento de la ciudad"],
+    "movilidad_transporte": ["Mejoras en la infraestructura de tranvías bajo el nuevo alcalde", "Estudios para la ampliación de la red viaria de la ciudad"]
+  },
+  {
+    "año": 1948,
+    "alcalde": "Luis Gómez Laguna (alcalde franquista)",
+    "eventos": ["España firma acuerdos comerciales con Argentina que alivian el hambre", "El régimen franquista se estabiliza pese al aislamiento internacional"],
+    "noticias_sociedad_sucesos": ["El fin del racionamiento de algunos productos mejora la vida cotidiana", "La emigración del campo a Zaragoza se acelera"],
+    "urbanismo": ["Plan de construcción de nuevas viviendas sociales en el extrarradio", "Obras en la avenida de Madrid y otras vías de comunicación interurbana"],
+    "movilidad_transporte": ["Mejoras en el servicio de tranvía con nuevos vagones", "Primeras líneas regulares de autobús urbano como complemento al tranvía"]
+  },
+  {
+    "año": 1949,
+    "alcalde": "Luis Gómez Laguna (alcalde franquista)",
+    "eventos": ["España empieza a salir del aislamiento internacional con la guerra fría como nuevo contexto", "Primeras negociaciones para un concordato con la Santa Sede"],
+    "noticias_sociedad_sucesos": ["Zaragoza recibe oleadas de emigrantes del campo aragonés en busca de trabajo", "Mejora relativa de las condiciones de vida respecto a los años más duros de posguerra"],
+    "urbanismo": ["Gran expansión de los barrios de Delicias y Las Fuentes por la llegada de inmigrantes", "Construcción de nuevas iglesias y equipamientos parroquiales en los barrios de nueva creación"],
+    "movilidad_transporte": ["Ampliación de líneas de autobús urbano ante el crecimiento de la ciudad", "Mejoras en la red de carreteras que enlazan Zaragoza con el resto de Aragón"]
+  },
+  {
+    "año": 1950,
+    "alcalde": "Luis Gómez Laguna (alcalde franquista)",
+    "eventos": ["La ONU levanta el veto a España; inicio de la reinserción internacional del régimen", "Crecimiento económico moderado en España tras los peores años de la autarquía"],
+    "noticias_sociedad_sucesos": ["Zaragoza supera los 200.000 habitantes por la emigración interior", "La radio se convierte en instrumento de propaganda franquista y entretenimiento popular"],
+    "urbanismo": ["Grandes barriadas de nueva construcción en Delicias, Oliver y Las Fuentes", "Plan de ordenación urbana de Zaragoza que prevé la expansión hacia el sur"],
+    "movilidad_transporte": ["El tranvía continúa siendo el transporte público predominante en Zaragoza", "Nuevas líneas de autobús interurbano hacia municipios de la provincia"]
+  },
+  {
+    "año": 1951,
+    "alcalde": "Luis Gómez Laguna (alcalde franquista)",
+    "eventos": ["Huelgas de tranvías en Barcelona; en Zaragoza el movimiento obrero también se agita", "España es admitida en organizaciones internacionales tras el levantamiento del veto"],
+    "noticias_sociedad_sucesos": ["Primeros síntomas de recuperación económica en el sector industrial", "Continúa la emigración masiva del campo a la ciudad"],
+    "urbanismo": ["Construcción de nuevos mercados de abastos en los barrios de expansión", "Proyectos de dotación de servicios básicos en los barrios periféricos"],
+    "movilidad_transporte": ["Modernización de la flota de tranvías con nuevos vehículos", "Ampliación de la red de autobuses urbanos"]
+  },
+  {
+    "año": 1952,
+    "alcalde": "Luis Gómez Laguna (alcalde franquista)",
+    "eventos": ["Fin del racionamiento oficial en España; termina la cartilla de racionamiento", "España es admitida en la UNESCO"],
+    "noticias_sociedad_sucesos": ["La eliminación del racionamiento marca el fin simbólico de la posguerra", "Crecimiento del consumo y primeros signos de una incipiente sociedad de consumo"],
+    "urbanismo": ["Nuevos barrios residenciales de clase media en la zona del ensanche", "Construcción de colegios y equipamientos educativos en los barrios obreros"],
+    "movilidad_transporte": ["Incremento del parque de automóviles privados en Zaragoza", "Nuevas líneas de autobús para servir a los barrios en expansión"]
+  },
+  {
+    "año": 1953,
+    "alcalde": "Luis Gómez Laguna (alcalde franquista)",
+    "eventos": ["España firma el Concordato con la Santa Sede y los Pactos de Madrid con Estados Unidos", "Los pactos con EE.UU. suponen la integración de España en el bloque occidental"],
+    "noticias_sociedad_sucesos": ["Instalación de bases militares americanas en España; influencia americana en la cultura", "La cultura americana empieza a filtrarse a través de revistas, cine y música"],
+    "urbanismo": ["Grandes proyectos de vivienda social del Instituto Nacional de la Vivienda", "Barrio de Oliver: desarrollo de una gran zona residencial obrera"],
+    "movilidad_transporte": ["Incremento significativo de vehículos motorizados en las calles de Zaragoza", "Primeras señales de congestión de tráfico en el casco histórico"]
+  },
+  {
+    "año": 1954,
+    "alcalde": "Luis Gómez Laguna (alcalde franquista)",
+    "eventos": ["España entra en la ONU como miembro pleno", "Auge del desarrollismo franquista en las ciudades españolas"],
+    "noticias_sociedad_sucesos": ["Zaragoza supera los 250.000 habitantes gracias a la emigración interior", "El Real Zaragoza juega en Primera División con notable éxito"],
+    "urbanismo": ["Intenso desarrollo urbanístico en el barrio de Las Fuentes", "Aprobación de nuevos planes parciales de ordenación en la periferia"],
+    "movilidad_transporte": ["El tranvía y el autobús urbano comparten protagonismo en el transporte urbano", "Nuevas infraestructuras viarias en la entrada sur de la ciudad"]
+  },
+  {
+    "año": 1955,
+    "alcalde": "Luis Gómez Laguna (alcalde franquista)",
+    "eventos": ["España ingresa en la ONU el 14 de diciembre de 1955", "Crece la influencia americana y el desarrollismo en España"],
+    "noticias_sociedad_sucesos": ["La televisión española emite sus primeras emisiones experimentales", "El Real Zaragoza consolida su posición en Primera División"],
+    "urbanismo": ["Grandes bloques de vivienda social en el barrio de Delicias", "Plan de Ordenación Urbana que prevé la gran expansión de Zaragoza"],
+    "movilidad_transporte": ["Primeros estudios sobre la reorganización del transporte urbano", "Construcción de nuevos accesos viarios a la ciudad por el sur"]
+  },
+  {
+    "año": 1956,
+    "alcalde": "Luis Gómez Laguna (alcalde franquista)",
+    "eventos": ["Crisis universitaria de 1956: protestas estudiantiles en Madrid y otras ciudades", "En Zaragoza, primeras protestas universitarias contra el régimen franquista"],
+    "noticias_sociedad_sucesos": ["Agitación en la Universidad de Zaragoza; algunos profesores represaliados", "Primeras emisiones de Televisión Española en Madrid, gran expectación"],
+    "urbanismo": ["Continuación de la expansión urbana de posguerra hacia la periferia", "Nuevos barrios en construcción en el sur y oeste de la ciudad"],
+    "movilidad_transporte": ["El parque de automóviles crece rápidamente entre las clases medias", "Primeros problemas de tráfico en el centro histórico de Zaragoza"]
+  },
+  {
+    "año": 1957,
+    "alcalde": "Luis Gómez Laguna (alcalde franquista)",
+    "eventos": ["Inauguración del estadio de La Romareda, nuevo estadio del Real Zaragoza", "Los tecnócratas del Opus Dei entran en el gobierno franquista; inicio del desarrollismo"],
+    "noticias_sociedad_sucesos": ["La Romareda sustituye al viejo campo de Torrero como estadio del Real Zaragoza", "Gran euforia deportiva en la ciudad por el nuevo estadio"],
+    "urbanismo": ["Construcción de grandes infraestructuras deportivas y equipamientos públicos", "Desarrollo del barrio de Torrero con nuevas viviendas"],
+    "movilidad_transporte": ["El acceso en tranvía a La Romareda mejora el servicio los días de partido", "Nuevas rutas de autobús urbano hacia las zonas de expansión"]
+  },
+  {
+    "año": 1958,
+    "alcalde": "Luis Gómez Laguna (alcalde franquista)",
+    "eventos": ["España solicita asociación con la Comunidad Económica Europea", "Plan de Estabilización en preparación; España abandona la autarquía"],
+    "noticias_sociedad_sucesos": ["Primeras huelgas importantes en Asturias y el País Vasco; eco en Zaragoza", "La economía española comienza su apertura al exterior"],
+    "urbanismo": ["Proyectos de modernización del centro urbano de Zaragoza", "Nuevas edificaciones en el Paseo de la Independencia de estilo moderno"],
+    "movilidad_transporte": ["Debate sobre el futuro del tranvía ante el crecimiento del automóvil", "Ampliación de la red de autobuses urbanos"]
+  },
+  {
+    "año": 1959,
+    "alcalde": "Luis Gómez Laguna (alcalde franquista)",
+    "eventos": ["Plan de Estabilización de 1959: España se abre a la economía de mercado", "Fin definitivo de la autarquía; llegada de inversión extranjera"],
+    "noticias_sociedad_sucesos": ["La estabilización implica austeridad y emigración masiva al extranjero", "Zaragoza ve partir a trabajadores hacia Francia, Alemania y Suiza"],
+    "urbanismo": ["El plan de estabilización frena temporalmente la construcción", "Proyectos de nuevas infraestructuras viarias financiadas con fondos internacionales"],
+    "movilidad_transporte": ["Inicio de la motorización masiva con los primeros Seat 600 en las calles", "Debate sobre la necesidad de nuevos puentes sobre el Ebro"]
+  },
+  {
+    "año": 1960,
+    "alcalde": "Luis Gómez Laguna (alcalde franquista)",
+    "eventos": ["Inicio del desarrollismo franquista: el milagro económico español comienza", "Primer Plan de Desarrollo Económico y Social"],
+    "noticias_sociedad_sucesos": ["El turismo extranjero empieza a llegar a España como fuente de divisas", "Zaragoza atrae inversión industrial gracias a su posición geoestratégica"],
+    "urbanismo": ["Gran expansión de los barrios obreros: Delicias, Las Fuentes, Oliver, La Jota", "Aprobación del Plan General de Ordenación Urbana de Zaragoza"],
+    "movilidad_transporte": ["El Seat 600 populariza el automóvil privado; caos creciente en las calles", "Primeros debates sobre si suprimir el tranvía ante el avance del automóvil"]
+  },
+  {
+    "año": 1961,
+    "alcalde": "Luis Gómez Laguna (alcalde franquista)",
+    "eventos": ["Segundo año del boom económico: la industria zaragozana crece aceleradamente", "Construcción masiva de viviendas para acoger a los emigrantes del campo"],
+    "noticias_sociedad_sucesos": ["Zaragoza supera los 300.000 habitantes; se multiplican los barrios periféricos", "Primeras importaciones de electrodomésticos y bienes de consumo"],
+    "urbanismo": ["Construcción de grandes polígonos de vivienda en la periferia", "Barrio de Valdefierro en desarrollo"],
+    "movilidad_transporte": ["El automóvil desplaza progresivamente al tranvía entre las clases medias", "Nuevas carreteras nacionales mejoradas para conectar Zaragoza con Madrid y Barcelona"]
+  },
+  {
+    "año": 1962,
+    "alcalde": "Luis Gómez Laguna (alcalde franquista)",
+    "eventos": ["Huelgas mineras en Asturias; el régimen franquista sufre una crisis de legitimidad", "Contubernio de Munich: la oposición democrática española se reúne en Alemania"],
+    "noticias_sociedad_sucesos": ["Represión de activistas antifranquistas en Zaragoza", "El turismo y la emigración transforman las costumbres sociales"],
+    "urbanismo": ["Construcción acelerada de bloques de pisos en todos los barrios de expansión", "Problemas de urbanización: barrios sin servicios adecuados"],
+    "movilidad_transporte": ["Saturación creciente del tráfico en el centro histórico", "Proyectos de vías de circunvalación para descongestionar el centro"]
+  },
+  {
+    "año": 1963,
+    "alcalde": "Luis Gómez Laguna (alcalde franquista)",
+    "eventos": ["Primer Plan de Desarrollo Económico (1964-1967) anunciado", "El Tribunal de Orden Público procesa a activistas antifranquistas aragoneses"],
+    "noticias_sociedad_sucesos": ["Zaragoza entra en la era de la televisión: la señal de TVE llega con regularidad", "Crecimiento del nivel de vida de las clases medias y obreras cualificadas"],
+    "urbanismo": ["Plan parcial de urbanización de grandes zonas al sur del Ebro", "Primeros rascacielos y edificios de gran altura en el ensanche"],
+    "movilidad_transporte": ["Declive progresivo del tranvía ante el auge del autobús y el coche privado", "Nuevas infraestructuras de acceso a Zaragoza por la N-II (Madrid-Barcelona)"]
+  },
+  {
+    "año": 1964,
+    "alcalde": "Mariano Horno Liria (alcalde franquista, inicio de mandato)",
+    "eventos": ["25 años de Paz franquista: grandes celebraciones oficiales del régimen", "Real Zaragoza gana la Copa del Generalísimo (Copa del Rey) por primera vez"],
+    "noticias_sociedad_sucesos": ["Las celebraciones del 25 aniversario son boicoteadas discretamente por la oposición", "El movimiento obrero clandestino se reorganiza en Zaragoza"],
+    "urbanismo": ["Construcción del Palacio de los Deportes de Zaragoza", "Grandes avenidas y bulevares en las nuevas zonas residenciales"],
+    "movilidad_transporte": ["Inauguración de nuevas líneas de autobús urbano que van sustituyendo al tranvía", "La N-II Madrid-Barcelona, que pasa por Zaragoza, es modernizada"]
+  },
+  {
+    "año": 1965,
+    "alcalde": "Mariano Horno Liria (alcalde franquista)",
+    "eventos": ["Agitación universitaria en toda España; primeras comisiones obreras en Zaragoza", "El desarrollismo trae prosperidad pero también desigualdades crecientes"],
+    "noticias_sociedad_sucesos": ["Primera huelga importante de Comisiones Obreras en Zaragoza", "El Seat 600 y la televisión transforman la vida cotidiana de los zaragozanos"],
+    "urbanismo": ["Barrio de La Paz: gran conjunto de vivienda social en el norte de la ciudad", "Construcción de centros comerciales y mercados en los barrios de expansión"],
+    "movilidad_transporte": ["Supresión de algunas líneas de tranvía menos rentables", "Inauguración de nuevas líneas de autobús urbano"]
+  },
+  {
+    "año": 1966,
+    "alcalde": "Mariano Horno Liria (alcalde franquista)",
+    "eventos": ["Ley Orgánica del Estado: Franco reorganiza el régimen con una apariencia de modernización", "Primer referéndum franquista; en Zaragoza participación forzada"],
+    "noticias_sociedad_sucesos": ["La oposición antifranquista trabaja en la clandestinidad en Zaragoza", "El consumismo de los años 60 cambia los hábitos sociales"],
+    "urbanismo": ["Aprobación de nuevos planes parciales de desarrollo urbano", "Construcción de polideportivos y equipamientos culturales en los barrios"],
+    "movilidad_transporte": ["El automóvil privado ya supera en uso al transporte público en muchos trayectos", "Proyectos de reforma de la red viaria del casco histórico"]
+  },
+  {
+    "año": 1967,
+    "alcalde": "Mariano Horno Liria (alcalde franquista)",
+    "eventos": ["III Plan de Desarrollo anunciado; España crece a ritmos del 7% anual", "Actividad sindical clandestina de Comisiones Obreras en las fábricas zaragozanas"],
+    "noticias_sociedad_sucesos": ["El Real Zaragoza compite en Europa tras los éxitos coperos", "La emigración a Europa de trabajadores aragoneses sigue siendo masiva"],
+    "urbanismo": ["Construcción de nuevas escuelas y colegios en los barrios populares", "Debate sobre la preservación del casco histórico medieval de Zaragoza"],
+    "movilidad_transporte": ["El tranvía sigue en funcionamiento pero pierde pasajeros ante el autobús", "Nuevas carreteras de circunvalación en proyecto para Zaragoza"]
+  },
+  {
+    "año": 1968,
+    "alcalde": "Mariano Horno Liria (alcalde franquista)",
+    "eventos": ["Mayo del 68 en Francia tiene eco en las universidades españolas", "Estado de excepción en el País Vasco; represión que afecta al conjunto de la oposición"],
+    "noticias_sociedad_sucesos": ["Agitación universitaria en Zaragoza en solidaridad con el mayo francés", "Primeros militantes de ETA detenidos con vinculaciones aragonesas"],
+    "urbanismo": ["Nuevas construcciones residenciales en el barrio de Casablanca", "Debate sobre la densificación excesiva de los barrios periféricos"],
+    "movilidad_transporte": ["Saturación del tráfico en el casco histórico exige medidas urgentes", "Proyecto de reforma de la Vía Imperial en Zaragoza"]
+  },
+  {
+    "año": 1969,
+    "alcalde": "Mariano Horno Liria (alcalde franquista)",
+    "eventos": ["Juan Carlos I nombrado sucesor de Franco a título de Rey", "Estado de excepción general en España; represión de la oposición antifranquista"],
+    "noticias_sociedad_sucesos": ["Detenciones de activistas antifranquistas en Zaragoza durante el estado de excepción", "El nombramiento de Juan Carlos genera debate sobre el futuro político de España"],
+    "urbanismo": ["Continúan los grandes proyectos de construcción en la periferia de Zaragoza", "Nuevas zonas industriales en el corredor del Ebro"],
+    "movilidad_transporte": ["Supresión de más líneas de tranvía; el autobús urbano domina el transporte público", "Plan de ordenación del tráfico en el centro histórico"]
+  },
+  {
+    "año": 1970,
+    "alcalde": "Mariano Horno Liria (alcalde franquista)",
+    "eventos": ["Proceso de Burgos: juicio a militantes de ETA con gran conmoción nacional", "Grandes manifestaciones en Zaragoza en protesta por el Proceso de Burgos"],
+    "noticias_sociedad_sucesos": ["La clase obrera zaragozana apoya masivamente las protestas por el Proceso de Burgos", "El franquismo muestra señales de agotamiento ante la presión social"],
+    "urbanismo": ["Zaragoza supera los 400.000 habitantes; gran expansión urbana", "Nuevos polígonos industriales en las afueras de la ciudad"],
+    "movilidad_transporte": ["El tranvía está prácticamente condenado; el autobús y el coche dominan", "Nuevas infraestructuras de carretera en el entorno de Zaragoza"]
+  },
+  {
+    "año": 1971,
+    "alcalde": "Mariano Horno Liria (alcalde franquista)",
+    "eventos": ["Huelgas importantes en el sector del metal y la construcción en Zaragoza", "La oposición antifranquista se reorganiza en torno a los partidos clandestinos"],
+    "noticias_sociedad_sucesos": ["El PCE y el PSOE operan en la clandestinidad en Zaragoza", "Conflictos laborales en fábricas de la ciudad"],
+    "urbanismo": ["Construcción de centros comerciales en las nuevas zonas residenciales", "Debate sobre la creación de parques y zonas verdes en los barrios obreros"],
+    "movilidad_transporte": ["La red de autobuses urbanos cubre la mayoría de los barrios", "Proyecto de ronda de circunvalación para descongestionar el tráfico urbano"]
+  },
+  {
+    "año": 1972,
+    "alcalde": "Mariano Horno Liria (alcalde franquista)",
+    "eventos": ["Continúa el auge económico; Spain conocida internacionalmente como el milagro español", "Conflictos laborales importantes en Zaragoza en empresas del metal"],
+    "noticias_sociedad_sucesos": ["Gran huelga en el sector del metal zaragozano con reivindicaciones salariales", "La prensa clandestina antifranquista se distribuye en los barrios obreros"],
+    "urbanismo": ["Construcción de grandes hipermercados y centros de consumo en las afueras", "Remodelación urbana de la zona del Portillo"],
+    "movilidad_transporte": ["Se suprime otra línea histórica de tranvía", "Primeros planes de construcción de una ronda de circunvalación exterior"]
+  },
+  {
+    "año": 1973,
+    "alcalde": "Mariano Horno Liria (alcalde franquista)",
+    "eventos": ["Asesinato de Carrero Blanco por ETA (20 de diciembre); gran impacto político", "Crisis del petróleo de 1973: el milagro económico español llega a su fin"],
+    "noticias_sociedad_sucesos": ["Conmoción en Zaragoza por el asesinato de Carrero Blanco", "La crisis del petróleo dispara la inflación y frena el crecimiento económico"],
+    "urbanismo": ["La crisis económica ralentiza los proyectos urbanísticos en curso", "Debate sobre la especulación inmobiliaria y su efecto en la ciudad"],
+    "movilidad_transporte": ["La crisis del petróleo provoca restricciones al tráfico privado", "Los domingos sin coches son impuestos por el gobierno para ahorrar combustible"]
+  },
+  {
+    "año": 1974,
+    "alcalde": "Mariano Horno Liria (alcalde franquista)",
+    "eventos": ["Franco gravemente enfermo; el régimen está en horas bajas", "La oposición antifranquista coordina sus actuaciones de cara al postfranquismo"],
+    "noticias_sociedad_sucesos": ["Grandes huelgas en Zaragoza en sectores industriales y de servicios", "El PCE, PSOE y otras fuerzas antifranquistas trabajan abiertamente en la semiclandestinidad"],
+    "urbanismo": ["Crisis de la construcción por el alza de precios de materiales y energía", "Barrios populares reclaman mejores servicios e infraestructuras"],
+    "movilidad_transporte": ["Restricciones de tráfico por la crisis energética del petróleo", "Debate sobre el futuro del transporte público en Zaragoza"]
+  },
+  {
+    "año": 1975,
+    "alcalde": "Alcalde franquista de transición (tras el fallecimiento de Franco el 20 de noviembre)",
+    "eventos": ["Muerte de Franco el 20 de noviembre; Juan Carlos I proclamado Rey de España", "Últimas ejecuciones del régimen; protestas internacionales", "Fin de la Dictadura: inicio de la Transición democrática"],
+    "noticias_sociedad_sucesos": ["Celebraciones discretas pero significativas en los barrios obreros de Zaragoza por la muerte de Franco", "La sociedad zaragozana mira con expectación el futuro político del país"],
+    "urbanismo": ["Los últimos grandes proyectos urbanísticos franquistas están en curso", "Debate sobre el modelo de ciudad para la futura democracia"],
+    "movilidad_transporte": ["El tranvía clásico de Zaragoza está en sus últimos meses de servicio", "Proyectos de modernización del transporte público para la nueva etapa democrática"]
+  },
+  {
+    "año": 1976,
+    "alcalde": "Alcalde de transición (período predemocràtico)",
+    "eventos": ["Reforma política de Adolfo Suárez; España camina hacia la democracia", "Gran manifestación pro-amnistía en Zaragoza por los presos políticos franquistas", "16 de noviembre: último servicio del tranvía clásico de Zaragoza"],
+    "noticias_sociedad_sucesos": ["Los partidos políticos se legalizan progresivamente; gran actividad política en la ciudad", "El fin del tranvía histórico cierra una época de más de 75 años de transporte urbano sobre raíles"],
+    "urbanismo": ["Los barrios periféricos reclaman mejores equipamientos y servicios en el nuevo contexto democrático", "Debate ciudadano sobre el modelo urbano futuro de Zaragoza"],
+    "movilidad_transporte": ["16 de noviembre de 1976: cierre definitivo de la histórica red de tranvías de Zaragoza", "El autobús urbano asume todo el transporte público de la ciudad"]
+  },
+  {
+    "año": 1977,
+    "alcalde": "Alcalde de transición (Comisión Gestora Municipal)",
+    "eventos": ["15 de junio: primeras elecciones democráticas generales desde 1936; gran participación en Zaragoza", "Legalización del PCE y todos los partidos políticos"],
+    "noticias_sociedad_sucesos": ["Enorme entusiasmo popular en Zaragoza por las primeras elecciones libres", "Pactos de la Moncloa para estabilizar la economía y la transición"],
+    "urbanismo": ["Los vecinos de los barrios periféricos organizan asociaciones para reclamar mejoras urbanas", "Inicio del debate democrático sobre el plan urbanístico de Zaragoza"],
+    "movilidad_transporte": ["La red de autobuses urbanos es modernizada con nuevos vehículos", "Primeras propuestas de reorganización del transporte urbano en democracia"]
+  },
+  {
+    "año": 1978,
+    "alcalde": "Alcalde de transición (Comisión Gestora Municipal)",
+    "eventos": ["Aprobación de la Constitución española en referéndum (6 de diciembre); gran participación en Aragón", "Proceso de elaboración del Estatuto de Autonomía de Aragón"],
+    "noticias_sociedad_sucesos": ["Gran votación favorable a la Constitución en Zaragoza", "Los primeros alcaldes democráticos están a punto de ser elegidos"],
+    "urbanismo": ["Las asociaciones de vecinos tienen voz en los planes urbanísticos por primera vez", "Debate sobre la revisión de los planes franquistas de ordenación urbana"],
+    "movilidad_transporte": ["Modernización gradual de la red de autobuses de la TUZSA", "Proyectos de mejora de los accesos viarios a Zaragoza"]
+  },
+  {
+    "año": 1979,
+    "alcalde": "Ramón Sáinz de Varanda (PSOE) — primer alcalde democrático de Zaragoza",
+    "eventos": ["Primeras elecciones municipales democráticas (3 de abril); Ramón Sáinz de Varanda elegido alcalde por el PSOE", "Aprobación del Estatuto de Autonomía de Aragón"],
+    "noticias_sociedad_sucesos": ["Gran celebración en Zaragoza por la elección del primer alcalde democrático en décadas", "El movimiento vecinal zaragozano presenta sus reivindicaciones al nuevo ayuntamiento democrático"],
+    "urbanismo": ["El nuevo ayuntamiento democrático revisa los planes urbanísticos heredados del franquismo", "Inicio de inversiones en barrios obreros históricamente olvidados"],
+    "movilidad_transporte": ["Mejoras en la red de autobuses urbanos bajo el nuevo gobierno municipal", "Proyectos de nuevas infraestructuras viarias para la ciudad democrática"]
+  },
+  {
+    "año": 1980,
+    "alcalde": "Ramón Sáinz de Varanda (PSOE)",
+    "eventos": ["El ayuntamiento democrático afronta la crisis económica y el legado urbanístico franquista", "Debate sobre el Estatuto de Autonomía de Aragón"],
+    "noticias_sociedad_sucesos": ["Crisis económica con alto desempleo en la industria zaragozana", "Debate sobre el modelo económico y social de la España democrática"],
+    "urbanismo": ["Plan Especial de Reforma Interior para el casco histórico de Zaragoza", "Inversiones municipales en parques y zonas verdes en los barrios carentes de ellas"],
+    "movilidad_transporte": ["Mejora de frecuencias en las líneas de autobús urbano de la TUZSA", "Primeras propuestas de un carril bus en el centro de la ciudad"]
+  },
+  {
+    "año": 1981,
+    "alcalde": "Ramón Sáinz de Varanda (PSOE)",
+    "eventos": ["Intento de golpe de Estado del 23-F (Tejero); gran tensión en toda España", "Zaragoza: la guarnición militar permanece leal al Rey durante el 23-F"],
+    "noticias_sociedad_sucesos": ["Enorme alarma social en Zaragoza durante la noche del 23-F", "Manifestaciones masivas de apoyo a la democracia en Zaragoza los días siguientes"],
+    "urbanismo": ["El ayuntamiento retoma sus planes de inversión urbana tras la incertidumbre del 23-F", "Proyectos de rehabilitación del barrio de la Magdalena"],
+    "movilidad_transporte": ["Continuación de la modernización de la flota de autobuses urbanos", "Estudios para la mejora de la red viaria en el entorno de La Romareda"]
+  },
+  {
+    "año": 1982,
+    "alcalde": "Ramón Sáinz de Varanda (PSOE)",
+    "eventos": ["Mundial de Fútbol España 1982: La Romareda acoge partidos de la fase de grupos", "Inauguración de la planta de fabricación de GM/Opel en Figueruelas (gran impacto económico para Zaragoza)", "Victoria del PSOE en las elecciones generales de octubre: Felipe González, presidente del gobierno"],
+    "noticias_sociedad_sucesos": ["Zaragoza vive el Mundial con enorme entusiasmo; la ciudad recibe visitantes de todo el mundo", "La planta de Opel en Figueruelas transforma la economía de la comarca de Zaragoza"],
+    "urbanismo": ["Mejoras en la accesibilidad al estadio de La Romareda para el Mundial", "Nuevas infraestructuras en la zona industrial sur de Zaragoza"],
+    "movilidad_transporte": ["Mejoras en accesos viarios a La Romareda para el Mundial de Fútbol", "La carretera nacional N-II es reforzada por el tráfico del Mundial"]
+  },
+  {
+    "año": 1983,
+    "alcalde": "Ramón Sáinz de Varanda (PSOE)",
+    "eventos": ["Consolidación de la autonomía aragonesa; las Cortes de Aragón comienzan a funcionar", "El PSOE en el gobierno nacional impulsa el estado del bienestar"],
+    "noticias_sociedad_sucesos": ["Crecimiento del empleo en el sector del automóvil gracias a Opel-Figueruelas", "Crisis en sectores industriales tradicionales: textil y metalurgia"],
+    "urbanismo": ["Plan General de Ordenación Urbana de Zaragoza en revisión", "Inversiones en equipamientos culturales y educativos en los barrios"],
+    "movilidad_transporte": ["El transporte urbano de Zaragoza es reorganizado bajo gestión municipal", "Nuevas líneas interurbanas para conectar Zaragoza con los municipios del área metropolitana"]
+  },
+  {
+    "año": 1984,
+    "alcalde": "Ramón Sáinz de Varanda (PSOE)",
+    "eventos": ["Reconversión industrial en España: cierre de empresas y altas tasas de paro", "Zaragoza lucha contra el desempleo con políticas activas de empleo municipal"],
+    "noticias_sociedad_sucesos": ["Huelgas en el sector industrial zaragozano por la reconversión", "La cultura y el ocio nocturno florecen en la España democrática"],
+    "urbanismo": ["Proyectos de remodelación de plazas históricas del centro", "Planes de mejora de barrios periféricos degradados"],
+    "movilidad_transporte": ["Continuación de la mejora de la red de autobuses urbanos", "Proyectos de primer anillo de circunvalación de Zaragoza"]
+  },
+  {
+    "año": 1985,
+    "alcalde": "Ramón Sáinz de Varanda (PSOE)",
+    "eventos": ["España firma el Tratado de Adhesión a la CEE (12 de junio)", "Debate sobre la permanencia en la OTAN en España"],
+    "noticias_sociedad_sucesos": ["La adhesión a la CEE genera grandes expectativas económicas en Zaragoza", "El movimiento pacifista contra la OTAN tiene presencia notable en la ciudad"],
+    "urbanismo": ["Proyectos de modernización de infraestructuras financiados parcialmente por fondos europeos", "Rehabilitación de edificios históricos en el casco antiguo"],
+    "movilidad_transporte": ["Ampliación de la red viaria de la ciudad con nuevos tramos de ronda", "Mejoras en las conexiones de Zaragoza con las autovías nacionales"]
+  },
+  {
+    "año": 1986,
+    "alcalde": "Ramón Sáinz de Varanda (PSOE)",
+    "eventos": ["1 de enero: España entra en la Comunidad Económica Europea", "Referéndum sobre la OTAN: España decide permanecer en la Alianza"],
+    "noticias_sociedad_sucesos": ["Celebraciones por la entrada en Europa; Zaragoza ve oportunidades de desarrollo económico", "El movimiento anti-OTAN organiza grandes manifestaciones en Zaragoza"],
+    "urbanismo": ["Los fondos estructurales europeos comienzan a financiar infraestructuras en Zaragoza", "Plan de mejora de las infraestructuras hidráulicas de la ciudad"],
+    "movilidad_transporte": ["Inicio de las obras de la primera ronda de circunvalación de Zaragoza", "Proyecto de mejora del eje viario norte-sur de la ciudad"]
+  },
+  {
+    "año": 1987,
+    "alcalde": "Antonio González Triviño (PSOE), nuevo alcalde",
+    "eventos": ["Elecciones municipales de junio; el PSOE mantiene el gobierno de Zaragoza", "Sáinz de Varanda cede el testigo a su sucesor en el PSOE"],
+    "noticias_sociedad_sucesos": ["Zaragoza continúa su desarrollo económico en el marco europeo", "La movida cultural llega a Zaragoza con una escena musical y artística vibrante"],
+    "urbanismo": ["El nuevo alcalde continúa los planes urbanísticos socialistas de su predecesor", "Proyectos de remodelación del entorno de la Basílica del Pilar"],
+    "movilidad_transporte": ["Continuación de las obras de circunvalación de Zaragoza", "Mejoras en la red de autobuses con nuevos vehículos articulados"]
+  },
+  {
+    "año": 1988,
+    "alcalde": "Antonio González Triviño (PSOE)",
+    "eventos": ["Huelga general del 14-D en España: gran éxito en Zaragoza", "Crecimiento económico sostenido en España gracias a la integración europea"],
+    "noticias_sociedad_sucesos": ["La huelga general del 14-D paraliza Zaragoza casi completamente", "Auge del sector de la construcción y la industria del automóvil en la ciudad"],
+    "urbanismo": ["Nuevos barrios residenciales de clase media en las afueras de Zaragoza", "Proyecto del Palacio de Congresos de Zaragoza"],
+    "movilidad_transporte": ["Avances en la construcción de la ronda de circunvalación", "Aumento del parque de vehículos privados; congestión creciente"]
+  },
+  {
+    "año": 1989,
+    "alcalde": "Antonio González Triviño (PSOE)",
+    "eventos": ["Caída del Muro de Berlín: fin de la Guerra Fría con repercusión global", "España ejerce la presidencia de la CEE por primera vez"],
+    "noticias_sociedad_sucesos": ["La caída del Muro de Berlín es seguida con gran interés en Zaragoza", "Zaragoza consolida su posición como nodo logístico de España"],
+    "urbanismo": ["El área metropolitana de Zaragoza planifica su desarrollo conjunto", "Proyectos de parques periurbanos y espacios naturales en los márgenes del Ebro"],
+    "movilidad_transporte": ["Inauguración de nuevos tramos de la ronda exterior de Zaragoza", "Mejoras en las conexiones ferroviarias con Madrid y Barcelona"]
+  },
+  {
+    "año": 1990,
+    "alcalde": "Antonio González Triviño (PSOE)",
+    "eventos": ["España en pleno auge económico; burbuja inmobiliaria incipiente", "Zaragoza aspira a grandes eventos internacionales"],
+    "noticias_sociedad_sucesos": ["Boom inmobiliario: los precios de la vivienda suben aceleradamente en Zaragoza", "El Real Zaragoza compite en competiciones europeas"],
+    "urbanismo": ["Grandes proyectos de urbanización en las zonas periféricas del sur y este", "Proyectos de recuperación de la ribera del Ebro para uso ciudadano"],
+    "movilidad_transporte": ["La ronda de circunvalación parcialmente operativa mejora el tráfico", "Debate sobre la necesidad de una autovía Zaragoza-Huesca"]
+  },
+  {
+    "año": 1991,
+    "alcalde": "Antonio González Triviño (PSOE)",
+    "eventos": ["Guerra del Golfo Pérsico; España participa como aliada de EE.UU.", "Crisis económica se avecina; fin del boom de los años 80"],
+    "noticias_sociedad_sucesos": ["Manifestaciones pacifistas en Zaragoza contra la guerra del Golfo", "Primeros síntomas de recesión económica afectan a la industria zaragozana"],
+    "urbanismo": ["Ralentización de proyectos inmobiliarios ante la perspectiva de crisis", "Plan de rehabilitación del barrio histórico de San Pablo"],
+    "movilidad_transporte": ["Autovía A-2 Madrid-Zaragoza-Barcelona casi completada en el tramo zaragozano", "Nuevos accesos a la ciudad desde la autovía"]
+  },
+  {
+    "año": 1992,
+    "alcalde": "Antonio González Triviño (PSOE)",
+    "eventos": ["Olimpiadas de Barcelona y Expo de Sevilla: España en el centro del mundo", "Crisis económica española con alto desempleo"],
+    "noticias_sociedad_sucesos": ["El año olímpico genera un gran orgullo nacional compartido en Zaragoza", "La recesión económica golpea duramente a la industria manufacturera de Zaragoza"],
+    "urbanismo": ["La crisis frena los proyectos urbanísticos ambiciosos del final de los 80", "Proyectos de recuperación de zonas degradadas del casco histórico"],
+    "movilidad_transporte": ["Inauguración de tramos adicionales de la ronda de circunvalación", "Conexión de Zaragoza con la red de autovías del noreste peninsular"]
+  },
+  {
+    "año": 1993,
+    "alcalde": "Antonio González Triviño (PSOE)",
+    "eventos": ["España atraviesa una dura crisis económica con alto desempleo", "Escándalos de corrupción sacuden al PSOE a nivel nacional"],
+    "noticias_sociedad_sucesos": ["El desempleo en Zaragoza supera el 20%; gran malestar social", "Los escándalos del gobierno socialista empiezan a erosionar su apoyo popular"],
+    "urbanismo": ["Proyectos de vivienda de protección oficial para hacer frente a la crisis", "Debate sobre la expansión del área metropolitana de Zaragoza"],
+    "movilidad_transporte": ["Mejoras en las conexiones de autobús con los municipios del área metropolitana", "Inversiones en la red ferroviaria de cercanías de Zaragoza"]
+  },
+  {
+    "año": 1994,
+    "alcalde": "Juan Iranzo (PP), nuevo alcalde",
+    "eventos": ["El PP gana las elecciones municipales en Zaragoza; fin del ciclo socialista", "Real Zaragoza gana la Copa del Rey"],
+    "noticias_sociedad_sucesos": ["La victoria del PP en Zaragoza marca un giro político en la ciudad", "El Real Zaragoza campeón de Copa genera gran euforia en la ciudad"],
+    "urbanismo": ["El nuevo ayuntamiento popular revisa los planes urbanísticos socialistas", "Proyectos de desarrollo en el sur de Zaragoza"],
+    "movilidad_transporte": ["Planes para mejorar los accesos viarios a la planta de Opel-Figueruelas desde Zaragoza", "Estudios de viabilidad para una posible futura línea de metro o tranvía"]
+  },
+  {
+    "año": 1995,
+    "alcalde": "Juan Iranzo (PP)",
+    "eventos": ["Real Zaragoza gana la Recopa de Europa (2-1 al Arsenal en París, gol de Nayim desde el centro del campo, 10 de mayo de 1995)", "Gran explosión de alegría en Zaragoza por el título europeo"],
+    "noticias_sociedad_sucesos": ["El gol de Nayim en el último minuto de la prórroga desata la euforia en toda la ciudad", "El título europeo eleva la proyección internacional del Real Zaragoza"],
+    "urbanismo": ["Proyectos de nuevas infraestructuras en el barrio de Valdespartera", "Planes de desarrollo del sur de Zaragoza"],
+    "movilidad_transporte": ["Mejoras en la red viaria de acceso al estadio de La Romareda", "Proyecto de autovía Zaragoza-Huesca en fase avanzada"]
+  },
+  {
+    "año": 1996,
+    "alcalde": "Juan Iranzo (PP)",
+    "eventos": ["El PP gana las elecciones generales; Aznar, presidente del gobierno", "Zaragoza en la senda de nuevos proyectos de infraestructura nacional"],
+    "noticias_sociedad_sucesos": ["El cambio de gobierno nacional favorece algunas inversiones en Aragón", "Debate sobre la expansión del aeropuerto de Zaragoza"],
+    "urbanismo": ["Nuevos desarrollos urbanísticos en el sur de Zaragoza (Arcosur, Valdespartera en proyecto)", "Planes de expansión del aeropuerto de Zaragoza"],
+    "movilidad_transporte": ["Inauguración de tramos de la autovía A-23 Zaragoza-Huesca", "Mejoras en el aeropuerto de Zaragoza"]
+  },
+  {
+    "año": 1997,
+    "alcalde": "Juan Iranzo (PP)",
+    "eventos": ["España cumple los criterios de convergencia para entrar en el euro", "Boom económico y de la construcción en España"],
+    "noticias_sociedad_sucesos": ["Zaragoza vive un nuevo auge económico y demográfico", "Proyectos de grandes centros comerciales en las afueras de la ciudad"],
+    "urbanismo": ["Gran expansión de nuevos barrios residenciales en la periferia sur y oeste", "Proyecto del barrio de Valdespartera en desarrollo"],
+    "movilidad_transporte": ["Apertura de nuevos tramos de ronda y conexiones viarias", "Estudio de viabilidad del AVE Madrid-Zaragoza-Barcelona"]
+  },
+  {
+    "año": 1998,
+    "alcalde": "Juan Iranzo (PP)",
+    "eventos": ["España entra en la zona euro", "Boom inmobiliario acelerado; especulación del suelo en Zaragoza"],
+    "noticias_sociedad_sucesos": ["Los precios de la vivienda en Zaragoza se disparan", "Zaragoza consolida su sector logístico aprovechando su posición central en España"],
+    "urbanismo": ["Grandes proyectos residenciales en Valdespartera y Arcosur", "Inicio del desarrollo urbanístico de la margen izquierda del Ebro"],
+    "movilidad_transporte": ["Inicio de las obras del tramo zaragozano del AVE Madrid-Barcelona", "Nuevas infraestructuras logísticas en el entorno de la ciudad (PLAZA en proyecto)"]
+  },
+  {
+    "año": 1999,
+    "alcalde": "Juan Iranzo (PP)",
+    "eventos": ["España adopta el euro como moneda de cambio (vigencia de billetes y monedas en 2002)", "La economía española crece al ritmo más alto de la UE"],
+    "noticias_sociedad_sucesos": ["La Plataforma Logística Zaragoza (PLAZA) en proyecto", "El boom inmobiliario transforma la fisonomía de la ciudad"],
+    "urbanismo": ["Aprobación del plan parcial de Valdespartera, un nuevo barrio al sur", "Grandes proyectos de desarrollo en la ribera del Ebro"],
+    "movilidad_transporte": ["Avance de las obras del AVE en el entorno de Zaragoza", "Plan de infraestructuras de transporte para el área metropolitana"]
+  },
+  {
+    "año": 2000,
+    "alcalde": "José Atarés (PP), nuevo alcalde",
+    "eventos": ["Elecciones municipales de mayo: el PP mantiene el gobierno de Zaragoza", "España en pleno boom económico; la ciudad crece aceleradamente"],
+    "noticias_sociedad_sucesos": ["Zaragoza supera los 600.000 habitantes; gran crecimiento demográfico por inmigración", "Llegada masiva de inmigrantes extranjeros a Zaragoza: latinoamericanos, magrebíes, europeos del este"],
+    "urbanismo": ["Inicio de las grandes transformaciones urbanas ligadas a la candidatura para la Expo 2008", "Plan de recuperación de la ribera del Ebro y de la antigua zona industrial"],
+    "movilidad_transporte": ["Obras intensas del AVE en el corredor Madrid-Zaragoza-Barcelona", "Inauguración de PLAZA (Plataforma Logística de Zaragoza), la mayor de Europa"]
+  },
+  {
+    "año": 2001,
+    "alcalde": "José Atarés (PP)",
+    "eventos": ["Atentados del 11-S en Nueva York: impacto global; manifestaciones de condena en Zaragoza", "Candidatura de Zaragoza para albergar una Exposición Internacional en 2008 toma fuerza"],
+    "noticias_sociedad_sucesos": ["Enorme conmoción en Zaragoza tras los atentados del 11-S", "La inmigración extranjera transforma la demografía y la sociedad zaragozana"],
+    "urbanismo": ["Proyectos urbanísticos para la posible Expo 2008 en la ribera del Ebro", "Continuación del desarrollo de los grandes barrios periféricos del sur"],
+    "movilidad_transporte": ["Avance significativo de las obras del AVE en el tramo Zaragoza", "La logística como sector estratégico: PLAZA en plena expansión"]
+  },
+  {
+    "año": 2002,
+    "alcalde": "José Atarés (PP)",
+    "eventos": ["España adopta el euro físico (billetes y monedas) el 1 de enero", "Zaragoza es designada sede de la Exposición Internacional de 2008 por el BIE"],
+    "noticias_sociedad_sucesos": ["Gran júbilo en Zaragoza por la concesión de la Expo 2008", "El Prestige hunde su petróleo en las costas gallegas: manifestaciones en toda España"],
+    "urbanismo": ["Inicio de los estudios del plan maestro de la Expo 2008 en la ribera del Ebro", "Proyectos de regeneración urbana en la zona de Ranillas"],
+    "movilidad_transporte": ["Las infraestructuras de transporte se planifican pensando en la Expo 2008", "Avance de las obras del AVE; Zaragoza tendrá estación intermodal nueva (Delicias)"]
+  },
+  {
+    "año": 2003,
+    "alcalde": "Juan Alberto Belloch (PSOE), nuevo alcalde",
+    "eventos": ["11 de octubre: inauguración de la línea AVE Madrid-Zaragoza-Lleida (primer tramo del AVE Madrid-Barcelona)", "El PSOE recupera la alcaldía de Zaragoza; Belloch elegido alcalde", "Manifestaciones masivas en Zaragoza contra la guerra de Irak (15-F y posteriores)"],
+    "noticias_sociedad_sucesos": ["El AVE revoluciona la comunicación de Zaragoza con Madrid (75 minutos) y Barcelona", "Zaragoza se opone masivamente a la guerra de Irak; gran manifestación del 15-F"],
+    "urbanismo": ["Nueva estación de Zaragoza-Delicias como estación intermodal de AVE, trenes regionales y autobuses", "Obras de urbanización en los terrenos de la antigua estación de El Portillo"],
+    "movilidad_transporte": ["El AVE Madrid-Zaragoza-Lleida entra en servicio el 11 de octubre: Madrid a 1h15min", "La nueva estación de Delicias centraliza el transporte ferroviario de Zaragoza"]
+  },
+  {
+    "año": 2004,
+    "alcalde": "Juan Alberto Belloch (PSOE)",
+    "eventos": ["11-M: atentados terroristas en Madrid; gran impacto en toda España", "El PSOE gana las elecciones generales; Zapatero, presidente del gobierno"],
+    "noticias_sociedad_sucesos": ["Enorme conmoción en Zaragoza por los atentados del 11-M", "El resultado electoral del 14-M vuelca la política española"],
+    "urbanismo": ["Obras a pleno ritmo para la Expo 2008: recinto ferial, pabellones, infraestructuras", "Desarrollo del barrio de Valdespartera: primeros residentes se instalan"],
+    "movilidad_transporte": ["Las obras del tranvía moderno de Zaragoza comienzan a planearse", "Mejoras en la red de autobuses urbanos"]
+  },
+  {
+    "año": 2005,
+    "alcalde": "Juan Alberto Belloch (PSOE)",
+    "eventos": ["Obras de la Expo 2008 en pleno apogeo; transformación radical de la ribera del Ebro", "Aprobación del matrimonio igualitario en España; debate social en Zaragoza"],
+    "noticias_sociedad_sucesos": ["La construcción masiva de los edificios Expo transforma el barrio de la Almozara y la ribera", "Debate ciudadano sobre los impactos positivos y negativos de la Expo 2008"],
+    "urbanismo": ["Construcción del Puente del Tercer Milenio (diseño de Zaha Hadid) sobre el Ebro", "Construcción del Pabellón Puente y otros edificios emblemáticos del recinto Expo"],
+    "movilidad_transporte": ["Inicio de los estudios definitivos para la Línea 1 del tranvía de Zaragoza", "Mejoras viarias en el acceso al futuro recinto de la Expo 2008"]
+  },
+  {
+    "año": 2006,
+    "alcalde": "Juan Alberto Belloch (PSOE)",
+    "eventos": ["Últimas grandes obras de la Expo 2008 en construcción", "El boom inmobiliario alcanza su pico máximo en España"],
+    "noticias_sociedad_sucesos": ["La construcción en Zaragoza está en máximos históricos por la Expo y el boom inmobiliario", "Los precios de la vivienda alcanzan niveles insostenibles en la ciudad"],
+    "urbanismo": ["El Pabellón de España y los pabellones internacionales de la Expo en construcción", "Gran remodelación del meandro de Ranillas para acoger el recinto exposicional"],
+    "movilidad_transporte": ["Inicio de las obras de la Línea 1 del tranvía moderno de Zaragoza", "La nueva infraestructura tranviaria transforma el eje Valdespartera-Parque Goya"]
+  },
+  {
+    "año": 2007,
+    "alcalde": "Juan Alberto Belloch (PSOE)",
+    "eventos": ["Los preparativos para la Expo 2008 entran en su fase final", "Primeros síntomas de la crisis inmobiliaria; las ventas de pisos empiezan a caer"],
+    "noticias_sociedad_sucesos": ["La Expo 2008 genera miles de empleos en Zaragoza", "Los primeros signos de la burbuja inmobiliaria generan inquietud"],
+    "urbanismo": ["La ribera del Ebro transformada: Puente del Tercer Milenio y zona Expo", "Inauguración del Auditorio de Zaragoza como gran equipamiento cultural"],
+    "movilidad_transporte": ["Continuación de las obras del tranvía; interrupciones en el tráfico durante la construcción", "La estación intermodal de Delicias funciona a pleno rendimiento"]
+  },
+  {
+    "año": 2008,
+    "alcalde": "Juan Alberto Belloch (PSOE)",
+    "eventos": ["Exposición Internacional de Zaragoza Agua y Desarrollo Sostenible (14 junio - 14 septiembre 2008)", "Crisis económica mundial estalla; colapso de Lehman Brothers en septiembre"],
+    "noticias_sociedad_sucesos": ["La Expo 2008 recibe más de 5 millones de visitantes; gran éxito internacional para Zaragoza", "La crisis financiera global llega a España; comienza el estallido de la burbuja inmobiliaria"],
+    "urbanismo": ["El Puente del Tercer Milenio (Zaha Hadid) se convierte en símbolo arquitectónico de Zaragoza", "La zona de la Expo se integra en la ciudad como nuevo barrio y parque fluvial"],
+    "movilidad_transporte": ["La Expo genera un tráfico sin precedentes; transportes públicos reforzados al máximo", "El AVE Madrid-Zaragoza-Barcelona completo consolida su servicio"]
+  },
+  {
+    "año": 2009,
+    "alcalde": "Juan Alberto Belloch (PSOE)",
+    "eventos": ["Crisis económica en España: el paro se dispara; Zaragoza acusa el impacto", "Los barrios de nueva construcción (Valdespartera, Arcosur) empiezan a poblarse"],
+    "noticias_sociedad_sucesos": ["El paro en Zaragoza supera el 15% ante el colapso de la construcción", "Familias con hipotecas sufren desahucios en la ciudad"],
+    "urbanismo": ["El recinto de la Expo 2008 se reconvierte en parque y zona de ocio ciudadano", "Paralización de muchos proyectos urbanísticos por la crisis"],
+    "movilidad_transporte": ["Las obras del tranvía Línea 1 continúan pese a la crisis", "Reducción de servicios de autobús por recortes presupuestarios"]
+  },
+  {
+    "año": 2010,
+    "alcalde": "Juan Alberto Belloch (PSOE)",
+    "eventos": ["Crisis económica en su máxima intensidad; recortes del gobierno Zapatero", "Zaragoza sufre el paro más alto de la era democrática"],
+    "noticias_sociedad_sucesos": ["Huelga general del 29-S en toda España; participación masiva en Zaragoza", "Los desahucios y la crisis de la construcción son el drama social de la época"],
+    "urbanismo": ["Muchos edificios nuevos en Valdespartera y Arcosur están vacíos por la crisis inmobiliaria", "Proyectos de mejora del parque de la ribera del Ebro"],
+    "movilidad_transporte": ["Últimos trabajos para la inauguración del tranvía moderno de Zaragoza", "El AVE consolida Zaragoza como nodo de comunicaciones del noreste peninsular"]
+  },
+  {
+    "año": 2011,
+    "alcalde": "Juan Alberto Belloch (PSOE) hasta mayo; Juan Antonio Sánchez Quero (PP) desde junio",
+    "eventos": ["Inauguración del tranvía moderno de Zaragoza, Línea 1 (Valdespartera-Parque Goya)", "Movimiento 15-M: indignados acampan en la Plaza del Pilar de Zaragoza", "El PP gana las elecciones municipales de mayo"],
+    "noticias_sociedad_sucesos": ["El 15-M ocupa la Plaza del Pilar durante semanas; debate sobre la democracia", "El tranvía moderno es recibido con entusiasmo como símbolo de la modernización de la ciudad"],
+    "urbanismo": ["El tranvía transforma los barrios del sur: Valdespartera y Parque Goya", "Proyectos de nuevas dotaciones en los barrios de reciente construcción"],
+    "movilidad_transporte": ["Inauguración de la Línea 1 del Tranvía de Zaragoza: eje norte-sur de 12,8 km", "El tranvía moderno conecta Valdespartera con Parque Goya pasando por el centro"]
+  },
+  {
+    "año": 2012,
+    "alcalde": "Juan Antonio Sánchez Quero (PP)",
+    "eventos": ["Crisis económica en su crudeza máxima; España solicita rescate bancario europeo", "El PP aplica duros recortes en los ayuntamientos; Zaragoza reduce servicios"],
+    "noticias_sociedad_sucesos": ["Mareas ciudadanas y protestas masivas en Zaragoza contra los recortes", "El Gobierno central aplica la Ley de Racionalización y Sostenibilidad Local"],
+    "urbanismo": ["Paralización total de nuevas obras municipales por la crisis presupuestaria", "Debate sobre el futuro del recinto de la Expo 2008"],
+    "movilidad_transporte": ["Recortes en el servicio de autobuses urbanos de la TUZSA", "El tranvía mantiene su servicio pero sin inversión adicional"]
+  },
+  {
+    "año": 2013,
+    "alcalde": "Juan Antonio Sánchez Quero (PP)",
+    "eventos": ["Continúan los recortes y la austeridad; la prima de riesgo española se estabiliza", "Debate sobre la regeneración democrática ante los escándalos de corrupción"],
+    "noticias_sociedad_sucesos": ["El paro en Zaragoza sigue por encima del 20%; gran malestar social", "Escándalos de corrupción en el PP a nivel nacional afectan al partido localmente"],
+    "urbanismo": ["Proyectos de rehabilitación urbana como alternativa a la nueva construcción", "El barrio de Valdespartera busca dotarse de equipamientos definitivos"],
+    "movilidad_transporte": ["Estudios para una posible Línea 2 del tranvía sin financiación asegurada", "Mejoras en la gestión del tráfico urbano con nuevas tecnologías"]
+  },
+  {
+    "año": 2014,
+    "alcalde": "Juan Antonio Sánchez Quero (PP)",
+    "eventos": ["Abdicación de Juan Carlos I; Felipe VI es proclamado Rey de España", "Primeros síntomas de recuperación económica en España"],
+    "noticias_sociedad_sucesos": ["La abdicación real es seguida con interés en Zaragoza", "La recuperación económica es lenta y frágil; el desempleo sigue alto"],
+    "urbanismo": ["Inicio de proyectos de rehabilitación del casco histórico de Zaragoza", "El barrio del Gancho (San Pablo) en proceso de transformación social y urbana"],
+    "movilidad_transporte": ["Mejoras en la intermodalidad entre tranvía, autobús y AVE en la estación de Delicias", "Proyecto de ampliación de la red de carril bici en la ciudad"]
+  },
+  {
+    "año": 2015,
+    "alcalde": "Pedro Santisteve (Zaragoza en Común), nuevo alcalde",
+    "eventos": ["Elecciones municipales de mayo: Zaragoza en Común gana el Ayuntamiento", "Pedro Santisteve elegido alcalde con apoyo de PSOE e IU"],
+    "noticias_sociedad_sucesos": ["El cambio político en Zaragoza genera expectativas de nuevas políticas sociales y participativas", "La plataforma ciudadana Zaragoza en Común llega al poder con propuestas innovadoras"],
+    "urbanismo": ["El nuevo ayuntamiento apuesta por la rehabilitación y la vivienda social frente a la especulación", "Proyectos de renaturalización de espacios urbanos y recuperación de solares"],
+    "movilidad_transporte": ["Expansión de la red de carril bici en Zaragoza como apuesta por la movilidad sostenible", "Debate sobre la ampliación del tranvía o nuevas líneas de Bus de Alta Capacidad"]
+  },
+  {
+    "año": 2016,
+    "alcalde": "Pedro Santisteve (Zaragoza en Común)",
+    "eventos": ["Zaragoza acoge el Foro Mundial del Agua (marzo)", "España en situación de bloqueo político tras dos elecciones generales sin gobierno estable"],
+    "noticias_sociedad_sucesos": ["El Foro Mundial del Agua pone a Zaragoza en el centro de la agenda global hídrica", "El bloqueo político nacional paraliza inversiones en infraestructuras"],
+    "urbanismo": ["Proyectos de recuperación de solares para uso social y verde en el centro", "Plan de accesibilidad universal en el casco histórico"],
+    "movilidad_transporte": ["Ampliación significativa de la red de carriles bici de Zaragoza", "Mejoras en la frecuencia del tranvía Línea 1"]
+  },
+  {
+    "año": 2017,
+    "alcalde": "Pedro Santisteve (Zaragoza en Común)",
+    "eventos": ["Crisis del procés catalán: Zaragoza observa la situación con preocupación", "Atentado terrorista en Barcelona (Las Ramblas, agosto); conmoción en toda España"],
+    "noticias_sociedad_sucesos": ["Manifestaciones de solidaridad en Zaragoza tras el atentado de Barcelona", "El debate sobre el procés catalán divide a la sociedad española"],
+    "urbanismo": ["Inauguración del Mercado de San Vicente de Paúl rehabilitado como espacio cultural y gastronómico", "Proyectos de peatonalización en el centro histórico"],
+    "movilidad_transporte": ["Ampliación de la red de bicicletas públicas (Bizi Zaragoza)", "Nuevas zonas de velocidad 30 km/h en el centro de la ciudad"]
+  },
+  {
+    "año": 2018,
+    "alcalde": "Pedro Santisteve (Zaragoza en Común)",
+    "eventos": ["Moción de censura a Rajoy: Pedro Sánchez, nuevo presidente del gobierno", "Zaragoza debate sobre su modelo de ciudad para los próximos años"],
+    "noticias_sociedad_sucesos": ["La moción de censura en Madrid genera expectativa de cambios en la política nacional", "Debate en Zaragoza sobre las políticas de vivienda y el alquiler turístico"],
+    "urbanismo": ["Plan de rehabilitación de edificios en el barrio de San Pablo (el Gancho)", "Proyectos de nuevas zonas verdes en los barrios del sur"],
+    "movilidad_transporte": ["Aprobación del Plan de Movilidad Urbana Sostenible de Zaragoza", "Estudios para la electrificación de la flota de autobuses municipales"]
+  },
+  {
+    "año": 2019,
+    "alcalde": "Jorge Azcón (PP), nuevo alcalde",
+    "eventos": ["Elecciones municipales de mayo: el PP gana en Zaragoza; Jorge Azcón elegido alcalde", "Zaragoza celebra los 40 años de democracia municipal ininterrumpida"],
+    "noticias_sociedad_sucesos": ["La victoria del PP pone fin al gobierno de Zaragoza en Común", "El debate sobre el modelo de movilidad y urbanismo en Zaragoza continúa"],
+    "urbanismo": ["El nuevo ayuntamiento del PP revisa los proyectos de peatonalización heredados", "Nuevos planes de desarrollo en el sur de Zaragoza"],
+    "movilidad_transporte": ["Jorge Azcón promueve una nueva visión de la movilidad más favorable al coche privado", "Debate sobre el equilibrio entre zonas peatonales y tráfico rodado"]
+  },
+  {
+    "año": 2020,
+    "alcalde": "Jorge Azcón (PP)",
+    "eventos": ["Pandemia de COVID-19: estado de alarma desde el 14 de marzo; confinamiento total", "Zaragoza sufre una de las peores oleadas de COVID del verano de 2020 con confinamiento perimetral"],
+    "noticias_sociedad_sucesos": ["El confinamiento vacía las calles de Zaragoza; colapso del tejido hostelero", "Brote extraordinario de COVID en Zaragoza en verano de 2020; confinamiento perimetral de la ciudad"],
+    "urbanismo": ["La pandemia paraliza los proyectos urbanísticos en curso", "Se habilitan terrazas de hostelería en espacios públicos para compensar las restricciones de aforo"],
+    "movilidad_transporte": ["El uso del transporte público cae en picado durante el confinamiento", "Se promueve el uso de la bicicleta como medio de transporte seguro durante la pandemia"]
+  },
+  {
+    "año": 2021,
+    "alcalde": "Jorge Azcón (PP)",
+    "eventos": ["Vacunación masiva contra el COVID-19 en Zaragoza; el Pabellón Siglo XXI como punto de vacunación", "Lenta recuperación económica tras la pandemia"],
+    "noticias_sociedad_sucesos": ["La campaña de vacunación avanza con notable éxito en Zaragoza", "El sector hostelero lucha por recuperarse de los estragos de la pandemia"],
+    "urbanismo": ["Proyectos de recuperación del espacio público como legado positivo de la pandemia", "Debate sobre el futuro del comercio minorista en el centro histórico"],
+    "movilidad_transporte": ["Recuperación gradual del uso del transporte público", "Consolidación del carril bici como alternativa de movilidad post-pandemia"]
+  },
+  {
+    "año": 2022,
+    "alcalde": "Jorge Azcón (PP)",
+    "eventos": ["Invasión rusa de Ucrania (24 de febrero); impacto global en energía e inflación", "La inflación disparada afecta duramente a las economías domésticas zaragozanas"],
+    "noticias_sociedad_sucesos": ["Acogida de refugiados ucranianos en Zaragoza; solidaridad ciudadana", "La crisis energética dispara las facturas de luz y gas de los hogares"],
+    "urbanismo": ["Debate sobre la eficiencia energética de los edificios y la rehabilitación térmica", "Proyectos de nuevas infraestructuras verdes en los barrios periféricos"],
+    "movilidad_transporte": ["Impulso a la electromovilidad: instalación de puntos de recarga en la ciudad", "Debate sobre la ampliación del tranvía ante la necesidad de transporte sostenible"]
+  },
+  {
+    "año": 2023,
+    "alcalde": "Natalia Chueca (PP), primera mujer alcaldesa de Zaragoza (desde junio de 2023)",
+    "eventos": ["Elecciones municipales de mayo: el PP gana; Jorge Azcón es elegido presidente de Aragón y cede la alcaldía a Natalia Chueca", "Natalia Chueca se convierte en la primera mujer alcaldesa de Zaragoza"],
+    "noticias_sociedad_sucesos": ["Natalia Chueca asume la alcaldía; hito histórico como primera alcaldesa de la ciudad", "Zaragoza presenta proyectos de transformación urbana para los próximos años"],
+    "urbanismo": ["Nuevos planes de desarrollo urbano en el corredor del Ebro", "Proyectos de regeneración del casco histórico y el barrio de San Pablo"],
+    "movilidad_transporte": ["Plan de mejora de la red de autobuses y del tranvía", "Inicio del debate sobre la ampliación de la Línea 1 del tranvía o nuevas líneas"]
+  },
+  {
+    "año": 2024,
+    "alcalde": "Natalia Chueca (PP)",
+    "eventos": ["Zaragoza presenta y desarrolla proyectos de transformación urbana para la próxima década", "Debate nacional sobre la vivienda; Zaragoza sufre el alza de precios del alquiler"],
+    "noticias_sociedad_sucesos": ["La crisis de la vivienda en alquiler es el principal problema social en Zaragoza", "Zaragoza refuerza su posición como hub logístico y de movilidad eléctrica"],
+    "urbanismo": ["Revisión del Plan General de Ordenación Urbana para los próximos años", "Nuevos proyectos de vivienda protegida en respuesta a la crisis del alquiler"],
+    "movilidad_transporte": ["Anuncio de nuevos proyectos de movilidad sostenible: ampliación del tranvía en estudio", "Zaragoza apuesta por la electrificación de su flota de autobuses urbanos"]
+  },
+  {
+    "año": 2025,
+    "alcalde": "Natalia Chueca (PP)",
+    "eventos": ["Zaragoza consolida su papel como ciudad media europea de referencia en logística y sostenibilidad", "Debate sobre los grandes proyectos urbanos del horizonte 2030"],
+    "noticias_sociedad_sucesos": ["La digitalización transforma la administración municipal de Zaragoza", "El Real Zaragoza busca el retorno a Primera División con proyecto de renovación del estadio"],
+    "urbanismo": ["Proyecto de renovación o sustitución del estadio de La Romareda en debate activo", "Nuevos planes de regeneración urbana en barrios históricos como el Arrabal y Torrero"],
+    "movilidad_transporte": ["Plan de movilidad sostenible 2025-2030: electrificación total de los autobuses", "Debate sobre la segunda línea del tranvía y la extensión de la Línea 1"]
+  }
+]

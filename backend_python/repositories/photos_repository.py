@@ -23,6 +23,8 @@ class PhotosRepository:
         q = filters.get('q')
         page = filters.get('page', 1)
         page_size = filters.get('pageSize', 20)
+        random_order = filters.get('randomOrder', False)
+        seed = filters.get('seed')
         
         where_clauses = []
         query_params = []
@@ -79,29 +81,47 @@ class PhotosRepository:
         conn = Database.get_connection()
         try:
             cursor = conn.cursor()
-            
+
             # Ejecutar count
             cursor.execute(count_query, query_params)
             total = cursor.fetchone()['count']
-            
-            # Query para obtener fotos paginadas
+
+            # Orden: determinista aleatorio basado en md5(id || seed) o por defecto.
+            # Usamos md5 en lugar de setseed+random() porque setseed es estado de
+            # sesion y no funciona fiable con un pool de conexiones, mientras que
+            # md5(id||seed) es estable entre paginas y distinto para cada seed.
             offset = (page - 1) * page_size
-            data_query = f"""
-                SELECT 
-                    id, title, description, year, year_from, year_to, era, zone,
-                    lat, lng, image_url, thumb_url, source, author, rights, tags,
-                    created_at, updated_at
-                FROM photos
-                {where_clause}
-                ORDER BY year DESC NULLS LAST, created_at DESC
-                LIMIT %s OFFSET %s
-            """
-            
-            cursor.execute(data_query, query_params + [page_size, offset])
+            if random_order:
+                seed_str = str(seed) if seed is not None else "0"
+                data_query = f"""
+                    SELECT
+                        id, title, description, year, year_from, year_to, era, zone,
+                        lat, lng, image_url, thumb_url, source, author, rights, tags,
+                        created_at, updated_at
+                    FROM photos
+                    {where_clause}
+                    ORDER BY md5(id::text || %s)
+                    LIMIT %s OFFSET %s
+                """
+                exec_params = query_params + [seed_str, page_size, offset]
+            else:
+                data_query = f"""
+                    SELECT
+                        id, title, description, year, year_from, year_to, era, zone,
+                        lat, lng, image_url, thumb_url, source, author, rights, tags,
+                        created_at, updated_at
+                    FROM photos
+                    {where_clause}
+                    ORDER BY year DESC NULLS LAST, created_at DESC
+                    LIMIT %s OFFSET %s
+                """
+                exec_params = query_params + [page_size, offset]
+
+            cursor.execute(data_query, exec_params)
             photos = cursor.fetchall()
-            
+
             cursor.close()
-            
+
             return [dict(photo) for photo in photos], total
             
         finally:

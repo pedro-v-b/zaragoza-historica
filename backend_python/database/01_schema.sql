@@ -96,3 +96,13 @@ CREATE TABLE IF NOT EXISTS map_layers (
 CREATE INDEX IF NOT EXISTS idx_map_layers_year ON map_layers(year);
 CREATE INDEX IF NOT EXISTS idx_map_layers_active ON map_layers(is_active);
 CREATE INDEX IF NOT EXISTS idx_map_layers_order ON map_layers(display_order);
+
+-- Tabla de contexto histórico anual de Zaragoza (1900-2025)
+CREATE TABLE IF NOT EXISTS historical_context (
+    year INTEGER PRIMARY KEY,
+    alcalde TEXT,
+    eventos TEXT[],
+    noticias_sociedad_sucesos TEXT[],
+    urbanismo TEXT[],
+    movilidad_transporte TEXT[]
+);

@@ -29,6 +29,8 @@ export interface PhotoFilters {
   q?: string;
   page?: number;
   pageSize?: number;
+  randomOrder?: boolean;
+  seed?: number;
 }
 
 export interface PaginatedResponse<T> {
