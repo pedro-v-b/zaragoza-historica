@@ -22,17 +22,7 @@ export const Navbar: React.FC = () => {
         </button>
 
         <div className="navbar-brand">
-          <svg width="28" height="28" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect width="40" height="40" rx="8" fill="url(#navGradient)"/>
-            <path d="M12 28V16L20 12L28 16V28L20 24L12 28Z" stroke="white" strokeWidth="2" strokeLinejoin="round"/>
-            <circle cx="20" cy="18" r="3" stroke="white" strokeWidth="2"/>
-            <defs>
-              <linearGradient id="navGradient" x1="0" y1="0" x2="40" y2="40" gradientUnits="userSpaceOnUse">
-                <stop stopColor="#7CA5B8"/>
-                <stop offset="1" stopColor="#5A8A9F"/>
-              </linearGradient>
-            </defs>
-          </svg>
+          <img src="/logo.png" alt="Zaragoza Histórica" className="navbar-logo" />
           <span className="navbar-title">Zaragoza Historica</span>
         </div>
       </div>

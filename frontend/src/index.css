@@ -3126,6 +3126,12 @@ a:focus-visible {
   gap: 12px;
 }
 
+.navbar-logo {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+}
+
 .navbar-title {
   font-size: 18px;
   font-weight: 700;
