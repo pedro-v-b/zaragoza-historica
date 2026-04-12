@@ -14,7 +14,7 @@ import {
   ProtectedRoute,
 } from './components/Admin';
 import { Photo } from './types';
-import { getPhotos, getMapPhotos } from './services/api';
+import { getPhotos, getMapPhotos, warmUpBackend } from './services/api';
 import { useDebounce } from './hooks/useDebounce';
 import './index.css';
 
@@ -53,14 +53,27 @@ function MapApp() {
   const [detailPhoto, setDetailPhoto] = useState<Photo | null>(null);
   const [fullscreenPhoto, setFullscreenPhoto] = useState<Photo | null>(null);
   const [showHistoricalContext, setShowHistoricalContext] = useState(false);
+  const [backendReady, setBackendReady] = useState(false);
 
   // Debounce del bbox para evitar demasiadas peticiones al mover el mapa
   const debouncedBbox = useDebounce(bbox, 800);
 
-  // 1. Cargar TODAS las fotos para el MAPA
+  // 0. Despertar el backend (Render free tier cold start) y luego cargar datos
   useEffect(() => {
+    let cancelled = false;
+    warmUpBackend().then(() => {
+      if (!cancelled) {
+        setBackendReady(true);
+      }
+    });
+    return () => { cancelled = true; };
+  }, []);
+
+  // 1. Cargar TODAS las fotos para el MAPA (esperar a que el backend esté listo)
+  useEffect(() => {
+    if (!backendReady) return;
     loadMapPhotos();
-  }, [yearFrom, yearTo, zone, era, searchQuery]);
+  }, [backendReady, yearFrom, yearTo, zone, era, searchQuery]);
 
   // Regenerar la semilla del orden aleatorio cada vez que cambian los filtros
   // (pero no al cambiar solo de pagina, para mantener la paginacion estable).
@@ -68,10 +81,11 @@ function MapApp() {
     setListSeed(Math.random() * 2 - 1);
   }, [yearFrom, yearTo, zone, era, searchQuery, debouncedBbox, onlyInViewport]);
 
-  // 2. Cargar fotos para la LISTA lateral
+  // 2. Cargar fotos para la LISTA lateral (esperar a que el backend esté listo)
   useEffect(() => {
+    if (!backendReady) return;
     loadPhotos();
-  }, [yearFrom, yearTo, zone, era, searchQuery, page, debouncedBbox, onlyInViewport, listSeed]);
+  }, [backendReady, yearFrom, yearTo, zone, era, searchQuery, page, debouncedBbox, onlyInViewport, listSeed]);
 
   const loadMapPhotos = async () => {
     try {
@@ -336,6 +350,17 @@ function MapApp() {
             setSelectedPhotoId(null);
           }}
         />
+      )}
+
+      {/* Overlay mientras el backend despierta (Render free tier cold start) */}
+      {!backendReady && (
+        <div className="backend-warmup-overlay">
+          <div className="backend-warmup-card">
+            <div className="backend-warmup-spinner" />
+            <h3>Conectando con el servidor...</h3>
+            <p>El servidor se está iniciando, esto puede tardar unos segundos.</p>
+          </div>
+        </div>
       )}
     </Layout>
   );

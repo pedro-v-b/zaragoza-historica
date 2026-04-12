@@ -5,6 +5,36 @@ import { getToken } from './auth';
 const API_BASE_URL = import.meta.env.VITE_API_URL || '/api';
 
 /**
+ * Fetch con reintentos y backoff exponencial.
+ * Reintenta en errores de red (backend dormido) y respuestas 5xx.
+ */
+async function fetchWithRetry(
+  url: string,
+  options?: RequestInit,
+  maxRetries = 4,
+  baseDelay = 2000
+): Promise<Response> {
+  let lastError: Error | null = null;
+  for (let attempt = 0; attempt <= maxRetries; attempt++) {
+    try {
+      const response = await fetch(url, options);
+      // Reintentar en 502/503/504 (Render devuelve estos durante cold start)
+      if (response.status >= 502 && response.status <= 504 && attempt < maxRetries) {
+        await new Promise(r => setTimeout(r, baseDelay * Math.pow(2, attempt)));
+        continue;
+      }
+      return response;
+    } catch (error) {
+      lastError = error as Error;
+      if (attempt < maxRetries) {
+        await new Promise(r => setTimeout(r, baseDelay * Math.pow(2, attempt)));
+      }
+    }
+  }
+  throw lastError || new Error('Fetch failed after retries');
+}
+
+/**
  * Obtiene fotos con filtros
  */
 export async function getPhotos(filters: PhotoFilters): Promise<PaginatedResponse<Photo>> {
@@ -21,8 +51,8 @@ export async function getPhotos(filters: PhotoFilters): Promise<PaginatedRespons
   if (filters.randomOrder) params.append('randomOrder', 'true');
   if (filters.seed !== undefined) params.append('seed', filters.seed.toString());
 
-  const response = await fetch(`${API_BASE_URL}/photos?${params.toString()}`);
-  
+  const response = await fetchWithRetry(`${API_BASE_URL}/photos?${params.toString()}`);
+
   if (!response.ok) {
     throw new Error(`Error fetching photos: ${response.statusText}`);
   }
@@ -42,8 +72,8 @@ export async function getMapPhotos(filters: any): Promise<any[]> {
   if (filters.zone) params.append('zone', filters.zone);
   if (filters.q) params.append('q', filters.q);
 
-  const response = await fetch(`${API_BASE_URL}/map?${params.toString()}`);
-  
+  const response = await fetchWithRetry(`${API_BASE_URL}/map?${params.toString()}`);
+
   if (!response.ok) {
     throw new Error(`Error fetching map photos: ${response.statusText}`);
   }
@@ -68,13 +98,26 @@ export async function getPhotoById(id: number): Promise<Photo> {
  * Obtiene metadatos para filtros (épocas, zonas, rango años)
  */
 export async function getFilterMetadata(): Promise<FilterMetadata> {
-  const response = await fetch(`${API_BASE_URL}/photos/metadata/filters`);
-  
+  const response = await fetchWithRetry(`${API_BASE_URL}/photos/metadata/filters`);
+
   if (!response.ok) {
     throw new Error(`Error fetching filter metadata: ${response.statusText}`);
   }
 
   return response.json();
+}
+
+/**
+ * Despierta el backend (Render free tier duerme tras 15min inactividad).
+ * Retorna true cuando el backend responde.
+ */
+export async function warmUpBackend(): Promise<boolean> {
+  try {
+    const response = await fetchWithRetry(`${API_BASE_URL}/health`, undefined, 6, 2000);
+    return response.ok;
+  } catch {
+    return false;
+  }
 }
 
 // ============== WIKIPEDIA API ==============

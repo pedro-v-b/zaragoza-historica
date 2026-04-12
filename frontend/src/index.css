@@ -4113,3 +4113,54 @@ a:focus-visible {
     grid-template-columns: 1fr;
   }
 }
+
+/* =============================================
+   Backend warm-up overlay (Render free tier)
+   ============================================= */
+.backend-warmup-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  background: rgba(245, 240, 235, 0.92);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(4px);
+}
+
+.backend-warmup-card {
+  text-align: center;
+  padding: 48px 40px;
+  background: var(--bg-primary);
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+  max-width: 380px;
+}
+
+.backend-warmup-card h3 {
+  margin: 20px 0 8px;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.backend-warmup-card p {
+  margin: 0;
+  font-size: 14px;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+.backend-warmup-spinner {
+  width: 44px;
+  height: 44px;
+  margin: 0 auto;
+  border: 4px solid var(--border-light);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: warmup-spin 0.8s linear infinite;
+}
+
+@keyframes warmup-spin {
+  to { transform: rotate(360deg); }
+}
