@@ -1645,6 +1645,17 @@ body {
   font-size: 13px !important;
 }
 
+a.popup-btn {
+  color: white !important;
+  text-decoration: none !important;
+}
+
+a.popup-btn:hover,
+a.popup-btn:visited {
+  color: white !important;
+  text-decoration: none !important;
+}
+
 /* ============== PHOTO DETAIL VIEW ============== */
 .photo-detail {
   height: 100%;
