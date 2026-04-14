@@ -3555,6 +3555,34 @@ a:focus-visible {
   border-radius: 50%;
 }
 
+.roadmap-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.roadmap-item {
+  background: var(--bg-tertiary);
+  border-left: 4px solid var(--primary);
+  border-radius: var(--radius-md);
+  padding: 18px 22px;
+}
+
+.roadmap-item h3 {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--primary-dark);
+  margin: 0 0 8px 0;
+}
+
+.roadmap-item p {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin: 0;
+}
+
 .contact-info {
   background: var(--bg-tertiary);
   border-radius: var(--radius-md);
