@@ -5,139 +5,107 @@ export const ContactoPage: React.FC = () => {
     <div className="contacto-page">
       <div className="contacto-container">
         <header className="contacto-header">
-          <h1>Sobre Zaragoza Historica</h1>
-          <p>Un archivo visual geolocalizado de la memoria de la ciudad</p>
+          <h1>Acerca del proyecto</h1>
+          <p>Archivo visual geolocalizado de la memoria urbana de Zaragoza</p>
         </header>
 
         <section className="contacto-section">
-          <div className="section-icon">
-            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M16 4C10.4772 4 6 8.47715 6 14C6 21 16 28 16 28C16 28 26 21 26 14C26 8.47715 21.5228 4 16 4Z" stroke="currentColor" strokeWidth="2"/>
-              <circle cx="16" cy="14" r="4" stroke="currentColor" strokeWidth="2"/>
-            </svg>
-          </div>
-          <h2>Que es este proyecto</h2>
+          <h2>Descripcion</h2>
           <p>
-            <strong>Zaragoza Historica</strong> es un mapa interactivo que te permite viajar en
-            el tiempo por las calles de Zaragoza. Pincha cualquier punto y descubre como era
-            ese mismo lugar hace 50, 100 o mas de 150 anos, a traves de fotografias historicas
-            situadas exactamente donde fueron tomadas.
+            <strong>Zaragoza Historica</strong> es una plataforma web cartografica que reune,
+            organiza y pone a disposicion del publico fotografias historicas de la ciudad,
+            asociando cada imagen a las coordenadas exactas del lugar donde fue tomada. El
+            objetivo es facilitar la consulta visual del pasado urbano a traves de un unico
+            punto de acceso: un mapa interactivo, navegable desde cualquier dispositivo.
           </p>
           <p>
-            La idea es sencilla: recuperar la memoria visual de la ciudad y hacerla accesible
-            a todo el mundo. Vecinos que quieren recordar como era su barrio, estudiantes que
-            investigan el pasado, curiosos que descubren Zaragoza por primera vez... cualquiera
-            puede usar este archivo para mirar la ciudad con otros ojos.
+            La aplicacion esta orientada tanto al publico general interesado en la evolucion
+            de la ciudad como a investigadores, docentes, asociaciones vecinales y profesionales
+            del patrimonio que necesiten acceder de forma estructurada a material grafico
+            historico localizado con precision.
           </p>
         </section>
 
         <section className="contacto-section">
-          <div className="section-icon">
-            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <circle cx="16" cy="16" r="14" stroke="currentColor" strokeWidth="2"/>
-              <path d="M16 8V16L22 20" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-            </svg>
-          </div>
-          <h2>Como usarlo</h2>
+          <h2>Funcionalidades actuales</h2>
           <p>
-            Navega por el mapa como lo harias en cualquier mapa online: arrastra para moverte
-            y usa la rueda del raton (o pellizca en el movil) para hacer zoom. Cada marcador
-            es una fotografia historica; pulsalo para abrirla a pantalla completa y leer su
-            descripcion, fecha y contexto.
-          </p>
-          <p>
-            Desde el panel lateral puedes filtrar por <strong>ano</strong>, <strong>barrio</strong>
-            o <strong>epoca historica</strong>, y con el boton <strong>Capas</strong> cambiar
-            el mapa actual por ortofotos antiguas para comparar como se ha transformado la ciudad.
+            En su version presente, la plataforma permite explorar el fondo fotografico sobre
+            el mapa de la ciudad, aplicar filtros por periodo cronologico, barrio o epoca
+            historica, y consultar cada imagen en detalle junto con su ficha descriptiva.
+            Ademas, incorpora capas cartograficas historicas procedentes de servicios oficiales,
+            lo que habilita la comparacion directa entre el trazado actual y representaciones
+            del territorio correspondientes a distintos momentos del pasado.
           </p>
         </section>
 
         <section className="contacto-section">
-          <div className="section-icon">
-            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M4 10L16 4L28 10L16 16L4 10Z" stroke="currentColor" strokeWidth="2" strokeLinejoin="round"/>
-              <path d="M4 16L16 22L28 16" stroke="currentColor" strokeWidth="2" strokeLinejoin="round"/>
-              <path d="M4 22L16 28L28 22" stroke="currentColor" strokeWidth="2" strokeLinejoin="round"/>
-            </svg>
-          </div>
-          <h2>Primera version: esto es solo el principio</h2>
+          <h2>Estado del desarrollo</h2>
           <p>
-            Lo que ves hoy es una <strong>primera version</strong> del proyecto. Ya reune cientos
-            de fotografias historicas situadas sobre el mapa, pero la idea a largo plazo es mucho
-            mas ambiciosa: convertir Zaragoza Historica en un gran <strong>archivo de memoria
-            historica</strong> de la ciudad, abierto y geolocalizado.
+            La version accesible en la actualidad constituye una <strong>primera entrega
+            publica</strong> del proyecto. Aunque ofrece un conjunto significativo de
+            fotografias georreferenciadas y las herramientas necesarias para su consulta,
+            se concibe como el punto de partida de un archivo en crecimiento continuo, que
+            sera ampliado en sucesivas fases con nuevas fuentes, funcionalidades y tipologias
+            documentales.
           </p>
         </section>
 
         <section className="contacto-section">
-          <div className="section-icon">
-            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M16 4V28M4 16H28" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-              <circle cx="16" cy="16" r="12" stroke="currentColor" strokeWidth="2"/>
-            </svg>
-          </div>
-          <h2>Proximas actualizaciones</h2>
+          <h2>Lineas de trabajo futuras</h2>
           <div className="roadmap-list">
             <div className="roadmap-item">
-              <h3>Sube tus propias fotografias</h3>
+              <h3>Sistema de aportaciones ciudadanas</h3>
               <p>
-                Estamos preparando un sistema para que cualquier usuario pueda aportar sus
-                fotos antiguas y situarlas en el mapa. Esas imagenes que duermen en cajones
-                familiares tambien forman parte de la memoria de Zaragoza.
+                Se esta disenando un modulo de ingesta de fotografias que permitira a los
+                usuarios contribuir con imagenes procedentes de archivos particulares o
+                familiares, integrandolas en el mapa previa validacion. De este modo, el
+                repositorio crecera gracias a la colaboracion directa de la ciudadania.
               </p>
             </div>
             <div className="roadmap-item">
-              <h3>Mas alla de la fotografia</h3>
+              <h3>Ampliacion a otros documentos graficos</h3>
               <p>
-                Proximas versiones incluiran otros documentos graficos geolocalizados:
-                <strong> cortometrajes</strong>, fragmentos de <strong>peliculas</strong>,
-                <strong> videoclips</strong> y grabaciones historicas rodadas en la ciudad.
-                Poder ver no solo una foto fija, sino la calle moviendose en el pasado.
+                En proximas actualizaciones se incorporaran tipologias documentales
+                adicionales, como cortometrajes, fragmentos de peliculas, videoclips y
+                grabaciones audiovisuales rodadas en la ciudad, tambien geolocalizadas sobre
+                los puntos en los que fueron registradas.
               </p>
             </div>
             <div className="roadmap-item">
-              <h3>Noticias y articulos del pasado</h3>
+              <h3>Cruce con fuentes textuales historicas</h3>
               <p>
-                Cruzaremos los datos del mapa con <strong>noticias historicas</strong>,
-                <strong> sucesos</strong> y <strong>articulos</strong> de la ciudad para que,
-                al pulsar un punto, puedas leer tambien lo que alli ocurrio y lo que la prensa
-                de la epoca conto sobre ese lugar.
+                Esta previsto enriquecer cada ubicacion con noticias, sucesos y articulos
+                procedentes de hemerotecas y publicaciones historicas, de forma que la consulta
+                de un punto del mapa ofrezca no solo el material grafico disponible, sino
+                tambien el contexto narrativo asociado al lugar.
               </p>
             </div>
           </div>
         </section>
 
         <section className="contacto-section">
-          <div className="section-icon">
-            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M6 26V10L16 4L26 10V26" stroke="currentColor" strokeWidth="2" strokeLinejoin="round"/>
-              <path d="M12 26V16H20V26" stroke="currentColor" strokeWidth="2" strokeLinejoin="round"/>
-            </svg>
-          </div>
-          <h2>El objetivo</h2>
+          <h2>Objetivo a largo plazo</h2>
           <p>
-            Crear un <strong>archivo grafico geolocalizado de Zaragoza</strong> que reuna, en un
-            unico lugar, imagenes, videos, noticias y testimonios asociados a cada rincon de la
-            ciudad. Un proyecto vivo de memoria historica, construido entre todos, que permita
-            recordar, aprender y reconocer la ciudad en la que vivimos.
+            El proposito ultimo del proyecto es consolidar un <strong>archivo grafico
+            geolocalizado de la memoria historica de Zaragoza</strong>, que integre en una
+            misma interfaz imagen, audiovisual y fuente escrita. Se aspira a ofrecer un recurso
+            publico, abierto y sostenido en el tiempo, util para la conservacion del patrimonio
+            visual, la investigacion academica, la divulgacion educativa y el reconocimiento
+            colectivo del entorno urbano.
           </p>
         </section>
 
         <section className="contacto-section">
-          <div className="section-icon">
-            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <circle cx="16" cy="10" r="6" stroke="currentColor" strokeWidth="2"/>
-              <path d="M6 28C6 22.4772 10.4772 18 16 18C21.5228 18 26 22.4772 26 28" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-            </svg>
-          </div>
-          <h2>Sobre el autor</h2>
+          <h2>Origen academico</h2>
           <p>
-            Zaragoza Historica nace como <strong>Trabajo de Fin de Grado</strong> del ciclo
-            formativo de Desarrollo de Aplicaciones Multiplataforma (DAM). Las fotografias
-            actuales provienen en su mayoria del archivo comunitario <strong>Zaragoza Antigua</strong>
-            en Flickr, y los mapas historicos los proporciona el <strong>Instituto Geografico
-            Nacional (IGN)</strong>. Todos los contenidos se usan con fines educativos y de
-            divulgacion del patrimonio.
+            Zaragoza Historica se ha desarrollado como <strong>Trabajo de Fin de Grado</strong>
+            del ciclo formativo de grado superior en Desarrollo de Aplicaciones Multiplataforma
+            (DAM). El fondo fotografico inicial procede en su mayor parte del archivo comunitario
+            <strong> Zaragoza Antigua</strong> alojado en Flickr, mientras que las capas
+            cartograficas historicas son servidas por el
+            <strong> Instituto Geografico Nacional</strong> a traves de sus servicios oficiales
+            de mapas. Todo el contenido se utiliza con finalidad educativa, divulgativa y de
+            puesta en valor del patrimonio.
           </p>
           <div className="contact-info">
             <div className="contact-item">
@@ -156,7 +124,7 @@ export const ContactoPage: React.FC = () => {
         </section>
 
         <footer className="contacto-footer">
-          <p>Zaragoza Historica - La memoria visual de la ciudad, en un mapa</p>
+          <p>Zaragoza Historica - Memoria visual de la ciudad sobre el mapa</p>
         </footer>
       </div>
     </div>
