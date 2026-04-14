@@ -24,8 +24,6 @@ export default function BuildingsLegend({ visible }: BuildingsLegendProps) {
         ))}
       </div>
       <div className="buildings-legend-footer">
-        Catastro INSPIRE
-        <br />
         Visible desde zoom 14
       </div>
     </div>
