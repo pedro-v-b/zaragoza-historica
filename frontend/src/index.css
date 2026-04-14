@@ -3080,6 +3080,80 @@ a:focus-visible {
   border-bottom: 1px solid var(--border-light) !important;
 }
 
+/* Leyenda de Edificios por decada */
+.buildings-legend {
+  position: absolute;
+  bottom: 18px;
+  right: 12px;
+  background: rgba(255, 255, 255, 0.96);
+  border-radius: 10px;
+  padding: 10px 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.18);
+  z-index: 800;
+  max-height: 300px;
+  max-width: 220px;
+  display: flex;
+  flex-direction: column;
+  font-size: 12px;
+  line-height: 1.3;
+}
+
+.buildings-legend-title {
+  font-weight: 700;
+  margin-bottom: 8px;
+  flex-shrink: 0;
+}
+
+.buildings-legend-items {
+  overflow-y: auto;
+  flex: 1 1 auto;
+  min-height: 0;
+}
+
+.buildings-legend-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 3px;
+}
+
+.buildings-legend-swatch {
+  width: 14px;
+  height: 10px;
+  border-radius: 2px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+.buildings-legend-footer {
+  margin-top: 8px;
+  padding-top: 6px;
+  border-top: 1px solid #e9ecef;
+  font-size: 10px;
+  color: #666;
+  flex-shrink: 0;
+}
+
+@media (max-width: 768px) {
+  .buildings-legend {
+    bottom: 28px;
+    right: 8px;
+    left: auto;
+    max-width: 160px;
+    max-height: calc(100dvh - 180px);
+    padding: 8px 10px;
+    font-size: 11px;
+  }
+  .buildings-legend-title {
+    font-size: 12px;
+    margin-bottom: 6px;
+  }
+  .buildings-legend-footer {
+    font-size: 9px;
+  }
+}
+
 /* Attribution mejorado */
 .leaflet-control-attribution {
   background: rgba(255, 255, 255, 0.85) !important;
