@@ -13,6 +13,10 @@ export const PhotoFullscreen: React.FC<PhotoFullscreenProps> = ({ photo, onClose
   const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
   const imageContainerRef = useRef<HTMLDivElement>(null);
 
+  const pinchStartDistanceRef = useRef<number | null>(null);
+  const pinchStartZoomRef = useRef<number>(1);
+  const touchPanStartRef = useRef<{ x: number; y: number; posX: number; posY: number } | null>(null);
+
   const formatYear = (photo: Photo): string => {
     if (photo.year) return photo.year.toString();
     if (photo.year_from && photo.year_to) return `${photo.year_from} - ${photo.year_to}`;
@@ -58,9 +62,48 @@ export const PhotoFullscreen: React.FC<PhotoFullscreenProps> = ({ photo, onClose
 
   const handleMouseUp = () => setIsDragging(false);
 
+  // ----- Touch handlers: pinch-zoom + pan -----
+  const distance = (t1: React.Touch, t2: React.Touch) => {
+    const dx = t1.clientX - t2.clientX;
+    const dy = t1.clientY - t2.clientY;
+    return Math.hypot(dx, dy);
+  };
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    if (e.touches.length === 2) {
+      pinchStartDistanceRef.current = distance(e.touches[0], e.touches[1]);
+      pinchStartZoomRef.current = zoom;
+      touchPanStartRef.current = null;
+    } else if (e.touches.length === 1 && zoom > 1) {
+      const t = e.touches[0];
+      touchPanStartRef.current = { x: t.clientX, y: t.clientY, posX: position.x, posY: position.y };
+      pinchStartDistanceRef.current = null;
+    }
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (e.touches.length === 2 && pinchStartDistanceRef.current != null) {
+      e.preventDefault();
+      const d = distance(e.touches[0], e.touches[1]);
+      const ratio = d / pinchStartDistanceRef.current;
+      const newZoom = Math.min(Math.max(pinchStartZoomRef.current * ratio, 0.5), 5);
+      setZoom(newZoom);
+    } else if (e.touches.length === 1 && touchPanStartRef.current && zoom > 1) {
+      e.preventDefault();
+      const t = e.touches[0];
+      const s = touchPanStartRef.current;
+      setPosition({ x: s.posX + (t.clientX - s.x), y: s.posY + (t.clientY - s.y) });
+    }
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (e.touches.length < 2) pinchStartDistanceRef.current = null;
+    if (e.touches.length === 0) touchPanStartRef.current = null;
+  };
+
   return (
     <div className="fullscreen-modal" onClick={onClose}>
-      <div className="fullscreen-content" onClick={(e) => e.stopPropagation()}>
+      <div className={`fullscreen-content ${zoom > 1 ? 'zoomed' : ''}`} onClick={(e) => e.stopPropagation()}>
         <button className="fullscreen-close" onClick={onClose} title="Cerrar (Esc)">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
@@ -75,7 +118,14 @@ export const PhotoFullscreen: React.FC<PhotoFullscreenProps> = ({ photo, onClose
           onMouseMove={handleMouseMove}
           onMouseUp={handleMouseUp}
           onMouseLeave={handleMouseUp}
-          style={{ cursor: zoom > 1 ? (isDragging ? 'grabbing' : 'grab') : 'zoom-in' }}
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
+          onTouchCancel={handleTouchEnd}
+          style={{
+            cursor: zoom > 1 ? (isDragging ? 'grabbing' : 'grab') : 'zoom-in',
+            touchAction: 'none',
+          }}
         >
           <img
             src={photo.image_url}
@@ -113,7 +163,7 @@ export const PhotoFullscreen: React.FC<PhotoFullscreenProps> = ({ photo, onClose
           </div>
 
           <div className="zoom-hint">
-            Usa la rueda del ratón para hacer zoom
+            Usa la rueda del ratón o pellizca para hacer zoom
           </div>
         </div>
 

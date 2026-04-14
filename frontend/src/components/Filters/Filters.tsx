@@ -47,7 +47,7 @@ export const Filters: React.FC<FiltersProps> = ({
   const [selectedEra, setSelectedEra] = useState<string>('');
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [onlyInViewport, setOnlyInViewport] = useState<boolean>(false);
-  const [barrioExpanded, setBarrioExpanded] = useState<boolean>(false);
+  const [barrioExpanded, setBarrioExpanded] = useState<boolean>(true);
   const [tematicoExpanded, setTematicoExpanded] = useState<boolean>(false);
 
   useEffect(() => {
@@ -360,19 +360,6 @@ export const Filters: React.FC<FiltersProps> = ({
             </div>
           </>
         )}
-      </div>
-
-      {/* Filtro solo en viewport */}
-      <div className="filter-section">
-        <div className="checkbox-filter">
-          <input
-            type="checkbox"
-            id="onlyInViewport"
-            checked={onlyInViewport}
-            onChange={(e) => setOnlyInViewport(e.target.checked)}
-          />
-          <label htmlFor="onlyInViewport">Solo fotos en pantalla del mapa</label>
-        </div>
       </div>
 
       {/* Acciones */}

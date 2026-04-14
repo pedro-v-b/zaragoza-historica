@@ -6,7 +6,6 @@ import { Filters } from './components/Filters';
 import { MapView } from './components/Map';
 import { PhotoList, PhotoDetail, PhotoFullscreen } from './components/PhotoList';
 import { ContactoPage } from './components/Pages';
-import { HistoricalContext } from './components/HistoricalContext/HistoricalContext';
 import {
   AdminLogin,
   AdminDashboard,
@@ -47,13 +46,17 @@ function MapApp() {
   const [selectedPhotoId, setSelectedPhotoId] = useState<number | null>(null);
   const [centerOnPhoto, setCenterOnPhoto] = useState<Photo | null>(null);
   const [hoveredZone, setHoveredZone] = useState<string | null>(null);
-  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(() =>
+    typeof window !== 'undefined' && window.matchMedia('(max-width: 768px)').matches
+  );
   const [rightSidebarCollapsed, setRightSidebarCollapsed] = useState(false);
   const [showPhotoDetail, setShowPhotoDetail] = useState(false);
   const [detailPhoto, setDetailPhoto] = useState<Photo | null>(null);
   const [fullscreenPhoto, setFullscreenPhoto] = useState<Photo | null>(null);
-  const [showHistoricalContext, setShowHistoricalContext] = useState(false);
   const [backendReady, setBackendReady] = useState(false);
+  const [showOnboarding, setShowOnboarding] = useState(() =>
+    typeof window !== 'undefined' && !localStorage.getItem('zh_onboarding_seen_v2')
+  );
 
   // Debounce del bbox para evitar demasiadas peticiones al mover el mapa
   const debouncedBbox = useDebounce(bbox, 800);
@@ -145,7 +148,6 @@ function MapApp() {
       setSearchQuery(filters.q);
       setOnlyInViewport(filters.onlyInViewport);
       setPage(1);
-      setShowHistoricalContext(false); // Cerrar contexto al cambiar filtros
     },
     []
   );
@@ -309,23 +311,8 @@ function MapApp() {
             onClose={handleCloseDetail}
             onBackToList={handleBackToList}
           />
-        ) : showHistoricalContext && yearFrom !== undefined ? (
-          <HistoricalContext
-            year={yearFrom}
-            onClose={() => setShowHistoricalContext(false)}
-          />
         ) : (
           <>
-            {yearFrom !== undefined && (
-              <button
-                className="history-context-toggle"
-                onClick={() => setShowHistoricalContext(true)}
-                title={`Ver contexto histórico del año ${yearFrom}`}
-              >
-                <span className="history-context-toggle-icon">📅</span>
-                Contexto histórico de {yearFrom}
-              </button>
-            )}
             <PhotoList
               photos={photos}
               total={total}
@@ -359,6 +346,42 @@ function MapApp() {
             <div className="backend-warmup-spinner" />
             <h3>Conectando con el servidor...</h3>
             <p>El servidor se está iniciando, esto puede tardar unos segundos.</p>
+          </div>
+        </div>
+      )}
+
+      {/* Onboarding: guía rápida de uso tras conectarse */}
+      {backendReady && showOnboarding && (
+        <div className="backend-warmup-overlay onboarding-overlay">
+          <div className="backend-warmup-card onboarding-card">
+            <h3>Bienvenido a Zaragoza Histórica</h3>
+            <ul className="onboarding-tips">
+              <li>
+                <strong>Navega</strong>
+                <span>Arrastra el mapa y usa + / − para hacer zoom</span>
+              </li>
+              <li>
+                <strong>Explora fotos</strong>
+                <span>Pulsa un marcador para abrir la imagen</span>
+              </li>
+              <li>
+                <strong>Filtra</strong>
+                <span>Abre el panel lateral para filtrar por año o barrio</span>
+              </li>
+              <li>
+                <strong>Cambia de mapa</strong>
+                <span>Usa "Capas" para ver mapas históricos</span>
+              </li>
+            </ul>
+            <button
+              className="onboarding-dismiss"
+              onClick={() => {
+                localStorage.setItem('zh_onboarding_seen_v2', '1');
+                setShowOnboarding(false);
+              }}
+            >
+              Empezar a explorar
+            </button>
           </div>
         </div>
       )}

@@ -495,6 +495,7 @@ export const MapView: React.FC<MapViewProps> = ({
           <path d="M2 10L10 14L18 10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
           <path d="M2 14L10 18L18 14" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
         </svg>
+        <span className="layer-control-toggle-label">Capas</span>
       </button>
 
       {/* Overlay para cerrar al hacer clic fuera */}

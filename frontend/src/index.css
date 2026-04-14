@@ -1253,21 +1253,34 @@ body {
 /* Botón toggle para control de capas */
 .layer-control-toggle {
   position: absolute;
-  top: 10px;
-  right: 62px;
+  top: 39px;
+  right: 74px;
   z-index: 1001;
-  width: 44px;
-  height: 44px;
-  background: var(--bg-secondary);
-  border: 1px solid var(--border-light);
+  height: 34px;
+  padding: 0 12px;
+  gap: 6px;
+  background: var(--bg-secondary) !important;
+  border: none;
   border-radius: var(--radius-md);
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--text-secondary);
-  box-shadow: 0 4px 12px var(--shadow-hover);
+  color: var(--text-primary);
+  box-shadow: 0 4px 16px var(--shadow);
   transition: all var(--transition-fast);
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.layer-control-toggle svg {
+  width: 16px;
+  height: 16px;
+}
+
+.layer-control-toggle-label {
+  line-height: 1;
 }
 
 .layer-control-toggle:hover {
@@ -2192,6 +2205,21 @@ a.popup-btn:visited {
 
   .fullscreen-info {
     padding: 20px;
+  }
+
+  /* Al hacer zoom en móvil: imagen a pantalla completa, texto oculto */
+  .fullscreen-content.zoomed .fullscreen-image {
+    height: 100%;
+    width: 100%;
+    padding: 0;
+  }
+
+  .fullscreen-content.zoomed .fullscreen-info {
+    display: none;
+  }
+
+  .fullscreen-content.zoomed .zoom-hint {
+    display: none;
   }
 
   .fullscreen-title {
@@ -4086,6 +4114,15 @@ a:focus-visible {
     width: 100% !important;
   }
 
+  /* -- Eliminar margen del leaflet-container en móvil (bordes grises) -- */
+  .map-container .leaflet-container {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
   /* -- Links de la navbar: ocultar texto, dejar solo iconos -- */
   .nav-link span {
     display: none;
@@ -4100,7 +4137,7 @@ a:focus-visible {
      dejar espacio al botón de abrir sidebar derecha, que en móvil no existe) */
   .layer-control-toggle {
     right: 10px;
-    top: 10px;
+    top: 27px;
   }
 
   /* El panel de capas se abre justo debajo del botón toggle */
@@ -4180,4 +4217,96 @@ a:focus-visible {
 
 @keyframes warmup-spin {
   to { transform: rotate(360deg); }
+}
+
+/* ===== Onboarding overlay ===== */
+.onboarding-overlay {
+  background: rgba(245, 240, 235, 0.5);
+  backdrop-filter: none;
+  animation: onboarding-fade-in 0.4s ease-out;
+}
+
+.onboarding-card {
+  max-width: 400px;
+  text-align: left;
+  padding: 28px 28px;
+}
+
+.onboarding-card h3 {
+  text-align: center;
+  margin: 0 0 18px;
+  font-size: 20px;
+}
+
+.onboarding-tips {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.onboarding-tips li {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 10px 12px;
+  background: var(--bg-secondary);
+  border-radius: 10px;
+  border: 1px solid var(--border-light);
+}
+
+.onboarding-tips strong {
+  font-size: 13px;
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.onboarding-tips span {
+  font-size: 12px;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+.onboarding-dismiss {
+  display: block;
+  width: 100%;
+  padding: 11px 20px;
+  background: #F59435;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.15s, box-shadow 0.15s, background 0.15s;
+}
+
+.onboarding-dismiss:hover {
+  background: #E0832A;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(245, 148, 53, 0.35);
+}
+
+@keyframes onboarding-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@media (max-width: 768px) {
+  .onboarding-card {
+    max-width: 92vw;
+    padding: 28px 22px;
+    max-height: 85vh;
+    overflow-y: auto;
+  }
+
+  .onboarding-card h3 {
+    font-size: 19px;
+  }
+
+  .onboarding-tips li {
+    padding: 10px 12px;
+  }
 }
