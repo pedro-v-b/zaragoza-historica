@@ -1,279 +1,392 @@
-# Zaragoza Histórica 🏛️📷
+# Zaragoza Histórica
 
-Aplicación web para visualizar fotografías históricas geolocalizadas de Zaragoza en un mapa interactivo.
+Archivo visual geolocalizado de la memoria urbana de Zaragoza. Aplicación web cartográfica
+que sitúa fotografías históricas de la ciudad en las coordenadas exactas donde fueron
+tomadas y las cruza con cartografía histórica oficial del Instituto Geográfico Nacional
+(IGN) y con el catastro INSPIRE.
 
-**TFG DAM - Trabajo Fin de Grado Desarrollo de Aplicaciones Multiplataforma**
+Desarrollado como Trabajo de Fin de Grado del ciclo superior de Desarrollo de Aplicaciones
+Multiplataforma (DAM).
 
----
-
-## 🎯 Resumen Ejecutivo
-
-**Estado**: ✅ **MVP 100% FUNCIONAL** (Backend Python + Frontend + Base de datos)
-
-**Inicio rápido**: Lee `docs/QUICKSTART.md` o ejecuta `docker-compose up -d`
-
-**Características principales**:
-- 🗺️ Mapa interactivo con Leaflet + clustering de marcadores
-- 📸 8 fotografías históricas de ejemplo (con coords reales de Zaragoza)
-- 🔍 Filtros combinables: año, época, zona, bbox, búsqueda texto
-- 🔄 Sincronización bidireccional mapa ↔ lista en tiempo real
-- 📄 Paginación de resultados
-- 🗂️ Selector de capas históricas (actual + planos/ortofotos)
-- 🚀 API REST completa con PostGIS
-- 📚 Documentación interactiva automática (Swagger UI)
-- 🐍 Backend migrado a Python + FastAPI
-
-**Tech stack**: React + TypeScript + Vite + Leaflet | **Python + FastAPI** + PostgreSQL + PostGIS
-
-**Archivos clave** (todos en `docs/`):
-- `docs/QUICKSTART.md` - Guía de inicio en 5 minutos
-- `docs/MIGRACION_PYTHON.md` - **Documentación de la migración a Python**
-- `docs/API_EXAMPLES.md` - Ejemplos de uso de la API
-- `docs/INSTALL_POSTGRES.md` - 3 opciones de instalación de BD
-- `docs/RESUMEN.md` - Visión global del proyecto completo
-- `docs/GUIA_AÑADIR_FOTOS.md` - Guía para añadir fotos manualmente
-- `docs/CONTEXTO_PROYECTO.md` - Contexto y decisiones de diseño
+- **Producción**: desplegado en Render (frontend estático + backend contenedor Docker)
+- **Base de datos**: PostgreSQL 15 con PostGIS 3.4 sobre Supabase
+- **Estado**: primera versión pública
 
 ---
 
-## 📋 Características
+## Índice
 
-- 🗺️ Mapa interactivo con Leaflet + clustering de marcadores
-- 📸 Fotos históricas geolocalizadas de Zaragoza
-- 🔍 Filtros combinables: año, época, zona, bbox
-- 🎨 Selector de capas: mapa actual + planos/ortofotos históricas
-- 📱 Responsive design
-- 🚀 API REST con PostgreSQL + PostGIS
-
----
-
-## 🛠️ Stack Tecnológico
-
-### Backend
-- **Lenguaje**: Python 3.11+
-- **Framework**: FastAPI (framework web moderno y rápido)
-- **Base de datos**: PostgreSQL 15 + PostGIS 3.4
-- **Driver**: psycopg2-binary
-- **Validación**: Pydantic
-- **Servidor**: Uvicorn (ASGI)
-- **Documentación**: Swagger UI automático
-
-### Frontend
-- **Framework**: React 18 + TypeScript
-- **Build tool**: Vite
-- **Mapas**: Leaflet + leaflet.markercluster
-- **HTTP Client**: Fetch API
-
-### DevOps
-- **Contenedores**: Docker + Docker Compose
-- **Variables de entorno**: dotenv
+1. [Objetivo del proyecto](#objetivo-del-proyecto)
+2. [Características](#características)
+3. [Arquitectura](#arquitectura)
+4. [Stack tecnológico](#stack-tecnológico)
+5. [Modelo de datos](#modelo-de-datos)
+6. [API REST](#api-rest)
+7. [Instalación local](#instalación-local)
+8. [Despliegue](#despliegue)
+9. [Estructura del repositorio](#estructura-del-repositorio)
+10. [Roadmap](#roadmap)
+11. [Créditos y licencia](#créditos-y-licencia)
 
 ---
 
-## 🚀 Instalación y ejecución
+## Objetivo del proyecto
 
-### Requisitos previos
-- Node.js 18+ y npm
-- Docker y Docker Compose (para la base de datos)
+El proyecto consolida un archivo gráfico geolocalizado de Zaragoza: un mapa interactivo
+desde el que consultar fotografías históricas asociadas a su punto exacto de captura,
+con filtros por periodo cronológico, barrio y época histórica, y con la posibilidad de
+superponer cartografía histórica para comparar el trazado actual con representaciones
+del territorio de distintos momentos del pasado.
 
-### 1. Clonar repositorio
-```bash
-cd "c:\Users\pvial\Desktop\TFG DAM"
+Se dirige al público general, a investigadores, docentes, asociaciones vecinales y
+profesionales del patrimonio que necesiten acceder de forma estructurada a material
+gráfico histórico con localización precisa.
+
+---
+
+## Características
+
+- Mapa interactivo con clustering de marcadores y carga por viewport
+- Fichas de detalle con año, barrio, época, autor, fuente, derechos y descripción
+- Visor a pantalla completa con zoom, desplazamiento y gestos táctiles (pinch-zoom)
+- Filtros combinables: rango de años, barrio, época histórica y búsqueda textual
+- Selector de capas cartográficas con mapas históricos del IGN (WMS) y ortofotos
+  del PNOA histórico
+- Capa de catastro INSPIRE con coloreado de edificios por década de construcción
+- Integración de artículos de Wikipedia y monumentos del patrimonio local
+- Panel de administración con autenticación JWT para gestión de fotografías
+- Calentamiento automático del backend para mitigar cold starts del plan gratuito
+  de Render
+
+---
+
+## Arquitectura
+
+```
+                    ┌──────────────────────────┐
+                    │  Navegador (cliente web) │
+                    └────────────┬─────────────┘
+                                 │ HTTPS
+                    ┌────────────▼─────────────┐
+                    │  Frontend (Render static)│
+                    │  React + Vite + Leaflet  │
+                    └────────────┬─────────────┘
+                                 │ /api/*
+                    ┌────────────▼─────────────┐
+                    │  Backend (Render docker) │
+                    │  FastAPI + psycopg2      │
+                    └────────────┬─────────────┘
+                                 │ PostgreSQL wire
+                    ┌────────────▼─────────────┐
+                    │  Supabase (PostGIS 3.4)  │
+                    └──────────────────────────┘
+
+   Fuentes externas servidas directamente al mapa:
+   IGN WMS (planos/ortofotos) · Wikipedia · Catastro INSPIRE
 ```
 
-### 2. Iniciar base de datos
+El backend es una API REST sin estado que consulta PostGIS y expone recursos JSON. El
+frontend es una SPA estática que consume la API y monta los mapas en Leaflet con
+servicios WMS públicos para las capas históricas.
 
-**⚠️ IMPORTANTE**: Necesitas PostgreSQL + PostGIS. Elige UNA de estas 3 opciones:
+---
 
-#### Opción A: Docker Compose (RECOMENDADO)
-Asegúrate de que Docker Desktop está corriendo, luego:
-```powershell
+## Stack tecnológico
+
+**Backend**
+
+| Componente | Versión | Rol |
+|------------|---------|-----|
+| Python | 3.11+ | Lenguaje |
+| FastAPI | >=0.115 | Framework HTTP y validación |
+| Uvicorn | >=0.32 | Servidor ASGI |
+| psycopg2-binary | >=2.9 | Driver PostgreSQL |
+| Pydantic | >=2.10 | Modelos y settings |
+| python-jose | >=3.3 | JWT |
+| Pillow | >=10.4 | Procesado de imágenes |
+| lxml, pyproj | -- | Importación GML del catastro |
+
+**Frontend**
+
+| Componente | Versión | Rol |
+|------------|---------|-----|
+| React | 18 | UI |
+| TypeScript | 5 | Tipado |
+| Vite | 5 | Build y dev server |
+| Leaflet | 1.9 | Mapas |
+| leaflet.markercluster | 1.5 | Clustering |
+| React Router | 6 | Navegación |
+
+**Datos e infraestructura**
+
+- PostgreSQL 15 + PostGIS 3.4 sobre Supabase
+- Almacenamiento de imágenes en Supabase Storage (formato WebP)
+- Cartografía histórica vía WMS del IGN (PNOA histórico, minutas cartográficas,
+  Vuelo Americano 1956-57)
+- Catastro INSPIRE vía GML importado a PostGIS
+- Despliegue en Render (plan gratuito, frontend estático y backend Docker)
+
+---
+
+## Modelo de datos
+
+### `photos`
+
+| Campo | Tipo | Descripción |
+|-------|------|-------------|
+| `id` | bigserial | Clave primaria |
+| `title` | text | Título de la fotografía |
+| `description` | text | Descripción libre |
+| `year` | int | Año exacto si se conoce |
+| `year_from`, `year_to` | int | Rango de años si el año es incierto |
+| `era` | text | Época histórica (cadena controlada) |
+| `zone` | text | Barrio o distrito |
+| `tags` | text[] | Etiquetas libres |
+| `lat`, `lng` | double precision | Coordenadas WGS84 |
+| `geometry` | geometry(Point, 4326) | Geometría PostGIS indexada |
+| `image_url`, `thumb_url` | text | URLs públicas (Supabase Storage) |
+| `source`, `author`, `rights` | text | Atribución |
+
+Índices: GIST sobre `geometry`, BTREE sobre `year`, `zone`, `era` y GIN sobre `tags`.
+
+### `buildings`
+
+| Campo | Tipo | Descripción |
+|-------|------|-------------|
+| `inspire_id` | text | Identificador INSPIRE |
+| `construction_year` | int | Año de construcción declarado |
+| `decade` | int | Década derivada (color del coroplético) |
+| `geometry` | geometry(MultiPolygon, 4326) | Huella del edificio |
+
+### `map_layers`
+
+Capas base y superposiciones: URL plantilla de tiles o capa WMS, nombre, año, tipo
+(`current`, `plan`, `ortho`) y opcionalmente `bounds` geográficos.
+
+---
+
+## API REST
+
+Base: `/api`. Documentación interactiva en `/docs` (Swagger UI) cuando el backend
+corre localmente.
+
+### Fotografías
+
+- `GET /photos` — listado paginado con filtros
+- `GET /photos/map` — dataset optimizado para el mapa (campos mínimos)
+- `GET /photos/{id}` — ficha completa
+- `GET /photos/metadata/filters` — valores disponibles para cada filtro
+
+Parámetros de filtrado admitidos por `GET /photos`:
+
+| Parámetro | Tipo | Descripción |
+|-----------|------|-------------|
+| `yearFrom`, `yearTo` | int | Rango cronológico |
+| `zone` | string | Barrio exacto |
+| `era` | string | Época histórica |
+| `q` | string | Búsqueda textual en título y descripción |
+| `bbox` | string | `minLng,minLat,maxLng,maxLat` para filtrar por viewport |
+| `randomOrder` | bool | Orden aleatorio determinista por `seed` |
+| `seed` | float | Semilla `[-1, 1]` para el orden aleatorio |
+| `page`, `pageSize` | int | Paginación |
+
+### Capas cartográficas
+
+- `GET /layers` — capas base y superposiciones configuradas
+
+### Catastro
+
+- `GET /buildings` — edificios INSPIRE dentro de un `bbox`
+
+### Contextual
+
+- `GET /wikipedia` — artículos georreferenciados dentro de un `bbox`
+- `GET /monuments` — monumentos del patrimonio local
+- `GET /history` — eventos históricos asociados a un punto o zona
+
+### Administración
+
+- `POST /auth/login` — autenticación JWT
+- `POST /photos` — alta
+- `PUT /photos/{id}` — edición
+- `DELETE /photos/{id}` — baja
+
+### Utilidad
+
+- `GET /health` — health check para orquestadores
+
+---
+
+## Instalación local
+
+### Requisitos
+
+- Python 3.11 o superior
+- Node.js 18 o superior
+- Docker Desktop si se quiere levantar PostgreSQL con `docker-compose`
+- Acceso a un PostgreSQL 15 con la extensión PostGIS habilitada
+
+### Variables de entorno del backend
+
+Crear `backend_python/.env` con:
+
+```env
+DB_HOST=localhost
+DB_PORT=5432
+DB_NAME=zaragoza_historica
+DB_USER=postgres
+DB_PASSWORD=********
+JWT_SECRET=********
+CORS_ORIGINS=http://localhost:5173
+PORT=3000
+```
+
+Para producción, las mismas variables apuntan al pooler de Supabase.
+
+### Base de datos
+
+Opción con Docker Compose:
+
+```bash
 docker-compose up -d
 ```
 
-Esto iniciará PostgreSQL 15 con PostGIS 3.4 y ejecutará automáticamente:
-- `backend/database/schema.sql` - Crea tablas, índices y triggers
-- `backend/database/seeds.sql` - Inserta datos de ejemplo (8 fotos)
+El compose levanta PostgreSQL 15 con PostGIS 3.4 y ejecuta los scripts SQL de
+`backend_python/database/` al inicializar el volumen.
 
-Verifica que la BD está corriendo:
-```powershell
-docker-compose ps
-```
+Para inicializar un PostgreSQL existente ejecutar manualmente, en orden, los scripts
+de `backend_python/database/` y los migradores de `scripts/`.
 
-#### Opción B: PostgreSQL instalado en Windows
-Si Docker no funciona, instala PostgreSQL + PostGIS manualmente.
-Consulta `docs/INSTALL_POSTGRES.md` para instrucciones detalladas.
-
-#### Opción C: Base de datos en la nube (prueba rápida)
-- **ElephantSQL** (gratis): https://www.elephantsql.com/
-- **Supabase** (gratis): https://supabase.com/
-
-Luego ejecuta manualmente los scripts SQL en la consola de tu servicio cloud.
-
-### 3. Backend - Instalación y ejecución
+### Backend
 
 ```bash
-cd backend
-npm install
+cd backend_python
+python -m venv .venv
+.venv\Scripts\activate          # Windows
+# source .venv/bin/activate     # Linux / macOS
+pip install -r requirements.txt
+uvicorn main:app --reload --port 3000
 ```
 
-Crea el archivo `.env` copiando el ejemplo:
+La API queda en `http://localhost:3000/api` y la documentación en
+`http://localhost:3000/docs`.
+
+### Frontend
+
 ```bash
-Copy-Item .env.example .env
-```
-
-Inicia el servidor en modo desarrollo:
-```bash
-npm run dev
-```
-
-El backend estará disponible en: **http://localhost:3000**
-
-Endpoints disponibles:
-- `GET /api/health` - Health check
-- `GET /api/photos` - Listar fotos (con filtros)
-- `GET /api/photos/:id` - Detalle de foto
-- `GET /api/photos/metadata/filters` - Metadatos para filtros
-- `GET /api/layers` - Capas del mapa
-
-### 4. Frontend - Instalación y ejecución
-
-```powershell
 cd frontend
 npm install
 npm run dev
 ```
 
-El frontend estará disponible en: **http://localhost:5173**
+Servidor de desarrollo en `http://localhost:5173`. Vite redirige `/api` al backend
+local mediante proxy.
 
-**Nota**: El frontend usa un proxy de Vite que redirige `/api` a `http://localhost:3000`, así que asegúrate de que el backend esté corriendo primero.
+### Datos iniciales
+
+Los datos reales se han cargado en lotes mediante los scripts Python de `scripts/`.
+Para un entorno de pruebas basta con la semilla incluida en
+`backend_python/database/seeds.sql`. Para replicar la ingesta completa hay que
+ejecutar los scripts de scraping (`scraper/`) y los migradores por lotes
+(`scripts/batch_*.sql`, `upload_thumbs_webp.py`, `import_buildings.py`).
 
 ---
 
-## 📚 Estructura del proyecto
+## Despliegue
+
+Render lee `render.yaml` en la raíz del repositorio y define dos servicios:
+
+1. **zaragoza-historica-backend** — servicio web Docker construido desde
+   `backend_python/Dockerfile`. Expone el puerto `3000` y consume la contraseña de
+   la base de datos como secreto sincronizado en el panel de Render.
+2. **zaragoza-historica-frontend** — sitio estático que ejecuta
+   `cd frontend && npm install && npm run build` y publica `frontend/dist`. Recibe
+   `VITE_API_URL` a partir del host del backend mediante referencia cruzada.
+
+Cualquier push a la rama `master` dispara un rebuild automático de ambos servicios.
+
+El backend corre en el plan gratuito y sufre cold starts. El frontend realiza un
+calentamiento contra `/api/health` al cargar la página y muestra un overlay de
+progreso hasta que el backend responde.
+
+---
+
+## Estructura del repositorio
 
 ```
-TFG DAM/
-├── backend/
-│   ├── src/
-│   │   ├── config/          # Configuración DB
-│   │   ├── controllers/     # Controladores HTTP
-│   │   ├── services/        # Lógica de negocio
-│   │   ├── repositories/    # Acceso a datos
-│   │   ├── types/           # TypeScript types
-│   │   ├── middlewares/     # Middlewares Express
-│   │   ├── routes/          # Rutas API
-│   │   └── index.ts         # Entry point
-│   ├── database/
-│   │   ├── schema.sql       # Schema PostGIS
-│   │   └── seeds.sql        # Datos de ejemplo
-│   └── uploads/             # Imágenes (local dev)
+TFG DAM v2/
+├── backend_python/
+│   ├── main.py                 Entry point FastAPI
+│   ├── config/                 Settings Pydantic
+│   ├── database/               Esquema SQL y migraciones
+│   ├── dependencies/           Inyección (DB pool, auth)
+│   ├── models/                 Modelos Pydantic
+│   ├── repositories/           Acceso a datos
+│   ├── services/               Lógica de negocio
+│   ├── routers/                photos, layers, buildings,
+│   │                            wikipedia, monuments, history, auth
+│   ├── scripts/                Importadores puntuales (catastro)
+│   ├── tests/                  Tests pytest
+│   ├── Dockerfile
+│   └── requirements.txt
 ├── frontend/
 │   └── src/
-│       ├── components/      # Componentes React
-│       ├── services/        # API client
-│       ├── types/           # TypeScript types
-│       └── hooks/           # Custom hooks
-├── docker-compose.yml       # PostgreSQL + PostGIS
+│       ├── components/         Layout, Map, Filters, PhotoList,
+│       │                        Pages, Admin, Navbar
+│       ├── services/api.ts     Cliente HTTP
+│       ├── hooks/              Hooks reutilizables
+│       ├── utils/              Utilidades (colores catastro, etc.)
+│       ├── types/              Tipos compartidos
+│       ├── App.tsx             Rutas y contenedor principal
+│       └── index.css           Hoja de estilos global
+├── scraper/                    Scraping de Flickr y geocoding
+├── scripts/                    Migradores SQL por lotes y utilidades
+├── docs/                       Documentación complementaria
+├── uploads/                    Imágenes locales (entorno de desarrollo)
+├── docker-compose.yml
+├── render.yaml
 └── README.md
 ```
 
 ---
 
-## 🔍 Ejemplos de uso de la API
+## Roadmap
 
-### Obtener todas las fotos
-```bash
-curl http://localhost:3000/api/photos
-```
+### Publicado
 
-### Filtrar por año
-```bash
-curl "http://localhost:3000/api/photos?yearFrom=1930&yearTo=1960"
-```
+- Mapa interactivo con clustering y carga por viewport
+- Filtros por año, barrio, época y búsqueda textual
+- Capas cartográficas históricas del IGN (WMS) y ortofotos del PNOA
+- Coroplético del catastro INSPIRE por década de construcción
+- Fichas detalladas y visor a pantalla completa con pinch-zoom
+- Panel de administración con JWT
+- Despliegue automático en Render
 
-### Filtrar por época
-```bash
-curl "http://localhost:3000/api/photos?era=Años%2050"
-```
+### Próximas versiones
 
-### Filtrar por zona
-```bash
-curl "http://localhost:3000/api/photos?zone=Casco%20Histórico"
-```
-
-### Filtrar por bbox (bounding box visible en el mapa)
-```bash
-curl "http://localhost:3000/api/photos?bbox=-0.9,-41.6,-0.8,41.7"
-```
-
-### Combinar filtros + paginación
-```bash
-curl "http://localhost:3000/api/photos?yearFrom=1940&zone=Centro&page=1&pageSize=10"
-```
-
-### Obtener metadatos para filtros
-```bash
-curl http://localhost:3000/api/photos/metadata/filters
-```
-
-### Obtener capas del mapa
-```bash
-curl http://localhost:3000/api/layers
-```
+- Sistema de aportaciones ciudadanas: subida moderada de fotografías por usuarios
+  registrados con geolocalización en el mapa
+- Ampliación a otros documentos gráficos geolocalizados: cortometrajes, fragmentos
+  de películas, videoclips y grabaciones audiovisuales rodadas en la ciudad
+- Cruce con hemeroteca: noticias, sucesos y artículos históricos asociados a cada
+  punto del mapa
+- Búsqueda por texto completo sobre PostgreSQL FTS
+- Colecciones y enlaces compartibles con filtros preservados
+- Exportación a PDF y KML
 
 ---
 
-## 🗄️ Modelo de datos
+## Créditos y licencia
 
-### Tabla `photos`
-- Información temporal: `year`, `year_from`, `year_to`, `era`
-- Geolocalización: `lat`, `lng`, `geometry` (PostGIS POINT)
-- Clasificación: `zone`, `tags`
-- Archivos: `image_url`, `thumb_url`
-- Metadatos: `source`, `author`, `rights`
+- **Autor**: pvial — TFG DAM
+- **Año**: 2026
+- **Fondo fotográfico**: archivo comunitario *Zaragoza Antigua* (Flickr), utilizado
+  con fines educativos y de divulgación del patrimonio
+- **Cartografía histórica**: *Instituto Geográfico Nacional* a través de sus
+  servicios WMS públicos (PNOA histórico, minutas cartográficas, Vuelo Americano
+  1956-57)
+- **Catastro**: *Dirección General del Catastro*, datos INSPIRE
+- **Infraestructura**: Render (hosting) y Supabase (PostgreSQL + Storage)
 
-### Tabla `map_layers`
-- Capas base del mapa: actual, planos históricos, ortofotos
-- `tile_url_template` - URL de tiles
-- `year`, `type` (plan/ortho/current)
-- `bounds` - Límites geográficos opcionales
-
----
-
-## 📝 TODO / Roadmap
-
-### MVP (Funcional) ✅ COMPLETO
-- [x] Backend API con PostGIS
-- [x] Filtros combinables (año, época, zona, bbox)
-- [x] Paginación y ordenación
-- [x] Frontend con mapa Leaflet
-- [x] Clustering de marcadores
-- [x] Panel de filtros dinámico
-- [x] Lista de resultados sincronizada
-- [x] Selector de capas históricas
-- [x] Sincronización bidireccional mapa ↔ lista
-- [x] Debounce en movimientos del mapa
-- [x] Responsive design básico
-
-### Futuras mejoras
-- [ ] Panel admin para subir fotos
-- [ ] Autenticación (JWT)
-- [ ] Almacenamiento en S3
-- [ ] Búsqueda por texto completo (PostgreSQL FTS)
-- [ ] Favoritos/colecciones
-- [ ] Compartir enlaces con filtros
-- [ ] Export a PDF/KML
-- [ ] PWA / modo offline
-
----
-
-## 👤 Autor
-
-**pvial** - TFG DAM 2025
-
----
-
-## 📄 Licencia
-
-Este proyecto es un TFG académico. Las fotografías históricas de ejemplo son ficticias.
+Proyecto académico sin fines comerciales. Todos los contenidos externos se usan con
+atribución y con finalidad educativa, divulgativa y de puesta en valor del patrimonio.
