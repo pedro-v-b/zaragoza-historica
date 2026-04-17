@@ -51,6 +51,9 @@ export default function BuildingsLayer({
   useEffect(() => {
     if (!map) return;
 
+    // Canvas renderer compartido: mucho más rápido que SVG con miles de polígonos
+    const canvasRenderer = L.canvas({ padding: 0.2 });
+
     const styleFeature = (feature?: GeoJSON.Feature): L.PathOptions => {
       const props = (feature?.properties || {}) as { decade?: number | null };
       return {
@@ -59,37 +62,29 @@ export default function BuildingsLayer({
         color: '#2f2f2f',
         weight: 0.4,
         opacity: 0.75,
-        // Renderizador canvas (más rápido cuando hay miles de features)
-        interactive: true,
+        renderer: canvasRenderer,
       };
     };
 
-    // Popup lazy: se enlaza sólo al hacer click en la feature (evita bindPopup por feature al cargar)
+    // Popup lazy: sin bindPopup por feature; se abre uno único en click
     const onEachFeature = (_feature: GeoJSON.Feature, layer: L.Layer) => {
-      const pathLayer = layer as L.Path & {
-        bindPopup?: (html: string) => L.Layer;
-        openPopup?: () => void;
-        on?: (events: Record<string, (e: L.LeafletMouseEvent) => void>) => void;
-      };
-
-      pathLayer.on?.({
-        click: (e: L.LeafletMouseEvent) => {
-          const feature = (e.target as { feature?: GeoJSON.Feature }).feature;
-          const props = (feature?.properties || {}) as Parameters<typeof buildPopupHtml>[0];
-          L.popup({ autoPan: false })
-            .setLatLng(e.latlng)
-            .setContent(buildPopupHtml(props))
-            .openOn(map);
-        },
-        mouseover: (e: L.LeafletMouseEvent) => {
-          const target = e.target as L.Path;
-          target.setStyle({ weight: 1.2, color: '#ffffff', fillOpacity: 0.85 });
-        },
-        mouseout: (e: L.LeafletMouseEvent) => {
-          if (layerRef.current) {
-            layerRef.current.resetStyle(e.target as L.Path);
-          }
-        },
+      layer.on('click', (e) => {
+        const ev = e as L.LeafletMouseEvent;
+        const target = ev.target as { feature?: GeoJSON.Feature };
+        const props = (target.feature?.properties || {}) as Parameters<typeof buildPopupHtml>[0];
+        L.popup({ autoPan: false })
+          .setLatLng(ev.latlng)
+          .setContent(buildPopupHtml(props))
+          .openOn(map);
+      });
+      layer.on('mouseover', (e) => {
+        const target = (e as L.LeafletMouseEvent).target as L.Path;
+        target.setStyle({ weight: 1.2, color: '#ffffff', fillOpacity: 0.85 });
+      });
+      layer.on('mouseout', (e) => {
+        if (layerRef.current) {
+          layerRef.current.resetStyle((e as L.LeafletMouseEvent).target as L.Path);
+        }
       });
     };
 
@@ -97,7 +92,6 @@ export default function BuildingsLayer({
       layerRef.current = L.geoJSON(undefined, {
         style: styleFeature,
         onEachFeature,
-        renderer: L.canvas({ padding: 0.2 }),
       });
     }
 
