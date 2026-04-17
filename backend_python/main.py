@@ -26,6 +26,7 @@ logger = logging.getLogger("zaragoza_historica")
 
 from fastapi import FastAPI, Query
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.middleware.gzip import GZipMiddleware
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import JSONResponse
 from dotenv import load_dotenv
@@ -81,6 +82,9 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# Compresión gzip: GeoJSON catastro ~60-80% menor payload
+app.add_middleware(GZipMiddleware, minimum_size=1024)
 
 # Servir archivos estáticos (uploads)
 def get_uploads_path():

@@ -8,7 +8,7 @@ from config.database import Database
 class BuildingsRepository:
     """Acceso a datos de edificios catastro."""
 
-    def find_in_bbox(
+    def find_geojson_in_bbox(
         self,
         min_lng: float,
         min_lat: float,
@@ -18,17 +18,21 @@ class BuildingsRepository:
         year_from: Optional[int] = None,
         year_to: Optional[int] = None,
         limit: int = 5000,
-    ) -> List[dict]:
-        # ST_Intersects ya aplica && (bounding box + GiST index) internamente.
+    ) -> dict:
+        """Devuelve un FeatureCollection GeoJSON ya construido en Postgres.
+
+        Evita construir el JSON fila-a-fila en Python (json.loads por row) y
+        reduce el payload a un único string serializado directamente por PostGIS.
+        """
+        # ST_Intersects aplica && (bounding box + GiST) internamente.
         conditions = [
             "ST_Intersects(geometry, ST_MakeEnvelope(%s, %s, %s, %s, 4326))",
         ]
-        params = [
+        params: list = [
             zoom,
             min_lng, min_lat, max_lng, max_lat,
         ]
 
-        # Cuando hay filtro de año sólo se muestran edificios con año conocido
         if year_from is not None:
             conditions.append("year_built >= %s")
             params.append(year_from)
@@ -38,27 +42,57 @@ class BuildingsRepository:
 
         params.append(limit)
 
+        # simplify_for_zoom_row lee columnas precomputadas (geom_z11/z13/z15)
+        # y cae a la geometría original si aún no están pobladas.
         query = f"""
-            SELECT
-                id,
-                cadastral_ref,
-                year_built,
-                decade,
-                current_use,
-                ST_AsGeoJSON(simplify_for_zoom(geometry, %s)) AS geojson
-            FROM catastro_buildings
-            WHERE {' AND '.join(conditions)}
-            ORDER BY year_built
-            LIMIT %s
+            WITH selected AS (
+                SELECT
+                    id,
+                    cadastral_ref,
+                    year_built,
+                    decade,
+                    current_use,
+                    simplify_for_zoom_row(catastro_buildings, %s) AS geom
+                FROM catastro_buildings
+                WHERE {' AND '.join(conditions)}
+                ORDER BY year_built
+                LIMIT %s
+            )
+            SELECT COALESCE(
+                jsonb_build_object(
+                    'type', 'FeatureCollection',
+                    'features', COALESCE(
+                        jsonb_agg(
+                            jsonb_build_object(
+                                'type', 'Feature',
+                                'geometry', ST_AsGeoJSON(geom)::jsonb,
+                                'properties', jsonb_build_object(
+                                    'id', id,
+                                    'cadastral_ref', cadastral_ref,
+                                    'year_built', year_built,
+                                    'decade', decade,
+                                    'current_use', current_use
+                                )
+                            )
+                        ),
+                        '[]'::jsonb
+                    )
+                ),
+                jsonb_build_object('type', 'FeatureCollection', 'features', '[]'::jsonb)
+            ) AS fc
+            FROM selected
         """
 
         conn = Database.get_connection()
         try:
             cursor = conn.cursor()
             cursor.execute(query, params)
-            rows = cursor.fetchall()
+            row = cursor.fetchone()
             cursor.close()
-            return [dict(row) for row in rows]
+            return row["fc"] if row and row.get("fc") else {
+                "type": "FeatureCollection",
+                "features": [],
+            }
         finally:
             Database.return_connection(conn)
 

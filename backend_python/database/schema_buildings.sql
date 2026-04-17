@@ -25,6 +25,10 @@ CREATE TABLE catastro_buildings (
     floors_below    SMALLINT,
     current_use     VARCHAR(100),
     geometry        GEOMETRY(MultiPolygon, 4326) NOT NULL,
+    -- Geometrías pre-simplificadas por zoom (se pueblan tras el import)
+    geom_z15        GEOMETRY(MultiPolygon, 4326),
+    geom_z13        GEOMETRY(MultiPolygon, 4326),
+    geom_z11        GEOMETRY(MultiPolygon, 4326),
     source          VARCHAR(50)  DEFAULT 'Catastro INSPIRE',
     imported_at     TIMESTAMP    DEFAULT CURRENT_TIMESTAMP
 );
@@ -48,6 +52,7 @@ CREATE INDEX idx_buildings_geom_year
 
 -- ── Función de simplificación adaptativa según zoom ───────────────────────
 -- Utilizada por el repository para reducir el payload según el nivel de zoom.
+-- Variante clásica (cálculo por fila; se mantiene como fallback).
 CREATE OR REPLACE FUNCTION simplify_for_zoom(
     geom       GEOMETRY,
     zoom_level INTEGER
@@ -59,6 +64,23 @@ BEGIN
         WHEN zoom_level >= 13 THEN ST_SimplifyPreserveTopology(geom, 0.000050)
         WHEN zoom_level >= 11 THEN ST_SimplifyPreserveTopology(geom, 0.000200)
         ELSE                       ST_SimplifyPreserveTopology(geom, 0.001000)
+    END;
+END;
+$$ LANGUAGE plpgsql IMMUTABLE;
+
+-- Variante preferida: usa geometrías precomputadas por fila → sin CPU en runtime.
+-- Si la columna precomputada está vacía (no se ha poblado aún), cae a la original.
+CREATE OR REPLACE FUNCTION simplify_for_zoom_row(
+    b catastro_buildings,
+    zoom_level INTEGER
+) RETURNS GEOMETRY AS $$
+BEGIN
+    RETURN CASE
+        WHEN zoom_level >= 17 THEN b.geometry
+        WHEN zoom_level >= 15 THEN COALESCE(b.geom_z15, b.geometry)
+        WHEN zoom_level >= 13 THEN COALESCE(b.geom_z13, b.geometry)
+        WHEN zoom_level >= 11 THEN COALESCE(b.geom_z11, b.geometry)
+        ELSE                       COALESCE(b.geom_z11, b.geometry)
     END;
 END;
 $$ LANGUAGE plpgsql IMMUTABLE;
