@@ -19,13 +19,12 @@ class BuildingsRepository:
         year_to: Optional[int] = None,
         limit: int = 5000,
     ) -> List[dict]:
+        # ST_Intersects ya aplica && (bounding box + GiST index) internamente.
         conditions = [
-            "geometry && ST_MakeEnvelope(%s, %s, %s, %s, 4326)",
             "ST_Intersects(geometry, ST_MakeEnvelope(%s, %s, %s, %s, 4326))",
         ]
         params = [
             zoom,
-            min_lng, min_lat, max_lng, max_lat,
             min_lng, min_lat, max_lng, max_lat,
         ]
 

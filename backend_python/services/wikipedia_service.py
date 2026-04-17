@@ -7,14 +7,16 @@ import urllib.request
 import urllib.parse
 import json
 import logging
+from collections import OrderedDict
 from typing import List, Optional
 
 logger = logging.getLogger(__name__)
 
 
-# Caché en memoria: clave = "lat,lon,radius" → (timestamp, datos)
-_cache: dict[str, tuple[float, list]] = {}
+# Caché LRU acotada: clave = "lat,lon,radius" → (timestamp, datos)
+_cache: "OrderedDict[str, tuple[float, list]]" = OrderedDict()
 CACHE_TTL = 3600  # 1 hora
+CACHE_MAX_SIZE = 256  # evita crecimiento ilimitado
 
 
 class WikipediaService:
@@ -35,17 +37,22 @@ class WikipediaService:
         cache_key = f"{lat:.4f},{lon:.4f},{radius}"
         now = time.time()
 
-        # Comprobar caché
+        # Comprobar caché (hit refresca orden LRU)
         if cache_key in _cache:
             cached_time, cached_data = _cache[cache_key]
             if now - cached_time < CACHE_TTL:
+                _cache.move_to_end(cache_key)
                 return cached_data[:limit]
+            del _cache[cache_key]
 
         # Llamar a la API de Wikipedia
         articles = self._fetch_from_wikipedia(lat, lon, radius, limit)
 
-        # Guardar en caché
+        # Guardar en caché aplicando eviction LRU
         _cache[cache_key] = (now, articles)
+        _cache.move_to_end(cache_key)
+        while len(_cache) > CACHE_MAX_SIZE:
+            _cache.popitem(last=False)
 
         return articles
 

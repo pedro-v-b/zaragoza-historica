@@ -68,15 +68,20 @@ class Database:
                     f"client_encoding=UTF8"
                 )
                 
+                minconn = int(os.getenv('DB_POOL_MIN', '1'))
+                maxconn = int(os.getenv('DB_POOL_MAX', '20'))
+                if maxconn < minconn:
+                    maxconn = minconn
+
                 cls._connection_pool = pool.SimpleConnectionPool(
-                    minconn=1,
-                    maxconn=20,
+                    minconn=minconn,
+                    maxconn=maxconn,
                     dsn=conn_string,
                     cursor_factory=RealDictCursor
                 )
                 
                 cls._initialized = True
-                logger.info("Pool de conexiones PostgreSQL creado")
+                logger.info("Pool de conexiones PostgreSQL creado (min=%d, max=%d)", minconn, maxconn)
             except Exception as e:
                 logger.exception("Error creando pool de conexiones: %s", e)
                 raise

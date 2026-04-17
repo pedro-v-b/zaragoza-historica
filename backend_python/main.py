@@ -93,24 +93,30 @@ os.makedirs(os.path.abspath(uploads_path), exist_ok=True)
 app.mount("/uploads", StaticFiles(directory=os.path.abspath(uploads_path)), name="uploads")
 
 
-# Endpoint optimizado para el mapa (DIRECTO EN MAIN PARA EVITAR ERRORES DE RUTAS)
+# Límite máximo de puntos servidos al mapa (evita cargar datasets ilimitados)
+MAP_MAX_POINTS = int(os.getenv("MAP_MAX_POINTS", "10000"))
+
+
+# Endpoint ligero para el mapa. Se mantiene en main para no romper la URL pública.
 @app.get("/api/map", response_model=List[MapPhoto])
 async def get_photos_for_map(
     yearFrom: Optional[int] = Query(None),
     yearTo: Optional[int] = Query(None),
     era: Optional[str] = Query(None),
     zone: Optional[str] = Query(None),
-    q: Optional[str] = Query(None)
+    q: Optional[str] = Query(None),
 ):
-    """Obtiene datos ligeros de todas las fotos para el mapa"""
+    """Datos mínimos (id, coord, urls) de fotos para pintar el mapa."""
     filters = {
         'yearFrom': yearFrom, 'yearTo': yearTo, 'era': era, 'zone': zone, 'q': q,
-        'page': 1, 'pageSize': 10000 
     }
-    photos_data, _ = photos_service.get_photos_raw(filters)
+    points = photos_service.get_map_points(filters, MAP_MAX_POINTS)
     return [
-        MapPhoto(id=p['id'], lat=p['lat'], lng=p['lng'], title=p['title'], image_url=p['image_url'], thumb_url=p['thumb_url']) 
-        for p in photos_data
+        MapPhoto(
+            id=p['id'], lat=p['lat'], lng=p['lng'], title=p['title'],
+            image_url=p['image_url'], thumb_url=p['thumb_url'],
+        )
+        for p in points
     ]
 
 

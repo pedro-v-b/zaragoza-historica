@@ -7,17 +7,20 @@ from config.database import Database
 
 class PhotosRepository:
     """Repository para acceso a datos de fotos"""
-    
-    def _format_photo_urls(self, photo: dict) -> dict:
-        """Prefija las URLs de las imágenes con el base URL de almacenamiento si existe"""
-        base_url = os.getenv("STORAGE_PUBLIC_URL", "").rstrip('/')
+
+    @staticmethod
+    def _storage_base_url() -> str:
+        return os.getenv("STORAGE_PUBLIC_URL", "").rstrip('/')
+
+    @staticmethod
+    def _apply_base_url(photo: dict, base_url: str) -> dict:
+        """Prefija URLs relativas (/uploads/...) con el base URL si existe."""
         if not base_url:
             return photo
-            
-        # Solo prefijar si la URL es relativa (empieza por /uploads/)
-        for key in ['image_url', 'thumb_url']:
-            if photo.get(key) and photo[key].startswith('/uploads/'):
-                photo[key] = f"{base_url}{photo[key]}"
+        for key in ('image_url', 'thumb_url'):
+            value = photo.get(key)
+            if value and value.startswith('/uploads/'):
+                photo[key] = f"{base_url}{value}"
         return photo
 
     def find_all(self, filters: dict) -> Tuple[List[dict], int]:
@@ -128,13 +131,67 @@ class PhotosRepository:
             photos = cursor.fetchall()
             cursor.close()
 
-            # Formatear URLs para cada foto
-            formatted_photos = [self._format_photo_urls(dict(photo)) for photo in photos]
+            base_url = self._storage_base_url()
+            formatted_photos = [
+                self._apply_base_url(dict(photo), base_url) for photo in photos
+            ]
             return formatted_photos, total
             
         finally:
             Database.return_connection(conn)
     
+    def find_map_points(self, filters: dict, limit: int) -> List[dict]:
+        """Proyección ligera para el mapa: solo campos necesarios y sin COUNT."""
+        year_from = filters.get('yearFrom')
+        year_to = filters.get('yearTo')
+        era = filters.get('era')
+        zone = filters.get('zone')
+        q = filters.get('q')
+
+        where_clauses: List[str] = []
+        query_params: List = []
+
+        if year_from is not None:
+            where_clauses.append("(year >= %s OR year_to >= %s)")
+            query_params.extend([year_from, year_from])
+        if year_to is not None:
+            where_clauses.append("(year <= %s OR year_from <= %s)")
+            query_params.extend([year_to, year_to])
+        if era:
+            where_clauses.append("era = %s")
+            query_params.append(era)
+        if zone:
+            where_clauses.append("zone = %s")
+            query_params.append(zone)
+        if q:
+            where_clauses.append(
+                "(title ILIKE %s OR description ILIKE %s OR array_to_string(tags, ' ') ILIKE %s)"
+            )
+            term = f"%{q}%"
+            query_params.extend([term, term, term])
+
+        where_clause = f"WHERE {' AND '.join(where_clauses)}" if where_clauses else ""
+        query = f"""
+            SELECT id, title, lat, lng, image_url, thumb_url
+            FROM photos
+            {where_clause}
+            ORDER BY year DESC NULLS LAST, created_at DESC
+            LIMIT %s
+        """
+        query_params.append(limit)
+
+        conn = Database.get_connection()
+        try:
+            cursor = conn.cursor()
+            cursor.execute(query, query_params)
+            rows = cursor.fetchall()
+            cursor.close()
+
+            base_url = self._storage_base_url()
+            return [self._apply_base_url(dict(r), base_url) for r in rows]
+        finally:
+            Database.return_connection(conn)
+
     def find_by_id(self, photo_id: int) -> Optional[dict]:
         """Obtiene una foto por ID"""
         query = """
@@ -154,65 +211,47 @@ class PhotosRepository:
             cursor.close()
             
             if photo:
-                return self._format_photo_urls(dict(photo))
+                return self._apply_base_url(dict(photo), self._storage_base_url())
             return None
             
         finally:
             Database.return_connection(conn)
     
-    def get_distinct_eras(self) -> List[str]:
-        """Obtiene todas las épocas distintas"""
-        query = "SELECT DISTINCT era FROM photos WHERE era IS NOT NULL ORDER BY era"
-        
+    def get_filter_metadata(self) -> Dict[str, object]:
+        """Obtiene épocas, zonas y rango de años en una sola conexión."""
         conn = Database.get_connection()
         try:
             cursor = conn.cursor()
-            cursor.execute(query)
-            results = cursor.fetchall()
-            cursor.close()
-            
-            return [row['era'] for row in results]
-            
-        finally:
-            Database.return_connection(conn)
-    
-    def get_distinct_zones(self) -> List[str]:
-        """Obtiene todas las zonas distintas"""
-        query = "SELECT DISTINCT zone FROM photos WHERE zone IS NOT NULL ORDER BY zone"
-        
-        conn = Database.get_connection()
-        try:
-            cursor = conn.cursor()
-            cursor.execute(query)
-            results = cursor.fetchall()
-            cursor.close()
-            
-            return [row['zone'] for row in results]
-            
-        finally:
-            Database.return_connection(conn)
-    
-    def get_year_range(self) -> Dict[str, int]:
-        """Obtiene el rango de años disponible"""
-        query = """
-            SELECT
-                MIN(COALESCE(year, year_from)) as min_year,
-                MAX(COALESCE(year, year_to)) as max_year
-            FROM photos
-        """
 
-        conn = Database.get_connection()
-        try:
-            cursor = conn.cursor()
-            cursor.execute(query)
-            result = cursor.fetchone()
+            cursor.execute(
+                "SELECT DISTINCT era FROM photos WHERE era IS NOT NULL ORDER BY era"
+            )
+            eras = [row['era'] for row in cursor.fetchall()]
+
+            cursor.execute(
+                "SELECT DISTINCT zone FROM photos WHERE zone IS NOT NULL ORDER BY zone"
+            )
+            zones = [row['zone'] for row in cursor.fetchall()]
+
+            cursor.execute(
+                """
+                SELECT
+                    MIN(COALESCE(year, year_from)) AS min_year,
+                    MAX(COALESCE(year, year_to))   AS max_year
+                FROM photos
+                """
+            )
+            row = cursor.fetchone() or {}
             cursor.close()
 
             return {
-                'min': result['min_year'] or 1800,
-                'max': result['max_year'] or 2024
+                'eras': eras,
+                'zones': zones,
+                'yearRange': {
+                    'min': row.get('min_year') or 1800,
+                    'max': row.get('max_year') or 2024,
+                },
             }
-
         finally:
             Database.return_connection(conn)
 
