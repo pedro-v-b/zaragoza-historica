@@ -42,8 +42,6 @@ class BuildingsRepository:
 
         params.append(limit)
 
-        # simplify_for_zoom_row lee columnas precomputadas (geom_z11/z13/z15)
-        # y cae a la geometría original si aún no están pobladas.
         query = f"""
             WITH selected AS (
                 SELECT
@@ -52,7 +50,7 @@ class BuildingsRepository:
                     year_built,
                     decade,
                     current_use,
-                    simplify_for_zoom_row(catastro_buildings, %s) AS geom
+                    simplify_for_zoom(geometry, %s) AS geom
                 FROM catastro_buildings
                 WHERE {' AND '.join(conditions)}
                 ORDER BY year_built
